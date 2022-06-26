@@ -1,0 +1,26 @@
+{
+    "criar_user_valido":{
+        "nome": "caca",
+        "email": "ricardo123@qa.com.br",
+        "password": "teste123",
+        "administrador": "true"
+    },
+    "criar_user_invalido":{
+        "nome": "Neymaru",
+        "email": "fulano@qa.com.br",
+        "password": "teste",
+        "administrador": "true"
+    },
+    "criar_user_sem_senha":{
+        "nome": "Richarlyson pruu",
+        "email": "richarl@qa.com.br",
+        "password": "",
+        "administrador": "true"
+    },
+    "criar_user_sem_email":{
+        "nome": "Coutinho",
+        "email": "",
+        "password": "couto123",
+        "administrador": "true"
+    }
+}
