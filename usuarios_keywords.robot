@@ -13,9 +13,21 @@ GET Endpoint /usuarios por id "${id_usuario}"
     ${response}         GET on Session      serverest   /usuarios/${id_usuario}  
     Set Global Variable  ${response}  # Para a variável valer para todo o código
     Log to Console      Response: ${response.content}
-    
-POST Usuario Dinâmico no Endpoint /usuarios
-    ${response}         POST on Session     serverest       /usuarios   data=&{payload}
+
+POST Usuario Dinâmico no Endpoint /usuarios 
+    &{payload}          Create Dictionary       nome=Elano    email=elano123@qa.com         password=12345  administrador=true
+    ${response}         POST on Session         serverest       /usuarios   data=&{payload}     expected_status=any
+    Log to Console      Response: ${response.content}  # Para printar a resposta no console
+    Set Global Variable     ${response}
+
+POST Usuario Dinâmico no Endpoint /usuarios Sem Email
+    &{payload}          Create Dictionary       nome=Elano    email=        password=12345      administrador=true
+    ${response}         POST on Session         serverest       /usuarios   data=&{payload}     expected_status=any
+    Log to Console      Response: ${response.content}  # Para printar a resposta no console
+    Set Global Variable     ${response}
+
+POST Usuario Estatico no Endpoint /usuarios 
+    ${response}         POST on Session         serverest       /usuarios   data=&{payload}     expected_status=any
     Log to Console      Response: ${response.content}  # Para printar a resposta no console
     Set Global Variable     ${response}
 
@@ -32,9 +44,9 @@ DELETE Endpoint /usuarios com id "${id_usuario}"
 
 Criar Usuario Estatico Valido
     ${json}                 Importar Json Estatico  json_usuario.json
-    ${payload}              Set Variable            ${json["criar_user_valido"]}
+    ${payload}              Set Variable            ${json["criar_user_sem_email"]}
     Set Global Variable     ${payload}
-    POST Usuario Dinâmico no Endpoint /usuarios
+    POST Usuario Estatico no Endpoint /usuarios
 
 Criar Usuario Estatico Invalido
     ${json}                 Importar Json Estatico  json_usuario.json
