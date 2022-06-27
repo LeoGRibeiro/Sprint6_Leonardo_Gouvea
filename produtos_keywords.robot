@@ -15,8 +15,8 @@ GET Endpoint /produtos por ID "${id_produto}"
 
 POST Endpoint /produtos
     &{header}           Create Dictionary       Authorization=${token_auth}
-    &{payload}          Create Dictionary       nome=LG 305    preco=150      descricao=Mouse Bluetooth   quantidade=55  # Usar o "&" para transformar em dicionário
-    ${response}         POST on Session         serverest       /produtos       data=&{payload}                  headers=${header}
+    &{payload}          Create Dictionary       nome=T-dagger Bora    preco=      descricao=Teclado   quantidade=55  # Usar o "&" para transformar em dicionário
+    ${response}         POST on Session         serverest       /produtos       data=&{payload}                  headers=${header}          expected_status=any
     Log to Console      Response: ${response.content}  # Para printar a resposta no console
     Set Global Variable     ${response}
 

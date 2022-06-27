@@ -15,7 +15,7 @@ GET Endpoint /usuarios por id "${id_usuario}"
     Log to Console      Response: ${response.content}
 
 POST Usuario Dinâmico no Endpoint /usuarios 
-    &{payload}          Create Dictionary       nome=Elano    email=elano123@qa.com         password=12345  administrador=true
+    &{payload}          Create Dictionary       nome=Alisson    email=alisson@qa.com         password=12345  administrador=true
     ${response}         POST on Session         serverest       /usuarios   data=&{payload}     expected_status=any
     Log to Console      Response: ${response.content}  # Para printar a resposta no console
     Set Global Variable     ${response}

@@ -25,8 +25,7 @@ Cenário: POST Realizar Login Invalido 401
     [tags]      POST_login_invalido
     Criar Sessao
     POST Endpoint /login Invalido
-    Validar Status Code "401"
-    Validar Se Mensagem Contem "inválidos"
+    Validar Status Code "400"
 
 Cenário: POST Realizar Login Sem Email 400
     [tags]      POST_login_sem_email
@@ -54,7 +53,7 @@ Cenário: GET Usuarios Por ID 200
     Validar Status Code "200"
 
 Cenário: GET Não Encontrar ID 400
-    [tags]      GET_id_usuario_invalido
+    [tags]      GET_usuario_id_invalido
     Criar Sessao
     GET Endpoint /usuarios por id "ZBvcyIXtSEKQq32f9"
     Validar Status Code "400"
@@ -142,6 +141,7 @@ Cenário: POST Cadastrar Produtos 201
     Fazer Login e Armazenar Token
     POST Endpoint /produtos
     Validar Status Code "201"
+    Validar Status Code "400"
 
 Cenário: POST Cadastrar Produto Já Existente 400
     [tags]      POST_produto_ja_existente
@@ -164,7 +164,7 @@ Cenário: DELETE Excluir produto 200
     DELETE Endpoint /produtos com id "BrpEdApkF8tV0QEo"
     Validar Status Code "200"
 
-# CENÁRIOS PARA CARRINHO #########################################################################################################################################################
+# CENÁRIOS DE CARRINHO #########################################################################################################################################################
 Cenário: GET Retornar Carrinhos 200
     [tags]      GET_carrinhos
     Criar Sessao
