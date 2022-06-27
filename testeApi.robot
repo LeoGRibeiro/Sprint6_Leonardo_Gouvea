@@ -178,6 +178,7 @@ Cenário: GET Retornar Carrinho por ID
     GET Endpoint /carrinhos por ID "5qsUPyyvacXkeOYW"
     Validar Status Code "200"
 
+
 Cenário: POST Cadastrar Carrinhos 200
     [tags]      POST_carrinhos
     Criar Sessao
