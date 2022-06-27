@@ -20,21 +20,21 @@ POST Usuario Dinâmico no Endpoint /usuarios
     Log to Console      Response: ${response.content}  # Para printar a resposta no console
     Set Global Variable     ${response}
 
-POST Usuario Dinâmico no Endpoint /usuarios Já Usado
+POST Usuario Dinâmico no Endpoint /usuarios Ja Usado
     &{payload}          Create Dictionary       nome=Fulano    email=fulano@qa.com         password=teste  administrador=true
     ${response}         POST on Session         serverest       /usuarios   data=&{payload}     expected_status=any
-    Log to Console      Response: ${response.content}  # Para printar a resposta no console
+    Log to Console      Response: ${response.content}  
     Set Global Variable     ${response}
 
 POST Usuario Dinâmico no Endpoint /usuarios Sem Email
     &{payload}          Create Dictionary       nome=Elano    email=        password=12345      administrador=true
     ${response}         POST on Session         serverest       /usuarios   data=&{payload}     expected_status=any
-    Log to Console      Response: ${response.content}  # Para printar a resposta no console
+    Log to Console      Response: ${response.content}  
     Set Global Variable     ${response}
 
 POST Usuario Estatico no Endpoint /usuarios 
     ${response}         POST on Session         serverest       /usuarios   data=&{payload}     expected_status=any
-    Log to Console      Response: ${response.content}  # Para printar a resposta no console
+    Log to Console      Response: ${response.content}  
     Set Global Variable     ${response}
 
 PUT Endpoint /usuarios com id "${id_usuario}"
@@ -59,12 +59,6 @@ Criar Usuario Estatico Invalido
     ${payload}              Set Variable            ${json["criar_user_sem_email"]}
     Set Global Variable     ${payload}
     POST Usuario Dinâmico no Endpoint /usuarios
-
-Validar Quantidade "${valor}"
-    Should Be Equal     ${response.json()["quantidade"]}    ${valor}
-
-Validar Se Mensagem Contem "${palavra}"
-    Should Contain      ${response.json()["message"]}       ${palavra}
 
 Validar Sem Email
     Should be Equal         ${response.json()["email"]}   email não pode ficar em branco
