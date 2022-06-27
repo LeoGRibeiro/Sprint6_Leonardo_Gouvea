@@ -3,6 +3,15 @@ Documentation          Keywords relacionados a Produtoss
 
 
 * Keywords *
+GET Endpoint /produtos
+    ${response}         GET on Session      serverest   /produtos  # Tudo que estiver após a variável será seu valor
+    Set Global Variable  ${response}  # Para a variável valer para todo o código
+    Log to Console      Response: ${response.content}
+
+GET Endpoint /produtos por ID "${id_produto}"
+    ${response}         GET on Session      serverest   /produtos/${id_produto}        expected_status=any         # Tudo que estiver após a variável será seu valor
+    Set Global Variable  ${response}  # Para a variável valer para todo o código
+    Log to Console      Response: ${response.content}
 
 POST Endpoint /produtos
     &{header}           Create Dictionary       Authorization=${token_auth}
@@ -11,15 +20,12 @@ POST Endpoint /produtos
     Log to Console      Response: ${response.content}  # Para printar a resposta no console
     Set Global Variable     ${response}
 
-GET Endpoint /produtos
-    ${response}         GET on Session      serverest   /produtos  # Tudo que estiver após a variável será seu valor
-    Set Global Variable  ${response}  # Para a variável valer para todo o código
-    Log to Console      Response: ${response.content}
-
-GET Endpoint /produtos por ID "${id_produto}"
-    ${response}         GET on Session      serverest   /produtos/${id_produto}  # Tudo que estiver após a variável será seu valor
-    Set Global Variable  ${response}  # Para a variável valer para todo o código
-    Log to Console      Response: ${response.content}
+POST Endpoint /produtos Ja Usado
+    &{header}           Create Dictionary       Authorization=${token_auth}
+    &{payload}          Create Dictionary       nome=LG 305    preco=150      descricao=Mouse Bluetooth   quantidade=55  # Usar o "&" para transformar em dicionário
+    ${response}         POST on Session         serverest       /produtos       data=&{payload}           headers=${header}          expected_status=any 
+    Log to Console      Response: ${response.content}  # Para printar a resposta no console
+    Set Global Variable     ${response}
 
 PUT Endpoint /produtos com ID 
     &{header}           Create Dictionary       Authorization=${token_auth}

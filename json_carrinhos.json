@@ -1,6 +1,16 @@
 {
-    "produtos": {
-          "idProduto": "6wBk53KzZx8OeFjm",
-          "quantidade": 3
-        }  
+  "produtos": [
+    {
+      "idProduto": "1B9DqRr8Mq5jwzrx",
+      "quantidade": 5
+    },
+    {
+      "idProduto": "fnja8kVTIWDuTLb6",
+      "quantidade": 1
+    },
+    {
+      "idProduto": "t6PHisgFNKijWItV",
+      "quantidade": 2
+    }
+  ]
 }

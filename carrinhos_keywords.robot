@@ -14,8 +14,8 @@ GET Endpoint /carrinhos por ID "${id_carrinho}"
     Log to Console      Response: ${response.content}
     
 POST Endpoint /carrinhos
-    &{header}           Create Dictionary       Authorization=${token_auth}
-    ${response}         POST on Session     serverest       /carrinhos   data=&{payload}
+    &{header}           Create Dictionary       Authorization=${token_auth}         Content-Type=aplication/json
+    ${response}         POST on Session         serverest       /carrinhos          data=&{payload}
     Log to Console      Response: ${response.content}  # Para printar a resposta no console
     Set Global Variable     ${response}
 
