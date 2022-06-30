@@ -1,6 +1,7 @@
- * Settings *
- Documentation      Keywords relacionados a Carrinhos
-
+* Settings *
+Documentation      Keywords relacionados a Carrinhos
+Resource            ../support/common/common.robot
+Resource            ../support/fixtures/dynamics.robot
 
 * Keywords *
 GET Endpoint /carrinhos
@@ -21,6 +22,6 @@ POST Endpoint /carrinhos
 
 Criar Carrinho Estatico Valido
     ${json}                 Importar Json Estatico  json_carrinhos.json
-    ${payload}              Set Variable            ${json["produtos"][]}
+    ${payload}              Set Variable            ${json["produtos"][0]}
     Set Global Variable     ${payload}
     POST Endpoint /carrinhos

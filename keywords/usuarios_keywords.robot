@@ -1,6 +1,8 @@
 * Settings *
 Documentation       Keywords e variáveis relacionados a usuários
-Resource    ./common.robot
+Resource            ../support/common/common.robot
+Resource            ../support/fixtures/dynamics.robot
+
 
 * Keywords *
 
@@ -14,8 +16,7 @@ GET Endpoint /usuarios por id "${id_usuario}"
     Set Global Variable  ${response}  # Para a variável valer para todo o código
     Log to Console      Response: ${response.content}
 
-POST Usuario Dinâmico no Endpoint /usuarios 
-    &{payload}          Create Dictionary       nome=Alisson    email=alisson@qa.com         password=12345  administrador=true
+POST Endpoint /usuarios
     ${response}         POST on Session         serverest       /usuarios   data=&{payload}     expected_status=any
     Log to Console      Response: ${response.content}  # Para printar a resposta no console
     Set Global Variable     ${response}
@@ -37,22 +38,20 @@ POST Usuario Estatico no Endpoint /usuarios
     Log to Console      Response: ${response.content}  
     Set Global Variable     ${response}
 
-PUT Endpoint /usuarios com id "${id_usuario}"
-    &{payload}          Create Dictionary       nome=Cazé    email=casimiro@gmail.com    password=1234    administrador=true
-    ${response}         PUT on Session      serverest   /usuarios/${id_usuario}     data=&{payload}        expected_status=any
+PUT Endpoint /usuarios
+    ${response}         PUT on Session      serverest   /usuarios/${response.json()["_id"]}     json=&{payload}        expected_status=any
     Log to Console      Response: ${response.content}
     Set Global Variable     ${response}
 
-DELETE Endpoint /usuarios com id "${id_usuario}"
-    ${response}         DELETE on Session      serverest   /usuarios/${id_usuario}              expected_status=any
+DELETE Endpoint /usuarios
+    ${response}         DELETE on Session      serverest   /usuarios/${response.json()["_id"]}        expected_status=any
     Log to Console      Response: ${response.content}
     Set Global Variable     ${response}
 
-Criar Usuario Estatico Valido
+Pegar Dados Usuarios Estatico Valido
     ${json}                 Importar Json Estatico  json_usuario.json
     ${payload}              Set Variable            ${json["criar_user_valido"]}
     Set Global Variable     ${payload}
-    POST Usuario Estatico no Endpoint /usuarios
 
 Criar Usuario Estatico Invalido
     ${json}                 Importar Json Estatico  json_usuario.json

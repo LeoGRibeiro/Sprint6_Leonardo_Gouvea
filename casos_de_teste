@@ -1,6 +1,0 @@
-# Usuários
-Post - Cadastrar novo usuário
-- Dados válidos
-- Não pode ser permitido usar email já cadastrado
-- O corpo deve seguir corretamente: nome, email e senha
-- Deve retornar status 201

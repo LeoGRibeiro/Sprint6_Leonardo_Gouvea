@@ -1,6 +1,7 @@
 * Settings *
 Documentation          Keywords relacionados a Produtoss
-
+Resource            ../support/common/common.robot
+Resource            ../support/fixtures/dynamics.robot
 
 * Keywords *
 GET Endpoint /produtos
