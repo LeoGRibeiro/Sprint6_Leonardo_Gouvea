@@ -15,8 +15,8 @@ Validar Status Code "${statuscode}"
 Validar Quantidade "${valor}"
     Should Be Equal     ${response.json()["quantidade"]}    ${valor}
 
-Validar Se Mensagem Contem "${palavra}"
-    Should Contain      ${response.json()["message"]}       ${palavra}
+Validar Se "${chave}" Contem "${texto}"  # Função aprendida com Cléo                            
+    Should Contain      ${response.json()["${chave}"]}       ${texto}
 
 Validar ter Logado
     Should be Equal         ${response.json()["message"]}       Login realizado com sucesso
@@ -24,7 +24,7 @@ Validar ter Logado
 
 Importar Json Estatico  
     [Arguments]     ${nome_arquivo}
-    ${arquivo}      Get File        ${EXECDIR}/${nome_arquivo}  #EXECDIR para reconhecer a pasta atual dos arquivos
+    ${arquivo}      Get File        ${EXECDIR}/support/fixtures/statics/${nome_arquivo}  #EXECDIR para reconhecer a pasta atual dos arquivos
     ${data}         Evaluate        json.loads('''${arquivo}''')        json
     [return]        ${data}
 

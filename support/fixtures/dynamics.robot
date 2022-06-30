@@ -9,3 +9,5 @@ Criar Dados para Usuario Válido
     ${payload}              Create Dictionary         nome=${nome}      email=${email}     password=teste     administrador=true
     Log to Console          ${payload}
     Set Global Variable     ${payload}
+
+    
