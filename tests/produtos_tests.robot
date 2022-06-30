@@ -1,6 +1,6 @@
 * Settings *
 
-Documentation   Arquivo de Testes para o endopoint /produtos
+Documentation   Arquivo de Testes para o endpoint /produtos
 
 Resource        ../keywords/produtos_keywords.robot
 

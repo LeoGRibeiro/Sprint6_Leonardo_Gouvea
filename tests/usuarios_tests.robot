@@ -1,6 +1,6 @@
 * Settings *
 
-Documentation   Arquivo de Testes para o endopoint /usuarios
+Documentation   Arquivo de Testes para o endpoint /usuarios
 
 Resource        ../support/common/common.robot
 Resource        ../keywords/usuarios_keywords.robot
@@ -8,22 +8,26 @@ Resource        ../keywords/usuarios_keywords.robot
 Suite Setup     Criar Sessao        # Fazer algo antes de começar cada teste
 
 * Test Cases *
+# GET CENÁRIOS ##########################################################################################################################################
 Cenário: GET Todos os Usuarios 200
-    [tags]      GET_usuarios  # Caso queria executar somente um cenário, no momento do CMD digito robot -d ./reports -i (NOME DA TAG) testeApi.robot
+    [tags]      GET_usuarios  
     GET Endpoint /usuarios
     Validar Status Code "200"
 
 Cenário: GET Usuarios Por ID 200
     [tags]      GET_usuario_id
-    GET Endpoint /usuarios por id "3uMqrxuuX3xLGxiE"
+    Criar Dados para Usuario Válido
+    POST Endpoint /usuarios
+    GET Endpoint /usuarios por ID
     Validar Status Code "200"
 
 Cenário: GET Não Encontrar ID 400
     [tags]      GET_usuario_id_invalido
-    GET Endpoint /usuarios por id "ZBvcyIXtSEKQq32f9"
+    GET Endpoint /usuarios por ID Invalido
     Validar Status Code "400"
-    Validar Se Mensagem Contem "não encontrado"
+    Validar Se "message" Contem "Usuário não encontrado"
 
+# POST CENÁRIOS #########################################################################################################################################
 Cenário: POST Criar Novo Usuario 201    
     [tags]      POST_usuario
     POST Usuario Dinâmico no Endpoint /usuarios
@@ -53,6 +57,7 @@ Cenário: POST Criar Usuario Sem Email 400
     POST Usuario Dinâmico no Endpoint /usuarios Sem Email
     Validar Status Code "400"
 
+# PUT CENÁRIOS ##########################################################################################################################################
 Cenário: PUT Editar Usuario 200
     [tags]      PUT_usuario
     Criar Dados para Usuario Válido
@@ -73,6 +78,7 @@ Cenário: PUT Criar novo Usuario 400
     Validar Status Code "400"
     Validar Se Mensagem Contem "já está sendo usado"
 
+# DELETE CENÁRIOS ########################################################################################################################################
 Cenário: DELETE Deletar Usuario 200
     [tags]      DELETE_usuario
     Criar Dados para Usuario Válido

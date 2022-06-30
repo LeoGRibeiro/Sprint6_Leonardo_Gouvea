@@ -1,6 +1,6 @@
 * Settings *
 
-Documentation   Arquivo de Testes para o endopoint /carrinhos
+Documentation   Arquivo de Testes para o endpoint /carrinhos
 
 Resource        ../keywords/carrinhos_keywords.robot
 
