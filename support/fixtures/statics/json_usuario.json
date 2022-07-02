@@ -1,0 +1,38 @@
+{
+    "user_valido":{
+        "nome": "Alberto Junior",
+        "email": "betinho3@qa.com",
+        "password": "teste123",
+        "administrador": "true"
+    },
+    "user_invalido":{
+        "nome": "Roberto Pente",
+        "email": "ribhif.com.br",           
+        "password": "12234",
+        "administrador": "true"
+    },
+    "user_email_usado":{
+        "nome": "Neymar Jr",
+        "email": "fulano@qa.com.br",
+        "password": "teste",
+        "administrador": "true"
+    },
+    "user_sem_senha":{
+        "nome": "Richarlyson",
+        "email": "richarl@qa.com.br",
+        "password": "",
+        "administrador": "true"
+    },
+    "user_sem_email":{
+        "nome": "Coutinho",
+        "email": "",
+        "password": "couto123",
+        "administrador": "true"
+    },
+    "user_adm_invalido":{
+        "nome": "Carlos Ramos",
+        "email": "carlitos@qa.com.br",
+        "password": "couto123",
+        "administrador": "verdade"
+    }
+}
