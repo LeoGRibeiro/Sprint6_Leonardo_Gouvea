@@ -18,10 +18,13 @@ Coletar ID Usuario
 
 Coletar ID Usuario Aleatorio
     ${response}             GET on Session      serverest   /usuarios
-    ${numbers}=     Evaluate    random.sample(range(1, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
+    ${numbers}=             Evaluate    random.sample(range(1, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
     ${id_usuario}           Set Variable        ${response.json()["usuarios"][${numbers}[0]]["_id"]}
     Set Global Variable     ${id_usuario}
+    Log To Console          ${id_usuario}
 
+Definir ID "${id_usuario}"
+    Set Global Variable     ${id_usuario}
 
 # GET KEYWORDS #######################################################################################################
 GET Endpoint /usuarios
@@ -31,11 +34,6 @@ GET Endpoint /usuarios
 
 GET Endpoint /usuarios por ID 
     ${response}         GET on Session      serverest   /usuarios/${id_usuario}             expected_status=any
-    Set Global Variable  ${response}  # Para a variável valer para todo o código
-    Log to Console      Response: ${response.content}
-
-GET Endpoint /usuarios por ID Invalido
-    ${response}         GET on Session      serverest   /usuarios/4hriu1hi45f7              expected_status=any
     Set Global Variable  ${response}  # Para a variável valer para todo o código
     Log to Console      Response: ${response.content}
 

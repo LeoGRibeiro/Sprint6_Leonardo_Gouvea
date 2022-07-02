@@ -22,7 +22,8 @@ Cenário: GET Usuarios Por ID 200
 
 Cenário: GET Não Encontrar ID 400
     [tags]      GET_usuario_id_invalido
-    GET Endpoint /usuarios por ID Invalido
+    Definir ID "nc2r23yn7crt""
+    GET Endpoint /usuarios por ID
     Validar Status Code "400"
     Validar Se "message" Contem "Usuário não encontrado"
 
@@ -89,12 +90,15 @@ Cenário: PUT Editar Usuario 200
 
 Cenário: PUT Criar novo Usuario 201
     [tags]      PUT_criar_usuario
-    PUT Endpoint /usuarios com id "qyqWpvsVVnbDNdYn"
+    Criar Dados para Usuario Válido
+    Definir ID "c74wn5c972y23r"
+    PUT Endpoint /usuarios
     Validar Status Code "201"
-    Validar Se Mensagem Contem "realizado com sucesso"
+    Validar Se "message" Contem "Cadastro realizado com sucesso"
 
-Cenário: PUT Criar novo Usuario 400
+Cenário: PUT Email Usado 400
     [tags]      PUT_email_usado
+    Coletar ID Usuario Aleatorio
     PUT Endpoint /usuarios com id "qyqWpvsVVnbDNdYM"
     Validar Status Code "400"
     Validar Se Mensagem Contem "já está sendo usado"
