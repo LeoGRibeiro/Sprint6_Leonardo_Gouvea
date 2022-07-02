@@ -16,12 +16,9 @@ Cenário: GET Todos os Usuarios 200
 
 Cenário: GET Usuarios Por ID 200
     [tags]      GET_usuario_id
-    Criar Dados para Usuario Válido
-    POST Endpoint /usuarios
-    Coletar ID Usuario
+    Coletar ID Usuario Aleatorio
     GET Endpoint /usuarios por ID
     Validar Status Code "200"
-    DELETE Endpoint /usuarios
 
 Cenário: GET Não Encontrar ID 400
     [tags]      GET_usuario_id_invalido
@@ -85,12 +82,10 @@ Cenário: POST Criar Usuario Administrador Invalido 400
 Cenário: PUT Editar Usuario 200
     [tags]      PUT_usuario
     Criar Dados para Usuario Válido
-    POST Endpoint /usuarios
-    Coletar ID Usuario
+    Coletar ID Usuario Aleatorio
     PUT Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
-    DELETE Endpoint /usuarios
 
 Cenário: PUT Criar novo Usuario 201
     [tags]      PUT_criar_usuario

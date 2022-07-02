@@ -5,6 +5,24 @@ Resource            ../support/fixtures/dynamics.robot
 
 
 * Keywords *
+# GENERAL KEYWORDS ###################################################################################################
+Pegar Dados Usuarios Estatico "${user}"
+    ${json}                 Importar Json Estatico  json_usuario.json
+    ${payload}              Set Variable            ${json["${user}"]}
+    log To Console          ${payload}
+    Set Global Variable     ${payload}
+
+Coletar ID Usuario
+    ${id_usuario}           Set Variable        ${response.json()["_id"]}
+    Set Global Variable     ${id_usuario}
+
+Coletar ID Usuario Aleatorio
+    ${response}             GET on Session      serverest   /usuarios
+    ${numbers}=     Evaluate    random.sample(range(1, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
+    ${id_usuario}           Set Variable        ${response.json()["usuarios"][${numbers}[0]]["_id"]}
+    Set Global Variable     ${id_usuario}
+
+
 # GET KEYWORDS #######################################################################################################
 GET Endpoint /usuarios
     ${response}         GET on Session      serverest   /usuarios  # Tudo que estiver após a variável será seu valor
@@ -29,7 +47,7 @@ POST Endpoint /usuarios
 
 # PUT KEYWORDS #######################################################################################################
 PUT Endpoint /usuarios
-    ${response}         PUT on Session      serverest   /usuarios/${response.json()["_id"]}     json=&{payload}        expected_status=any
+    ${response}         PUT on Session      serverest   /usuarios/${id_usuario}    json=&{payload}        expected_status=any
     Log to Console      Response: ${response.content}
     Set Global Variable     ${response}
 
@@ -38,14 +56,3 @@ DELETE Endpoint /usuarios
     ${response}         DELETE on Session      serverest   /usuarios/${id_usuario}        expected_status=any
     Log to Console      Response: ${response.content}
     Set Global Variable     ${response}
-
-# GENERAL KEYWORDS ###################################################################################################
-Pegar Dados Usuarios Estatico "${user}"
-    ${json}                 Importar Json Estatico  json_usuario.json
-    ${payload}              Set Variable            ${json["${user}"]}
-    log To Console          ${payload}
-    Set Global Variable     ${payload}
-
-Coletar ID Usuario
-    ${id_usuario}           Set Variable        ${response.json()["_id"]}
-    Set Global Variable     ${id_usuario}
