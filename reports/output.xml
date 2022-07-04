@@ -1,25 +1,397 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 5.0.1 (Python 3.10.5 on win32)" generated="20220702 19:41:07.619" rpa="false" schemaversion="3">
+<robot generator="Robot 5.0.1 (Python 3.10.5 on win32)" generated="20220704 11:48:39.978" rpa="false" schemaversion="3">
 <suite id="s1" name="Usuarios Tests" source="D:\Coisas\Estudos\Compass\Robot_framework\tests\usuarios_tests.robot">
 <kw name="Criar Sessao" library="common" type="SETUP">
 <kw name="Create Session" library="RequestsLibrary">
 <arg>serverest</arg>
 <arg>${BASE_URL}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<msg timestamp="20220702 19:41:07.922" level="INFO">Creating Session using : alias=serverest, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20220702 19:41:07.921" endtime="20220702 19:41:07.922"/>
+<msg timestamp="20220704 11:48:40.281" level="INFO">Creating Session using : alias=serverest, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220704 11:48:40.280" endtime="20220704 11:48:40.281"/>
 </kw>
-<status status="PASS" starttime="20220702 19:41:07.921" endtime="20220702 19:41:07.922"/>
+<status status="PASS" starttime="20220704 11:48:40.280" endtime="20220704 11:48:40.281"/>
 </kw>
-<test id="s1-t1" name="Cenário: GET Não Encontrar ID 400" line="23">
-<kw name="Definir ID &quot;nc2r23yn7crt&quot;&quot;" library="usuarios_keywords" sourcename="Definir ID &quot;${id_usuario}">
+<test id="s1-t1" name="Cenário: PUT Atualizar Senha" line="127">
+<kw name="Coletar ID Usuario Aleatorio" library="usuarios_keywords">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/usuarios</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220704 11:48:40.287" level="INFO">GET Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220704 11:48:40.287" level="INFO">GET Response : url=http://localhost:3000/usuarios 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '0487f44e-2f4b-4b0b-9183-dd902c5330ac', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '11014', 'Date': 'Mon, 04 Jul 2022 14:48:40 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "quantidade": 52,
+    "usuarios": [
+        {
+            "nome": "Fulano da Silva",
+            "email": "fulano@qa.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "0uxuPY0cbmQhpEz1"
+        },
+        {
+            "nome": "Garrett Hoffman",
+            "email": "heathernavarro@example.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "1YrNUFg67NujFkVr"
+        },
+        {
+            "nome": "Patricia Soto",
+            "email": "vleon@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "34eyYGCPDeNwRVDH"
+        },
+        {
+            "nome": "Jose Mcgee",
+            "email": "nkirk@example.org",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "3MvOuzoe5HcVvtZx"
+        },
+        {
+            "nome": "Edwin Whitney",
+            "email": "dmorales@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "3hiiroduALppqme6"
+        },
+        {
+            "nome": "Marcelo12",
+            "email": "marchelo@qa.com",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "3uMqrxuuX3xLGxiE"
+        },
+        {
+            "nome": "Ashley Garcia",
+            "email": "michael27@example.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "4yVtXcE9HAuM81XK"
+        },
+        {
+            "nome": "Patrick Krause",
+            "email": "hgreen@example.org",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "6Viv3szSTs2E414T"
+        },
+        {
+            "nome": "Fred Silva",
+            "email": "rmills@example.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "6uTlIEDTY4tPG2NY"
+        },
+        {
+            "nome": "Rachel Hubbard",
+            "email": "wclark@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "9ac1FG3y6V0zAxJe"
+        },
+        {
+            "nome": "Leah Wiggins",
+            "email": "courtneygibbs@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "BUO9FzAsXB2aBKwD"
+        },
+        {
+            "nome": "Davi luis",
+            "email": "daviluis3@qa.com.br",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "C8AvqUuxdkRE4l7K"
+        },
+        {
+            "nome": "Anne Hess",
+            "email": "rosepeter@example.org",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "CFBWHtdZSaByQcDN"
+        },
+        {
+            "nome": "Jacob Turner",
+            "email": "linda22@example.org",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "Dfb0wpiOiYE3OFiE"
+        },
+        {
+            "nome": "Mary Patton",
+            "email": "william71@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "EbFcSTgftrJy1uba"
+        },
+        {
+            "nome": "William Stokes",
+            "email": "smithkara@example.org",
+            "password": "&amp;0WmY",
+            "administrador": "true",
+            "_id": "FrJGBoSo7Wn0Lpdu"
+        },
+        {
+            "nome": "James Hernandez",
+            "email": "jonesbrenda@example.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "GwfZ75MYS8RuIoNe"
+        },
+        {
+            "nome": "Janet Jackson",
+            "email": "montoyanicolas@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "HkAMO9Pz7yHDfzUF"
+        },
+        {
+            "nome": "Kelly Walker",
+            "email": "gordondennis@example.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "IZwqoy15uk1nRURw"
+        },
+        {
+            "nome": "Neymaru",
+            "email": "fulano@qa.com.br",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "JJAwZmD0BGmmOavI"
+        },
+        {
+            "nome": "Cazé",
+            "email": "casimiro@gmail.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "LBNTveEpMboFxKLp"
+        },
+        {
+            "nome": "William Carey",
+            "email": "smithlisa@example.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "OdJ5yswAKeDh0RvI"
+        },
+        {
+            "nome": "Cody Guerrero",
+            "email": "lsanchez@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "PPw4iR5jZnVlE8UD"
+        },
+        {
+            "nome": "Randall Meza",
+            "email": "wwilliams@example.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "Qib9oETBywJ1LWNS"
+        },
+        {
+            "nome": "Cody Adams",
+            "email": "tbaker@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "RPUBl1zNkQBwYilz"
+        },
+        {
+            "nome": "Brett Lewis",
+            "email": "hamptondarryl@example.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "RfCSZupicTZLyPHv"
+        },
+        {
+            "nome": "Walter Martinez",
+            "email": "zsmith@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "TqmKjbcOPAxIk2TX"
+        },
+        {
+            "nome": "Nicholas Singleton",
+            "email": "gilmorelisa@example.org",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "Tz7VCr34EdGeTrMl"
+        },
+        {
+            "nome": "Ryan Nelson",
+            "email": "armstrongrita@example.org",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "ViliyyDZ5Wb5DUqI"
+        },
+        {
+            "nome": "Charles Miles",
+            "email": "julie74@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "YQaC6QQN3u5EkHiJ"
+        },
+        {
+            "nome": "Allison Deleon",
+            "email": "zevans@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "YXZRqnfb7gH30vzA"
+        },
+        {
+            "nome": "Ronaldinho Gaucho",
+            "email": "ronaldinh9@qa.com.br",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "ZBvcyIXYSEKQq9f9"
+        },
+        {
+            "nome": "Jesus Butler",
+            "email": "roysmith@example.com",
+            "password": ")5B9u",
+            "administrador": "true",
+            "_id": "aI3a0u0wTf9S82Rt"
+        },
+        {
+            "nome": "Henry Simpson",
+            "email": "bmclean@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "d15FCfFp3a6ssvFn"
+        },
+        {
+            "nome": "Joseph Ryan",
+            "email": "roger38@example.org",
+            "password": "$3NlS",
+            "administrador": "true",
+            "_id": "dKX9A9YWjknh6GBX"
+        },
+        {
+            "nome": "Keith Proctor",
+            "email": "stevensstephanie@example.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "fLnW3WziOY4hT6y4"
+        },
+        {
+            "nome": "James Davis",
+            "email": "sdaniel@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "hUz4jiSuQYWUy1GS"
+        },
+        {
+            "nome": "Thomas Henrique",
+            "email": "thomas123@qa.com",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "ilopw82jauBOWPgO"
+        },
+        {
+            "nome": "Kimberly Stewart",
+            "email": "tnelson@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "jQrqgUjQeRQOyfz6"
+        },
+        {
+            "nome": "Robert Collins",
+            "email": "walshryan@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "lvfhDVcRgVBVBEfz"
+        },
+        {
+            "nome": "Richard Gomes",
+            "email": "richard_@qa.com",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "m42DKtadITK7v6Kb"
+        },
+        {
+            "nome": "Chris Aguirre",
+            "email": "joycehill@example.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "nefiiMwOLD3kT24D"
+        },
+        {
+            "nome": "Amy Rivera",
+            "email": "tommy08@example.org",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "qWR0ri4oJCzJeTCo"
+        },
+        {
+            "nome": "Gabriel Moore",
+            "email": "gilbertalexandra@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "qx5UoCn8CUz68ZQZ"
+        },
+        {
+            "nome": "Frank Castillo",
+            "email": "jenniferacosta@example.net",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "qylyHe0C2NcnPESA"
+        },
+        {
+            "nome": "Rulque Grande",
+            "email": "hulkVerde12@gmail.com",
+            "password": "1234",
+            "administrador": "true",
+            "_id": "qyqWpvsVVnbDNdYM"
+        },
+        {
+            "nome": "caca",
+            "email": "ricardo123@qa.com.br",
+            "password": "teste123",
+            "administrador": "true",
+            "_id": "twQf5wQlGDuVwPsG"
+        },
+        {
+            "nome": "Vini Jr",
+    ... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20220704 11:48:40.287" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220704 11:48:40.281" endtime="20220704 11:48:40.287"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${numbers}</var>
+<arg>random.sample(range(1, ${response.json()["quantidade"]}),1)</arg>
+<arg>random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220704 11:48:40.288" level="INFO">${numbers} = [19]</msg>
+<status status="PASS" starttime="20220704 11:48:40.287" endtime="20220704 11:48:40.288"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id_usuario}</var>
+<arg>${response.json()["usuarios"][${numbers}[0]]["_id"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220704 11:48:40.288" level="INFO">${id_usuario} = JJAwZmD0BGmmOavI</msg>
+<status status="PASS" starttime="20220704 11:48:40.288" endtime="20220704 11:48:40.288"/>
+</kw>
 <kw name="Set Global Variable" library="BuiltIn">
 <arg>${id_usuario}</arg>
 <doc>Makes a variable available globally in all tests and suites.</doc>
-<msg timestamp="20220702 19:41:07.923" level="INFO">${id_usuario} = nc2r23yn7crt""</msg>
-<status status="PASS" starttime="20220702 19:41:07.922" endtime="20220702 19:41:07.923"/>
+<msg timestamp="20220704 11:48:40.288" level="INFO">${id_usuario} = JJAwZmD0BGmmOavI</msg>
+<status status="PASS" starttime="20220704 11:48:40.288" endtime="20220704 11:48:40.288"/>
 </kw>
-<status status="PASS" starttime="20220702 19:41:07.922" endtime="20220702 19:41:07.923"/>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${id_usuario}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220704 11:48:40.288" endtime="20220704 11:48:40.289"/>
+</kw>
+<status status="PASS" starttime="20220704 11:48:40.281" endtime="20220704 11:48:40.289"/>
 </kw>
 <kw name="GET Endpoint /usuarios por ID" library="usuarios_keywords">
 <kw name="GET On Session" library="RequestsLibrary">
@@ -28,63 +400,138 @@
 <arg>/usuarios/${id_usuario}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a GET request on a previously created HTTP Session.</doc>
-<msg timestamp="20220702 19:41:07.929" level="INFO">GET Request : url=http://localhost:3000/usuarios/nc2r23yn7crt%22%22 
- path_url=/usuarios/nc2r23yn7crt%22%22 
+<msg timestamp="20220704 11:48:40.291" level="INFO">GET Request : url=http://localhost:3000/usuarios/JJAwZmD0BGmmOavI 
+ path_url=/usuarios/JJAwZmD0BGmmOavI 
  headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
  body=None 
  </msg>
-<msg timestamp="20220702 19:41:07.929" level="INFO">GET Response : url=http://localhost:3000/usuarios/nc2r23yn7crt%22%22 
- status=400, reason=Bad Request 
- headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '50f8945d-a034-475d-844d-c96e5c2f7937', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '45', 'Date': 'Sat, 02 Jul 2022 22:41:07 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+<msg timestamp="20220704 11:48:40.291" level="INFO">GET Response : url=http://localhost:3000/usuarios/JJAwZmD0BGmmOavI 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '290506bc-6480-438e-a64a-2da27814b48e', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '143', 'Date': 'Mon, 04 Jul 2022 14:48:40 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
  body={
-    "message": "Usuário não encontrado"
+    "nome": "Neymaru",
+    "email": "fulano@qa.com.br",
+    "password": "teste",
+    "administrador": "true",
+    "_id": "JJAwZmD0BGmmOavI"
 } 
  </msg>
-<msg timestamp="20220702 19:41:07.929" level="INFO">${response} = &lt;Response [400]&gt;</msg>
-<status status="PASS" starttime="20220702 19:41:07.923" endtime="20220702 19:41:07.929"/>
+<msg timestamp="20220704 11:48:40.291" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220704 11:48:40.289" endtime="20220704 11:48:40.291"/>
 </kw>
 <kw name="Set Global Variable" library="BuiltIn">
 <arg>${response}</arg>
 <doc>Makes a variable available globally in all tests and suites.</doc>
-<msg timestamp="20220702 19:41:07.930" level="INFO">${response} = &lt;Response [400]&gt;</msg>
-<status status="PASS" starttime="20220702 19:41:07.929" endtime="20220702 19:41:07.930"/>
+<msg timestamp="20220704 11:48:40.291" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220704 11:48:40.291" endtime="20220704 11:48:40.291"/>
 </kw>
 <kw name="Log To Console" library="BuiltIn">
 <arg>Response: ${response.content}</arg>
 <doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20220702 19:41:07.930" endtime="20220702 19:41:07.930"/>
+<status status="PASS" starttime="20220704 11:48:40.291" endtime="20220704 11:48:40.291"/>
 </kw>
-<status status="PASS" starttime="20220702 19:41:07.923" endtime="20220702 19:41:07.930"/>
+<status status="PASS" starttime="20220704 11:48:40.289" endtime="20220704 11:48:40.292"/>
 </kw>
-<kw name="Validar Status Code &quot;400&quot;" library="common" sourcename="Validar Status Code &quot;${statuscode}&quot;">
+<kw name="Alterar Dados Payload Senha" library="usuarios_keywords">
+<kw name="Password" library="FakerLibrary">
+<var>${senha}</var>
+<arg>length=5</arg>
+<arg>special_chars=True</arg>
+<arg>digits=True</arg>
+<arg>upper_case=True</arg>
+<arg>lower_case=True</arg>
+<doc>Generate a random password of the specified ``length``.</doc>
+<msg timestamp="20220704 11:48:40.292" level="INFO">${senha} = !5F+s</msg>
+<status status="PASS" starttime="20220704 11:48:40.292" endtime="20220704 11:48:40.292"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${payload}</var>
+<arg>nome=${response.json()["nome"]}</arg>
+<arg>email=${response.json()["email"]}</arg>
+<arg>password=${senha}</arg>
+<arg>administrador=${response.json()["administrador"]}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220704 11:48:40.294" level="INFO">${payload} = {'nome': 'Neymaru', 'email': 'fulano@qa.com.br', 'password': '!5F+s', 'administrador': 'true'}</msg>
+<status status="PASS" starttime="20220704 11:48:40.292" endtime="20220704 11:48:40.294"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${payload}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220704 11:48:40.294" endtime="20220704 11:48:40.294"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${payload}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220704 11:48:40.294" level="INFO">${payload} = {'nome': 'Neymaru', 'email': 'fulano@qa.com.br', 'password': '!5F+s', 'administrador': 'true'}</msg>
+<status status="PASS" starttime="20220704 11:48:40.294" endtime="20220704 11:48:40.294"/>
+</kw>
+<status status="PASS" starttime="20220704 11:48:40.292" endtime="20220704 11:48:40.294"/>
+</kw>
+<kw name="PUT Endpoint /usuarios" library="usuarios_keywords">
+<kw name="PUT On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/usuarios/${id_usuario}</arg>
+<arg>json=&amp;{payload}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a PUT request on a previously created HTTP Session.</doc>
+<msg timestamp="20220704 11:48:40.298" level="INFO">PUT Request : url=http://localhost:3000/usuarios/JJAwZmD0BGmmOavI 
+ path_url=/usuarios/JJAwZmD0BGmmOavI 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '94', 'Content-Type': 'application/json'} 
+ body=b'{"nome": "Neymaru", "email": "fulano@qa.com.br", "password": "!5F+s", "administrador": "true"}' 
+ </msg>
+<msg timestamp="20220704 11:48:40.298" level="INFO">PUT Response : url=http://localhost:3000/usuarios/JJAwZmD0BGmmOavI 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': 'ed96ea8f-f4fb-42b0-b175-554d57bcfc1c', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '50', 'Date': 'Mon, 04 Jul 2022 14:48:40 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Registro alterado com sucesso"
+} 
+ </msg>
+<msg timestamp="20220704 11:48:40.298" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220704 11:48:40.295" endtime="20220704 11:48:40.298"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Response: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220704 11:48:40.298" endtime="20220704 11:48:40.299"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220704 11:48:40.299" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220704 11:48:40.299" endtime="20220704 11:48:40.299"/>
+</kw>
+<status status="PASS" starttime="20220704 11:48:40.294" endtime="20220704 11:48:40.299"/>
+</kw>
+<kw name="Validar Status Code &quot;200&quot;" library="common" sourcename="Validar Status Code &quot;${statuscode}&quot;">
 <kw name="Should Be True" library="BuiltIn">
 <arg>${response.status_code} == ${statuscode}</arg>
 <doc>Fails if the given condition is not true.</doc>
-<status status="PASS" starttime="20220702 19:41:07.931" endtime="20220702 19:41:07.931"/>
+<status status="PASS" starttime="20220704 11:48:40.300" endtime="20220704 11:48:40.300"/>
 </kw>
-<status status="PASS" starttime="20220702 19:41:07.930" endtime="20220702 19:41:07.931"/>
+<status status="PASS" starttime="20220704 11:48:40.300" endtime="20220704 11:48:40.300"/>
 </kw>
-<kw name="Validar Se &quot;message&quot; Contem &quot;Usuário não encontrado&quot;" library="common" sourcename="Validar Se &quot;${chave}&quot; Contem &quot;${texto}&quot;">
+<kw name="Validar Se &quot;message&quot; Contem &quot;Registro alterado com sucesso&quot;" library="common" sourcename="Validar Se &quot;${chave}&quot; Contem &quot;${texto}&quot;">
 <kw name="Should Contain" library="BuiltIn">
 <arg>${response.json()["${chave}"]}</arg>
 <arg>${texto}</arg>
 <doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
-<status status="PASS" starttime="20220702 19:41:07.931" endtime="20220702 19:41:07.932"/>
+<status status="PASS" starttime="20220704 11:48:40.301" endtime="20220704 11:48:40.301"/>
 </kw>
-<status status="PASS" starttime="20220702 19:41:07.931" endtime="20220702 19:41:07.932"/>
+<status status="PASS" starttime="20220704 11:48:40.301" endtime="20220704 11:48:40.301"/>
 </kw>
-<tag>GET_usuario_id_invalido</tag>
-<status status="PASS" starttime="20220702 19:41:07.922" endtime="20220702 19:41:07.932"/>
+<tag>PUT_atualizar_senha</tag>
+<status status="PASS" starttime="20220704 11:48:40.281" endtime="20220704 11:48:40.301"/>
 </test>
 <doc>Arquivo de Testes para o endpoint /usuarios</doc>
-<status status="PASS" starttime="20220702 19:41:07.620" endtime="20220702 19:41:07.932"/>
+<status status="PASS" starttime="20220704 11:48:39.979" endtime="20220704 11:48:40.302"/>
 </suite>
 <statistics>
 <total>
 <stat pass="1" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="1" fail="0" skip="0">GET_usuario_id_invalido</stat>
+<stat pass="1" fail="0" skip="0">PUT_atualizar_senha</stat>
 </tag>
 <suite>
 <stat pass="1" fail="0" skip="0" id="s1" name="Usuarios Tests">Usuarios Tests</stat>

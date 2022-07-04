@@ -22,6 +22,9 @@ Validar ter Logado
     Should be Equal         ${response.json()["message"]}       Login realizado com sucesso
     Should Not Be Empty     ${response.json()["authorization"]}
 
+Validar Resposta Vazia "${espaco}"
+    Should Not Be Empty     ${response.json()["${espaco}"]}
+    
 Importar Json Estatico  
     [Arguments]     ${nome_arquivo}
     ${arquivo}      Get File        ${EXECDIR}/support/fixtures/statics/${nome_arquivo}  #EXECDIR para reconhecer a pasta atual dos arquivos

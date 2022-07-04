@@ -23,6 +23,12 @@
         "password": "",
         "administrador": "true"
     },
+    "user_sem_nome":{
+        "nome": "",
+        "email": "lorena123@qa.com",
+        "password": "teste",
+        "administrador": "true"
+    },
     "user_sem_email":{
         "nome": "Coutinho",
         "email": "",

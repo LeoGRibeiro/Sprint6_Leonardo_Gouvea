@@ -3,6 +3,7 @@ Documentation       Keywords e variáveis relacionados a usuários
 Resource            ../support/common/common.robot
 Resource            ../support/fixtures/dynamics.robot
 
+Library             FakerLibrary
 
 * Keywords *
 # GENERAL KEYWORDS ###################################################################################################
@@ -18,13 +19,32 @@ Coletar ID Usuario
 
 Coletar ID Usuario Aleatorio
     ${response}             GET on Session      serverest   /usuarios
-    ${numbers}=             Evaluate    random.sample(range(1, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
+    ${numbers}=             Evaluate            random.sample(range(1, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
     ${id_usuario}           Set Variable        ${response.json()["usuarios"][${numbers}[0]]["_id"]}
     Set Global Variable     ${id_usuario}
     Log To Console          ${id_usuario}
 
 Definir ID "${id_usuario}"
     Set Global Variable     ${id_usuario}
+
+Alterar Dados Payload Nome
+    ${nome}                 FakerLibrary.Name
+    ${payload}              Create Dictionary       nome=${nome}     email=${response.json()["email"]}     password=${response.json()["password"]}   administrador=${response.json()["administrador"]}
+    log To Console          ${payload}
+    Set Global Variable     ${payload}
+
+Alterar Dados Payload Email
+    ${email}                FakerLibrary.Email
+    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      email=${email}     password=${response.json()["password"]}   administrador=${response.json()["administrador"]}
+    log To Console          ${payload}
+    Set Global Variable     ${payload}
+
+Alterar Dados Payload Senha   
+    ${senha}                FakerLibrary.Password     length=5          special_chars=True     digits=True    upper_case=True    lower_case=True
+    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      email=${response.json()["email"]}     password=${senha}  administrador=${response.json()["administrador"]}
+    log To Console          ${payload}
+    Set Global Variable     ${payload}
+
 
 # GET KEYWORDS #######################################################################################################
 GET Endpoint /usuarios
