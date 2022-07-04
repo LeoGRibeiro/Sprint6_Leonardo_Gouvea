@@ -42,21 +42,33 @@ Alterar Dados Payload Email
 Alterar Dados Payload Senha   
     ${senha}                FakerLibrary.Password     length=5          special_chars=True     digits=True    upper_case=True    lower_case=True
     ${payload}              Create Dictionary       nome=${response.json()["nome"]}      email=${response.json()["email"]}     password=${senha}  administrador=${response.json()["administrador"]}
-    log To Console          ${payload}
+    Log To Console          ${payload}
     Set Global Variable     ${payload}
 
+Alterar Dados Payload Administrador True
+    ${senha}                FakerLibrary.Password     length=5          special_chars=True     digits=True    upper_case=True    lower_case=True
+    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      email=${response.json()["email"]}     password=${response.json()["password"]}  administrador=true
+    Log To Console          ${payload}
+    Set Global Variable     ${payload}
+
+Alterar Dados Payload Administrador False
+    ${senha}                FakerLibrary.Password     length=5          special_chars=True     digits=True    upper_case=True    lower_case=True
+    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      email=${response.json()["email"]}     password=${response.json()["password"]}  administrador=false
+    Log To Console          ${payload}
+    Set Global Variable     ${payload}
 
 # GET KEYWORDS #######################################################################################################
 GET Endpoint /usuarios
     ${response}         GET on Session      serverest   /usuarios  # Tudo que estiver após a variável será seu valor
     Set Global Variable  ${response}  # Para a variável valer para todo o código
     Log to Console      Response: ${response.content}
-
+    Log to Console      Quantidade: ${response.json()["quantidade"]}
+    
 GET Endpoint /usuarios por ID 
     ${response}         GET on Session      serverest   /usuarios/${id_usuario}             expected_status=any
     Set Global Variable  ${response}  # Para a variável valer para todo o código
     Log to Console      Response: ${response.content}
-
+    
 # POST KEYWORDS ######################################################################################################
 POST Endpoint /usuarios
     ${response}             POST on Session         serverest       /usuarios   data=&{payload}     expected_status=any
