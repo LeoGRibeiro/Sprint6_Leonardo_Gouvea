@@ -43,3 +43,11 @@ Fazer Login e Armazenar Token
     Validar ter Logado
     ${token_auth}           Set Variable        ${response.json()["authorization"]}
     Set Global Variable     ${token_auth}
+
+Fazer Login Sem Adm e Armazenar Token
+    POST Endpoint /login "user_sem_adm"
+    ${token_auth}           Set Variable        ${response.json()["authorization"]}
+    Set Global Variable     ${token_auth}
+
+Definir Token Invalido "${token_auth}"
+    Set Global Variable     ${token_auth}

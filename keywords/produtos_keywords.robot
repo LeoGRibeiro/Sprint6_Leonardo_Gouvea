@@ -67,3 +67,8 @@ Pegar Dados Produtos Estatico "${produto}"
     ${payload}              Set Variable            ${json["${produto}"]}
     log To Console          ${payload}
     Set Global Variable     ${payload}
+
+Alterar Payload Quantidade "${valor}"
+    ${payload}              Create Dictionary       nome=${payload["nome"]}      preco=${payload["preco"]}     descricao=${payload["descricao"]}   quantidade=${valor}
+    Set Global Variable     ${payload}
+    Log To Console          Nova Quantidade: ${valor}

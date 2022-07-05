@@ -5,16 +5,34 @@
         "descricao": "Mouse gamer",
         "quantidade": 204
     },
-    "produto_repeetido":{
-        "nome": "Logitech MX Vertical",
+    "produto_sem_nome":{
+        "nome": "",
         "preco": 470,
         "descricao": "Mouse",
         "quantidade": 381
     },
-    "user_email_usado":{
-        "nome": "Neymar Jr",
-        "email": "fulano@qa.com.br",
-        "password": "teste",
-        "administrador": "true"
+    "produto_preco_zero":{
+        "nome": "Logitech MX Vertical",
+        "preco": 0,
+        "descricao": "Mouse gamer",
+        "quantidade": 204
+    },
+    "produto_sem_descricao":{
+        "nome": "Logitech MX Vertical",
+        "preco": 750,
+        "descricao": "",
+        "quantidade": 204
+    },
+    "produto_quantidade_zero":{
+        "nome": "Logitech MXE",
+        "preco": 750,
+        "descricao": "Mouse gamer",
+        "quantidade": 0
+    },
+    "produto_preco_invalido":{
+        "nome": "Logitech MX Vertical",
+        "preco": 500.4,
+        "descricao": "Mouse gamer",
+        "quantidade": 204
     }
 }

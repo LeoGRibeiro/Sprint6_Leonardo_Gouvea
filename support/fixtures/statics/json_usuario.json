@@ -40,5 +40,11 @@
         "email": "carlitos@qa.com.br",
         "password": "couto123",
         "administrador": "verdade"
+    },
+    "user_sem_adm":{
+        "nome": "Sophia",
+        "email": "Sophia_@qa.com",
+        "password": "teste",
+        "administrador": "false"
     }
 }

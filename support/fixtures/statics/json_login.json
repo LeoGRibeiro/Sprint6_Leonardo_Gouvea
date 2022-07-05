@@ -14,5 +14,9 @@
     "user_sem_email":{
         "email":"",
         "password":"teste2"
+    },
+    "user_sem_adm":{
+        "email": "Sophia_@qa.com",
+        "password": "teste"
     }
 }

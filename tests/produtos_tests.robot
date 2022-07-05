@@ -35,15 +35,80 @@ Cenário: POST Cadastrar Produtos 201
     POST Endpoint /produtos
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
-    Validar Resposta Vazia "_id"
 
 Cenário: POST Cadastrar Produto Já Existente 400
-    [tags]      POST_produto_ja_existente
+    [tags]      POST_produto_ja_existente   POST
     Pegar Dados Produtos Estatico "produto_repetido"
     Fazer Login e Armazenar Token
     POST Endpoint /produtos
     Validar Status Code "400"
     Validar Se "message" Contem "Já existe produto com esse nome"
+
+Cenário: POST Cadastrar Produto Com Token Inváilido 401
+    [tags]      POST_cadastrar_token_invalido    POST
+    Criar Dados para Produto Dinamico Válido
+    Definir Token Invalido "fhn23cn429n45c43tc"
+    POST Endpoint /produtos
+    Validar Status Code "401"
+    Validar Se "message" Contem "Token de acesso ausente, inválido, expirado ou usuário do token não existe mais"
+
+Cenário: POST Cadastrar Produto Sem Adm 403
+    [tags]      POST_cadastrar_sem_adm  POST
+    Criar Dados para Produto Dinamico Válido
+    Fazer Login Sem Adm e Armazenar Token 
+    POST Endpoint /produtos
+    Validar Status Code "403"
+    Validar Se "message" Contem "Rota exclusiva para administradores"
+
+Cenário: POST Cadastrar Produto Sem Nome 400
+    [tags]      POST_cadastrar_sem_nome     POST
+    Pegar Dados Produtos Estatico "produto_sem_nome"
+    Fazer Login e Armazenar Token
+    POST Endpoint /produtos
+    Validar Status Code "400"
+    Validar Se "nome" Contem "nome não pode ficar em branco"
+
+Cenário: POST Cadastrar Produto Com Preco Zero 400
+    [tags]      POST_cadastrar_preco_zero     POST
+    Pegar Dados Produtos Estatico "produto_preco_zero"
+    Fazer Login e Armazenar Token
+    POST Endpoint /produtos
+    Validar Status Code "400"
+    Validar Se "preco" Contem "preco deve ser um número positivo"
+
+Cenário: POST Cadastrar Produto Sem Descricao 400
+    [tags]      POST_cadastrar_sem_descricao     POST
+    Pegar Dados Produtos Estatico "produto_sem_descricao"
+    Fazer Login e Armazenar Token
+    POST Endpoint /produtos
+    Validar Status Code "400"
+    Validar Se "descricao" Contem "descricao não pode ficar em branco"
+
+Cenário: POST Cadastrar Produto Com Quantidade Zero 400
+    [tags]      POST_cadastrar_quantidade_zero     POST
+    Criar Dados para Produto Dinamico Válido
+    Alterar Payload Quantidade "0"
+    Fazer Login e Armazenar Token
+    POST Endpoint /produtos
+    Validar Status Code "201"
+    Validar Se "message" Contem "Cadastro realizado com sucesso"
+
+Cenário: POST Cadastrar Produto Com Quantidade Negativa 400
+    [tags]      POST_cadastrar_quantidade_negativa     POST
+    Criar Dados para Produto Dinamico Válido
+    Alterar Payload Quantidade "-5"
+    Fazer Login e Armazenar Token
+    POST Endpoint /produtos
+    Validar Status Code "400"
+    Validar Se "quantidade" Contem "quantidade deve ser maior ou igual a 0"
+
+Cenário: POST Cadastrar Produto Com Preco Invalido 400
+    [tags]      POST_cadastrar_preco_invalido     POST
+    Pegar Dados Produtos Estatico "produto_preco_invalido"
+    Fazer Login e Armazenar Token
+    POST Endpoint /produtos
+    Validar Status Code "400"
+    Validar Se "preco" Contem "preco deve ser um inteiro"
 
 # PUT CENÁRIOS ##########################################################################################################################################
 Cenário: PUT Editar Produto 200
