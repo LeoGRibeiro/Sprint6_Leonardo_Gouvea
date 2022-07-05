@@ -5,18 +5,17 @@ Resource            ../support/fixtures/dynamics.robot
 
 * Keywords *
 GET Endpoint /produtos
-    ${response}         GET on Session      serverest   /produtos  # Tudo que estiver após a variável será seu valor
-    Set Global Variable  ${response}  # Para a variável valer para todo o código
+    ${response}         GET on Session      serverest   /produtos  
+    Set Global Variable  ${response}  
     Log to Console      Response: ${response.content}
 
-GET Endpoint /produtos por ID "${id_produto}"
+GET Endpoint /produtos por ID 
     ${response}         GET on Session      serverest   /produtos/${id_produto}        expected_status=any         # Tudo que estiver após a variável será seu valor
     Set Global Variable  ${response}  # Para a variável valer para todo o código
     Log to Console      Response: ${response.content}
 
 POST Endpoint /produtos
     &{header}           Create Dictionary       Authorization=${token_auth}
-    &{payload}          Create Dictionary       nome=T-dagger Bora    preco=      descricao=Teclado   quantidade=55  # Usar o "&" para transformar em dicionário
     ${response}         POST on Session         serverest       /produtos       data=&{payload}                  headers=${header}          expected_status=any
     Log to Console      Response: ${response.content}  # Para printar a resposta no console
     Set Global Variable     ${response}
@@ -41,6 +40,7 @@ DELETE Endpoint /produtos com id "${id_produto}"
     Log to Console      Response: ${response.content}  # Para printar a resposta no console
     Set Global Variable     ${response}
 
+# GENERAL KEYWORDS ###################################################################################################
 Validar Ter Criado Produto
     Should be Equal         ${response.json()["message"]}   Cadastro realizado com sucesso
     Should Not Be Empty     ${response.json()["_id"]}
@@ -51,3 +51,19 @@ Criar Um Produto e Armazenar id
     ${id_produto}           Set Variable    ${response.json()["_id"]}
     Log To Console          ID Produto: ${id_produto}
     Set Global Variable     ${id_produto}
+
+Coletar ID Produto Aleatorio
+    ${response}             GET on Session      serverest   /produtos
+    ${numbers}=             Evaluate            random.sample(range(1, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
+    ${id_produto}           Set Variable        ${response.json()["produtos"][${numbers}[0]]["_id"]}
+    Set Global Variable     ${id_produto}
+    Log To Console          ${id_produto}
+
+Definir ID "${id_produto}"
+    Set Global Variable     ${id_produto}
+
+Pegar Dados Produtos Estatico "${produto}"
+    ${json}                 Importar Json Estatico  json_produtos.json
+    ${payload}              Set Variable            ${json["${produto}"]}
+    log To Console          ${payload}
+    Set Global Variable     ${payload}

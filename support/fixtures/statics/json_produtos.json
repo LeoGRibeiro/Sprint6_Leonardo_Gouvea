@@ -1,0 +1,20 @@
+{
+    "produto_repetido":{
+        "nome": "Logitech MX Vertical",
+        "preco": 200,
+        "descricao": "Mouse gamer",
+        "quantidade": 204
+    },
+    "produto_repeetido":{
+        "nome": "Logitech MX Vertical",
+        "preco": 470,
+        "descricao": "Mouse",
+        "quantidade": 381
+    },
+    "user_email_usado":{
+        "nome": "Neymar Jr",
+        "email": "fulano@qa.com.br",
+        "password": "teste",
+        "administrador": "true"
+    }
+}

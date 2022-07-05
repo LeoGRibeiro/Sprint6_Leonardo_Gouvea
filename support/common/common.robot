@@ -31,9 +31,15 @@ Importar Json Estatico
     ${data}         Evaluate        json.loads('''${arquivo}''')        json
     [return]        ${data}
 
+POST Endpoint /login "${user}"
+    ${json}                 Importar Json Estatico  json_login.json
+    ${payload}              Set Variable            ${json["${user}"]}
+    ${response}             POST on Session         serverest                  /login          data=&{payload}        expected_status=any
+    Log To Console          Response: ${response.content}  # Para printar a resposta no console
+    Set Global Variable     ${response}
+
 Fazer Login e Armazenar Token
-    POST Endpoint /login
+    POST Endpoint /login "user_valido"
     Validar ter Logado
     ${token_auth}           Set Variable        ${response.json()["authorization"]}
-    Log To Console          Token Salvo: {token_auth}
     Set Global Variable     ${token_auth}

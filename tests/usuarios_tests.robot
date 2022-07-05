@@ -214,3 +214,5 @@ Cenário: DELETE Não Encontrar Usuario 200
     DELETE Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Nenhum registro excluído"
+
+Cenário: DELETE Usuario Com Carrinho 400
