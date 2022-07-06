@@ -9,20 +9,20 @@ Library             FakerLibrary
 
 # GET KEYWORDS #######################################################################################################
 GET Endpoint /usuarios
-    ${response}         GET on Session      serverest   /usuarios  # Tudo que estiver após a variável será seu valor
-    Set Global Variable  ${response}  # Para a variável valer para todo o código
+    ${response}         GET on Session      serverest   /usuarios  
+    Set Global Variable  ${response}  
     Log to Console      Response: ${response.content}
     Log to Console      Quantidade: ${response.json()["quantidade"]}
     
 GET Endpoint /usuarios por ID 
     ${response}         GET on Session      serverest   /usuarios/${id_usuario}             expected_status=any
-    Set Global Variable  ${response}  # Para a variável valer para todo o código
+    Set Global Variable  ${response}  
     Log to Console      Response: ${response.content}
     
 # POST KEYWORDS ######################################################################################################
 POST Endpoint /usuarios
     ${response}             POST on Session         serverest       /usuarios   data=&{payload}     expected_status=any
-    Log to Console          Response: ${response.content}  # Para printar a resposta no console
+    Log to Console          Response: ${response.content}  
     Set Global Variable     ${response}
 
 # PUT KEYWORDS #######################################################################################################
@@ -55,7 +55,7 @@ Coletar ID Usuario Aleatorio
     Set Global Variable     ${id_usuario}
     Log To Console          ${id_usuario}
 
-Definir ID "${id_usuario}"
+Definir ID Usuario "${id_usuario}"
     Set Global Variable     ${id_usuario}
 
 Alterar Dados Payload Nome

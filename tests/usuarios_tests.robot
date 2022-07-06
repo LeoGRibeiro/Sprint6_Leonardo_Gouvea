@@ -22,7 +22,7 @@ Cenário: GET Usuarios Por ID 200
 
 Cenário: GET Não Encontrar ID 400
     [tags]      GET_usuario_id_invalido     GET
-    Definir ID "nc2r23yn7crt""
+    Definir ID Usuario "nc2r23yn7crt""
     GET Endpoint /usuarios por ID
     Validar Status Code "400"
     Validar Se "message" Contem "Usuário não encontrado"
@@ -100,7 +100,7 @@ Cenário: PUT Editar Usuario 200
 Cenário: PUT Criar novo Usuario 201
     [tags]      PUT_criar_usuario   PUT
     Criar Dados para Usuario Válido
-    Definir ID "c74wn5c972y23r"
+    Definir ID Usuario "c74wn5c972y23r"
     PUT Endpoint /usuarios
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
@@ -210,7 +210,7 @@ Cenário: DELETE Deletar Usuario 200
 
 Cenário: DELETE Não Encontrar Usuario 200
     [tags]      DELETE_id_invalido  DELETE
-    Definir ID "IDinvalido"
+    Definir ID Usuario "IDinvalido"
     DELETE Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Nenhum registro excluído"

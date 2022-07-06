@@ -22,7 +22,7 @@ Validar ter Logado
     Should be Equal         ${response.json()["message"]}       Login realizado com sucesso
     Should Not Be Empty     ${response.json()["authorization"]}
 
-Validar Resposta Vazia "${espaco}"
+Validar Alguma Resposta Vazia "${espaco}"
     Should Not Be Empty     ${response.json()["${espaco}"]}
     
 Importar Json Estatico  
@@ -51,3 +51,4 @@ Fazer Login Sem Adm e Armazenar Token
 
 Definir Token Invalido "${token_auth}"
     Set Global Variable     ${token_auth}
+    Log to Console        Token Inválido: ${token_auth}

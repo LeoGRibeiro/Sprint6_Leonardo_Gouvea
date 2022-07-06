@@ -34,5 +34,11 @@
         "preco": 500.4,
         "descricao": "Mouse gamer",
         "quantidade": 204
+    },
+    "produto_preco_negativo":{
+        "nome": "Logitech MX Vertical",
+        "preco": -500,
+        "descricao": "Mouse gamer",
+        "quantidade": 204
     }
 }
