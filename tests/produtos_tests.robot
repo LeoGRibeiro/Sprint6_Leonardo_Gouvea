@@ -55,7 +55,7 @@ Cenário: POST Cadastrar Produto Com Token Inváilido 401
 
 Cenário: POST Cadastrar Produto Sem Adm 403
     [tags]      POST_cadastrar_sem_adm  POST
-    Fazer Login e Armazenar Token
+    Fazer Login Sem Adm e Armazenar Token
     Criar Dados para Produto Dinamico Válido
     POST Endpoint /produtos
     Validar Status Code "403"
@@ -160,6 +160,66 @@ Cenário: PUT Editar Produto Nome Já Existente 400
 
 Cenário: PUT Editar Produto Token Inválido 401
     [tags]     PUT_editar_token_invalido    PUT
+    Definir Token Invalido "fhn23cn429n45c43tc"
+    Coletar ID Produto Aleatorio
+    Criar Dados para Produto Dinamico Válido
+    PUT Endpoint /produtos 
+    Validar Status Code "401"
+    Validar Se "message" Contem "Token de acesso ausente, inválido, expirado ou usuário do token não existe mais"
+
+Cenário: PUT Editar Produto Sem Adm 403
+    [tags]     PUT_editar_sem_adm    PUT
+    Fazer Login Sem Adm e Armazenar Token
+    Coletar ID Produto Aleatorio
+    Criar Dados para Produto Dinamico Válido
+    PUT Endpoint /produtos
+    Validar Status Code "403"
+    Validar Se "message" Contem "Rota exclusiva para administradores"
+
+Cenário: PUT Editar Nome 200
+    [tags]     PUT_editar_nome   PUT
+    Fazer Login e Armazenar Token
+    Coletar ID Produto Aleatorio
+    Alterar Payload Nome Dinamico
+    PUT Endpoint /produtos
+    Validar Status Code "200"
+    Validar Se "message" Contem "Registro alterado com sucesso"
+
+Cenário: PUT Editar Preco 200
+    [tags]     PUT_editar_preco   PUT
+    Fazer Login e Armazenar Token
+    Coletar ID Produto Aleatorio
+    Alterar Payload Preco Dinamico
+    PUT Endpoint /produtos
+    Validar Status Code "200"
+    Validar Se "message" Contem "Registro alterado com sucesso"
+
+Cenário: PUT Editar Descricao 200
+    [tags]     PUT_editar_descricao   PUT
+    Fazer Login e Armazenar Token
+    Coletar ID Produto Aleatorio
+    Alterar Payload Descricao Dinamico
+    PUT Endpoint /produtos
+    Validar Status Code "200"
+    Validar Se "message" Contem "Registro alterado com sucesso"
+
+Cenário: PUT Editar Quantidade 200
+    [tags]     PUT_editar_quantidade   PUT
+    Fazer Login e Armazenar Token
+    Coletar ID Produto Aleatorio
+    Alterar Payload Quantidade Dinamico
+    PUT Endpoint /produtos
+    Validar Status Code "200"
+    Validar Se "message" Contem "Registro alterado com sucesso"
+
+Cenário: PUT Editar Nome 200
+    [tags]     PUT_editar_sem_nome   PUT
+    Fazer Login e Armazenar Token
+    Coletar ID Produto Aleatorio
+    Alterar Payload Nome Dinamico
+    PUT Endpoint /produtos
+    Validar Status Code "200"
+    Validar Se "message" Contem "Registro alterado com sucesso"
 
 # DELETE CENÁRIOS ########################################################################################################################################    
 Cenário: DELETE Excluir produto 200

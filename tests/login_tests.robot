@@ -3,7 +3,7 @@
 Documentation   Arquivo de Testes para o endpoint /login
 
 Resource        ../support/common/common.robot
-Resource        ../keywords/login_keywords.robot
+
 
 Suite Setup     Criar Sessao        # Fazer algo antes de começar cada teste
 # Suite Teardown                    # Fazer algo depois dos cenários aconterecerem

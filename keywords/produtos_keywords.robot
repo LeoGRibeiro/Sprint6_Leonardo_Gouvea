@@ -10,6 +10,7 @@ GET Endpoint /produtos
     ${response}         GET on Session      serverest   /produtos  
     Set Global Variable  ${response}  
     Log to Console      Response: ${response.content}
+    Log to Console      Quantidade: ${response.json()["quantidade"]}
 
 GET Endpoint /produtos por ID 
     ${response}         GET on Session      serverest   /produtos/${id_produto}        expected_status=any       
@@ -20,13 +21,17 @@ GET Endpoint /produtos por ID
 POST Endpoint /produtos
     &{header}           Create Dictionary       Authorization=${token_auth}
     ${response}         POST on Session         serverest       /produtos       data=&{payload}                  headers=${header}          expected_status=any
+    Log to Console      ${payload}
     Log to Console      Response: ${response.content}  
     Set Global Variable     ${response}
 
 # PUT KEYWORDS #######################################################################################################
 PUT Endpoint /produtos
+    ${response}         GET on Session      serverest   /produtos/${id_produto}        expected_status=any 
+    Log to Console      Antigo Produto: ${response.content}
     &{header}           Create Dictionary       Authorization=${token_auth}
     ${response}         PUT on Session         serverest       /produtos/${id_produto}       data=&{payload}                  headers=${header}     expected_status=any
+    Log to Console      Novo produto: ${payload}
     Log to Console      Response: ${response.content}  
     Set Global Variable     ${response}
 
@@ -38,23 +43,12 @@ DELETE Endpoint /produtos
     Set Global Variable     ${response}
 
 # GENERAL KEYWORDS ###################################################################################################
-Validar Ter Criado Produto
-    Should be Equal         ${response.json()["message"]}   Cadastro realizado com sucesso
-    Should Not Be Empty     ${response.json()["_id"]}
-
-Criar Um Produto e Armazenar id
-    POST Endpoint /produtos
-    Validar Ter Criado Produto
-    ${id_produto}           Set Variable    ${response.json()["_id"]}
-    Log To Console          ID Produto: ${id_produto}
-    Set Global Variable     ${id_produto}
 
 Coletar ID Produto Aleatorio
     ${response}             GET on Session      serverest   /produtos
     ${numbers}=             Evaluate            random.sample(range(1, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
     ${id_produto}           Set Variable        ${response.json()["produtos"][${numbers}[0]]["_id"]}
     Set Global Variable     ${id_produto}
-    Log To Console          Produto aleatório: ${response.json()["produtos"][${numbers}[0]]}
 
 Definir ID Produto "${id_produto}"
     Set Global Variable     ${id_produto}
@@ -63,6 +57,30 @@ Pegar Dados Produtos Estatico "${produto}"
     ${json}                 Importar Json Estatico  json_produtos.json
     ${payload}              Set Variable            ${json["${produto}"]}
     log To Console          ${payload}
+    Set Global Variable     ${payload}
+
+Alterar Payload Nome Dinamico
+    ${response}             GET on Session      serverest   /produtos/${id_produto}        expected_status=any
+    ${nome}                 FakerLibrary.Text            max_nb_chars=15
+    ${payload}              Create Dictionary       nome=${nome}      preco=${response.json()["preco"]}     descricao=${response.json()["descricao"]}   quantidade=${response.json()["quantidade"]}
+    Set Global Variable     ${payload}
+
+Alterar Payload Preco Dinamico
+    ${response}             GET on Session      serverest   /produtos/${id_produto}        expected_status=any
+    ${preco}                FakerLibrary.Random Int      min=20      max=1500
+    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      preco=${preco}     descricao=${response.json()["descricao"]}   quantidade=${response.json()["quantidade"]}
+    Set Global Variable     ${payload}
+
+Alterar Payload Descricao Dinamico
+    ${response}             GET on Session      serverest   /produtos/${id_produto}        expected_status=any
+    ${descricao}            FakerLibrary.Text       max_nb_chars=60   
+    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      preco=${response.json()["preco"]}     descricao=${descricao}   quantidade=${response.json()["quantidade"]}
+    Set Global Variable     ${payload}
+
+Alterar Payload Quantidade Dinamico
+    ${response}             GET on Session      serverest   /produtos/${id_produto}        expected_status=any
+    ${quantidade}           FakerLibrary.Random Int      min=2       max=500   
+    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      preco=${response.json()["preco"]}     descricao=${response.json()["descricao"]}   quantidade=${quantidade}
     Set Global Variable     ${payload}
 
 Alterar Payload Quantidade "${valor}"

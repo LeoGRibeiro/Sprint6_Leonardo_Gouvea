@@ -12,10 +12,9 @@ Criar Dados para Usuario Válido
     Set Global Variable     ${payload}
 
 Criar Dados para Produto Dinamico Válido
-    ${nome}                 FakerLibrary.Word
+    ${nome}                 FakerLibrary.Text            max_nb_chars=15
     ${preco}                FakerLibrary.Random Int      min=20      max=1500
     ${descricao}            FakerLibrary.Text            max_nb_chars=60   
     ${quantidade}           FakerLibrary.Random Int      min=2       max=500
     ${payload}              Create Dictionary         nome=${nome}      preco=${preco}     descricao=${descricao}    quantidade=${quantidade}
-    Log to Console          Novo produto: ${payload}
     Set Global Variable     ${payload}

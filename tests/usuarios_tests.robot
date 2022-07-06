@@ -34,16 +34,16 @@ Cenário: POST Cadastrar Usuario Dinâmico 201
     POST Endpoint /usuarios
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
-    Validar Resposta Vazia "_id"
+    Validar Alguma Resposta Vazia "_id"
 
 Cenário: POST Criar Usuário de De Massa Estatica 201
     [tags]      POST_criar_estatico     POST
     Pegar Dados Usuarios Estatico "user_valido"
     POST Endpoint /usuarios
+    Validar Alguma Resposta Vazia "_id"
     Coletar ID Usuario
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
-    Validar Resposta Vazia "_id"
     DELETE Endpoint /usuarios
 
 Cenário: POST Criar Usuario Já Existente 400
@@ -104,7 +104,7 @@ Cenário: PUT Criar novo Usuario 201
     PUT Endpoint /usuarios
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
-    Validar Resposta Vazia "_id"
+    Validar Alguma Resposta Vazia "_id"
 
 Cenário: PUT Atualizar Nome 200
     [tags]     PUT_atualizar_nome   PUT
