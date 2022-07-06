@@ -61,7 +61,7 @@ Pegar Dados Produtos Estatico "${produto}"
 
 Alterar Payload Nome Dinamico
     ${response}             GET on Session      serverest   /produtos/${id_produto}        expected_status=any
-    ${nome}                 FakerLibrary.Text            max_nb_chars=15
+    ${nome}                 FakerLibrary.Text            max_nb_chars=25
     ${payload}              Create Dictionary       nome=${nome}      preco=${response.json()["preco"]}     descricao=${response.json()["descricao"]}   quantidade=${response.json()["quantidade"]}
     Set Global Variable     ${payload}
 
@@ -87,3 +87,8 @@ Alterar Payload Quantidade "${valor}"
     ${payload}              Create Dictionary       nome=${payload["nome"]}      preco=${payload["preco"]}     descricao=${payload["descricao"]}   quantidade=${valor}
     Set Global Variable     ${payload}
     Log To Console          Nova Quantidade: ${valor}
+
+Alterar Payload Preco "${valor}"
+    ${payload}              Create Dictionary       nome=${payload["nome"]}      preco=${valor}     descricao=${payload["descricao"]}   quantidade=${payload["quantidade"]}
+    Set Global Variable     ${payload}
+    Log To Console          Novo Valor: ${valor}

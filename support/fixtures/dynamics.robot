@@ -12,7 +12,7 @@ Criar Dados para Usuario Válido
     Set Global Variable     ${payload}
 
 Criar Dados para Produto Dinamico Válido
-    ${nome}                 FakerLibrary.Text            max_nb_chars=15
+    ${nome}                 FakerLibrary.Text            max_nb_chars=25
     ${preco}                FakerLibrary.Random Int      min=20      max=1500
     ${descricao}            FakerLibrary.Text            max_nb_chars=60   
     ${quantidade}           FakerLibrary.Random Int      min=2       max=500

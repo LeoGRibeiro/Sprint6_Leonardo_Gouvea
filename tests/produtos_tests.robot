@@ -131,7 +131,7 @@ Cenário: POST Cadastrar Produto Com Quantidade Negativa 400
 
 # PUT CENÁRIOS ##########################################################################################################################################
 Cenário: PUT Editar Produto Dinamico 200
-    [tags]      PUT_produto   PUT
+    [tags]      PUT_editar_todos_dados   PUT
     Fazer Login e Armazenar Token
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
@@ -194,6 +194,16 @@ Cenário: PUT Editar Preco 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
+Cenário: PUT Editar Preco Invalido 200
+    [tags]     PUT_editar_preco_invalido   PUT
+    Fazer Login e Armazenar Token
+    Coletar ID Produto Aleatorio
+    Criar Dados para Produto Dinamico Válido
+    Alterar Payload Preco "50.4"
+    PUT Endpoint /produtos
+    Validar Status Code "400"
+    Validar Se "preco" Contem "preco deve ser um inteiro"
+
 Cenário: PUT Editar Descricao 200
     [tags]     PUT_editar_descricao   PUT
     Fazer Login e Armazenar Token
@@ -212,6 +222,16 @@ Cenário: PUT Editar Quantidade 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
+Cenário: PUT Editar Preco Invalido 200
+    [tags]     PUT_editar_quantidade_invalida   PUT
+    Fazer Login e Armazenar Token
+    Coletar ID Produto Aleatorio
+    Criar Dados para Produto Dinamico Válido
+    Alterar Payload Quantidade "150.8"
+    PUT Endpoint /produtos
+    Validar Status Code "400"
+    Validar Se "quantidade" Contem "quantidade deve ser um inteiro"
+
 Cenário: PUT Editar Nome 200
     [tags]     PUT_editar_sem_nome   PUT
     Fazer Login e Armazenar Token
@@ -221,10 +241,12 @@ Cenário: PUT Editar Nome 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
+
 # DELETE CENÁRIOS ########################################################################################################################################    
 Cenário: DELETE Excluir produto 200
-    [tags]      DELETE_produto
+    [tags]      DELETE_produto        DELETE
     Fazer Login e Armazenar Token
-    DELETE Endpoint /produtos com id "BrpEdApkF8tV0QEo"
+    Coletar ID Produto Aleatorio
+    DELETE Endpoint /produtos
     Validar Status Code "200"
 
