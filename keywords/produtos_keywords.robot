@@ -92,3 +92,13 @@ Alterar Payload Preco "${valor}"
     ${payload}              Create Dictionary       nome=${payload["nome"]}      preco=${valor}     descricao=${payload["descricao"]}   quantidade=${payload["quantidade"]}
     Set Global Variable     ${payload}
     Log To Console          Novo Valor: ${valor}
+
+Alterar Payload Nome "${valor}"
+    ${payload}              Create Dictionary       nome=${valor}      preco=${payload["preco"]}     descricao=${payload["descricao"]}   quantidade=${payload["quantidade"]}
+    Set Global Variable     ${payload}
+    Log To Console          Novo Valor: ${valor}
+
+Alterar Payload Descricao "${valor}"
+    ${payload}              Create Dictionary       nome=${payload["nome"]}      preco=${payload["preco"]}     descricao=${valor}   quantidade=${payload["quantidade"]}
+    Set Global Variable     ${payload}
+    Log To Console          Novo Valor: ${valor}

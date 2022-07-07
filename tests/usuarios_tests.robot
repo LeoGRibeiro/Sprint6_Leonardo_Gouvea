@@ -28,23 +28,23 @@ Cenário: GET Não Encontrar ID 400
     Validar Se "message" Contem "Usuário não encontrado"
 
 # POST CENÁRIOS #########################################################################################################################################
-Cenário: POST Cadastrar Usuario Dinâmico 201
-    [tags]      POST_cadastrar_dinamico     POST
+Cenário: POST Criar Usuario Dinâmico 201
+    [tags]      POST_criar_dinamico     POST
     Criar Dados para Usuario Válido
     POST Endpoint /usuarios
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
 
-Cenário: POST Criar Usuário de De Massa Estatica 201
-    [tags]      POST_criar_estatico     POST
+Cenário: POST Criar Usuario Valido 201
+    [tags]      POST_criar_usuario_valido     POST
     Pegar Dados Usuarios Estatico "user_valido"
     POST Endpoint /usuarios
-    Validar Alguma Resposta Vazia "_id"
-    Coletar ID Usuario
-    Validar Status Code "201"
-    Validar Se "message" Contem "Cadastro realizado com sucesso"
-    DELETE Endpoint /usuarios
+
+Cenário: POST Criar Usuario Sem Adm 201          # Para evitar erros com falta de usuarios sem adm
+    [tags]     POST_criar_sem_adm       POST
+    Pegar Dados Usuarios Estatico "user_sem_adm"
+    POST Endpoint /usuarios
 
 Cenário: POST Criar Usuario Já Existente 400
     [tags]      POST_usuario_email_usado    POST
@@ -133,26 +133,26 @@ Cenário: PUT Atualizar Senha 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Atualizar Administrador True 200
-    [tags]      PUT_atualizar_adm_true   PUT
-    Coletar ID Usuario Aleatorio
-    GET Endpoint /usuarios por ID
-    Alterar Dados Payload Administrador True
-    PUT Endpoint /usuarios
-    Validar Status Code "200"
-    Validar Se "message" Contem "Registro alterado com sucesso"
+#Cenário: PUT Atualizar Administrador True 200
+#    [tags]      PUT_atualizar_adm_true   PUT
+#    Coletar ID Usuario Aleatorio
+#    GET Endpoint /usuarios por ID
+#    Alterar Dados Payload Administrador True
+#    PUT Endpoint /usuarios
+#    Validar Status Code "200"
+#    Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Atualizar Administrador False 200
-    [tags]      PUT_atualizar_adm_false   PUT
-    Coletar ID Usuario Aleatorio
-    GET Endpoint /usuarios por ID
-    Alterar Dados Payload Administrador False
-    PUT Endpoint /usuarios
-    Validar Status Code "200"
-    Validar Se "message" Contem "Registro alterado com sucesso"
+#Cenário: PUT Atualizar Administrador False 200
+#    [tags]      PUT_atualizar_adm_false   PUT
+#    Coletar ID Usuario Aleatorio
+#    GET Endpoint /usuarios por ID
+#    Alterar Dados Payload Administrador False
+#    PUT Endpoint /usuarios
+#    Validar Status Code "200"
+#    Validar Se "message" Contem "Registro alterado com sucesso"
 
 Cenário: PUT Email Usado 400
-    [tags]      PUT_email_usado PUT
+    [tags]      PUT_email_usado     PUT
     Pegar Dados Usuarios Estatico "user_email_usado"
     Coletar ID Usuario Aleatorio
     PUT Endpoint /usuarios 
@@ -160,7 +160,7 @@ Cenário: PUT Email Usado 400
     Validar Se "message" Contem "Este email já está sendo usado"
 
 Cenário: PUT Editar Dados Invalidos 400
-    [tags]      PUT_dados_invalidos PUT
+    [tags]      PUT_dados_invalidos     PUT
     Pegar Dados Usuarios Estatico "user_invalido"
     Coletar ID Usuario Aleatorio
     PUT Endpoint /usuarios
@@ -215,4 +215,4 @@ Cenário: DELETE Não Encontrar Usuario 200
     Validar Status Code "200"
     Validar Se "message" Contem "Nenhum registro excluído"
 
-Cenário: DELETE Usuario Com Carrinho 400
+#Cenário: DELETE Usuario Com Carrinho 400
