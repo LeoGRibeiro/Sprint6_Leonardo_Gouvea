@@ -35,7 +35,5 @@ Cenário: POST Cadastrar Carrinho Dinamico 200
     POST Endpoint /carrinhos
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
-    
-# PUT CENÁRIOS ##########################################################################################################################################
 
 # DELETE CENÁRIOS #######################################################################################################################################

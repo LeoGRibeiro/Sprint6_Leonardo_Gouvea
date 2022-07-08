@@ -6,11 +6,14 @@ Library                 FakerLibrary
 Criar Dados para Usuario Válido
     ${nome}                 FakerLibrary.Name
     ${email}                FakerLibrary.Email
-    ${senha}                FakerLibrary.Password     length=5          special_chars=True     digits=True    upper_case=True    lower_case=True
+    ${senha}                FakerLibrary.Password     length=5          special_chars=False     digits=True    upper_case=True    lower_case=True
+    Set Global Variable     ${senha}
+    Set Global Variable     ${email}
     ${payload}              Create Dictionary         nome=${nome}      email=${email}     password=${senha}    administrador=true
     Log to Console          ${payload}
     Set Global Variable     ${payload}
-
+    
+    
 Criar Dados para Produto Dinamico Válido
     ${nome}                 FakerLibrary.Text            max_nb_chars=25
     ${preco}                FakerLibrary.Random Int      min=20      max=1500

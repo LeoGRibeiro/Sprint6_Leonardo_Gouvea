@@ -33,13 +33,6 @@ Importar Json Estatico
     ${data}         Evaluate        json.loads('''${arquivo}''')        json
     [return]        ${data}
 
-POST Endpoint /login "${user}"
-    ${json}                 Importar Json Estatico  json_login.json
-    ${payload}              Set Variable            ${json["${user}"]}
-    ${response}             POST on Session         serverest                  /login          data=&{payload}        expected_status=any
-    Log To Console          Response: ${response.content}  # Para printar a resposta no console
-    Set Global Variable     ${response}
-
 Fazer Login e Armazenar Token
     POST Endpoint /login "user_valido"
     Validar ter Logado
@@ -60,6 +53,8 @@ Fazer Login Sem Adm e Armazenar Token
     Criar Dados para Usuario Válido
     Set to Dictionary          ${payload}          administrador=false
     POST Endpoint /usuarios
+    ${payload}      Create Dictionary     email=${email}     password=${senha}
+    Set Global Variable     ${payload}
     POST Endpoint /login Dinamico
     ${token_auth}           Set Variable        ${response.json()["authorization"]}
     Set Global Variable     ${token_auth}

@@ -1,108 +1,1282 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 5.0.1 (Python 3.10.5 on win32)" generated="20220708 16:54:45.432" rpa="false" schemaversion="3">
-<suite id="s1" name="Produtos Tests" source="D:\Coisas\Estudos\Compass\Robot_framework\tests\produtos_tests.robot">
+<robot generator="Robot 5.0.1 (Python 3.10.5 on win32)" generated="20220708 17:37:39.366" rpa="false" schemaversion="3">
+<suite id="s1" name="Carrinhos Tests" source="D:\Coisas\Estudos\Compass\Robot_framework\tests\carrinhos_tests.robot">
 <kw name="Criar Sessao" library="common" type="SETUP">
 <kw name="Create Session" library="RequestsLibrary">
 <arg>serverest</arg>
 <arg>${BASE_URL}</arg>
 <doc>Create Session: create a HTTP session to a server</doc>
-<msg timestamp="20220708 16:54:45.758" level="INFO">Creating Session using : alias=serverest, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
-<status status="PASS" starttime="20220708 16:54:45.758" endtime="20220708 16:54:45.758"/>
+<msg timestamp="20220708 17:37:39.702" level="INFO">Creating Session using : alias=serverest, url=http://localhost:3000, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20220708 17:37:39.702" endtime="20220708 17:37:39.702"/>
 </kw>
-<status status="PASS" starttime="20220708 16:54:45.758" endtime="20220708 16:54:45.758"/>
+<status status="PASS" starttime="20220708 17:37:39.701" endtime="20220708 17:37:39.702"/>
 </kw>
-<test id="s1-t1" name="Cenário: POST Cadastrar Produto Sem Adm 403" line="56">
-<kw name="Fazer Login Sem Adm e Armazenar Token" library="common">
-<kw name="Criar Dados para Usuario Válido" library="dynamics">
-<kw name="Name" library="FakerLibrary">
-<var>${nome}</var>
-<doc>:example 'John Doe'</doc>
-<msg timestamp="20220708 16:54:45.759" level="INFO">${nome} = Monica Cox</msg>
-<status status="PASS" starttime="20220708 16:54:45.759" endtime="20220708 16:54:45.759"/>
-</kw>
-<kw name="Email" library="FakerLibrary">
-<var>${email}</var>
-<msg timestamp="20220708 16:54:45.760" level="INFO">${email} = edwardpage@example.com</msg>
-<status status="PASS" starttime="20220708 16:54:45.759" endtime="20220708 16:54:45.760"/>
-</kw>
-<kw name="Password" library="FakerLibrary">
-<var>${senha}</var>
-<arg>length=5</arg>
-<arg>special_chars=True</arg>
-<arg>digits=True</arg>
-<arg>upper_case=True</arg>
-<arg>lower_case=True</arg>
-<doc>Generate a random password of the specified ``length``.</doc>
-<msg timestamp="20220708 16:54:45.760" level="INFO">${senha} = @J2Dw</msg>
-<status status="PASS" starttime="20220708 16:54:45.760" endtime="20220708 16:54:45.760"/>
-</kw>
-<kw name="Create Dictionary" library="BuiltIn">
-<var>${payload}</var>
-<arg>nome=${nome}</arg>
-<arg>email=${email}</arg>
-<arg>password=${senha}</arg>
-<arg>administrador=true</arg>
-<doc>Creates and returns a dictionary based on the given ``items``.</doc>
-<msg timestamp="20220708 16:54:45.760" level="INFO">${payload} = {'nome': 'Monica Cox', 'email': 'edwardpage@example.com', 'password': '@J2Dw', 'administrador': 'true'}</msg>
-<status status="PASS" starttime="20220708 16:54:45.760" endtime="20220708 16:54:45.760"/>
-</kw>
-<kw name="Log To Console" library="BuiltIn">
-<arg>${payload}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20220708 16:54:45.760" endtime="20220708 16:54:45.761"/>
-</kw>
-<kw name="Set Global Variable" library="BuiltIn">
-<arg>${payload}</arg>
-<doc>Makes a variable available globally in all tests and suites.</doc>
-<msg timestamp="20220708 16:54:45.761" level="INFO">${payload} = {'nome': 'Monica Cox', 'email': 'edwardpage@example.com', 'password': '@J2Dw', 'administrador': 'true'}</msg>
-<status status="PASS" starttime="20220708 16:54:45.761" endtime="20220708 16:54:45.761"/>
-</kw>
-<status status="PASS" starttime="20220708 16:54:45.759" endtime="20220708 16:54:45.761"/>
-</kw>
-<kw name="Set To Dictionary" library="Collections">
-<arg>${payload}</arg>
-<arg>administrador=false</arg>
-<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
-<status status="PASS" starttime="20220708 16:54:45.761" endtime="20220708 16:54:45.761"/>
-</kw>
-<kw name="POST Endpoint /usuarios" library="usuarios_keywords">
-<kw name="POST On Session" library="RequestsLibrary">
+<test id="s1-t1" name="Cenário: GET Todos Carrinhos 200" line="12">
+<kw name="GET Endpoint /carrinhos" library="carrinhos_keywords">
+<kw name="GET On Session" library="RequestsLibrary">
 <var>${response}</var>
 <arg>serverest</arg>
-<arg>/usuarios</arg>
-<arg>data=&amp;{payload}</arg>
-<arg>expected_status=any</arg>
-<doc>Sends a POST request on a previously created HTTP Session.</doc>
-<msg timestamp="20220708 16:54:45.768" level="INFO">POST Request : url=http://localhost:3000/usuarios 
- path_url=/usuarios 
- headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '83', 'Content-Type': 'application/x-www-form-urlencoded'} 
- body=nome=Monica+Cox&amp;email=edwardpage%40example.com&amp;password=%40J2Dw&amp;administrador=false 
+<arg>/carrinhos</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220708 17:37:39.708" level="INFO">GET Request : url=http://localhost:3000/carrinhos 
+ path_url=/carrinhos 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
  </msg>
-<msg timestamp="20220708 16:54:45.768" level="INFO">POST Response : url=http://localhost:3000/usuarios 
- status=201, reason=Created 
- headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '21096154-749e-4d57-9288-7d751b60b2b4', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '82', 'Date': 'Fri, 08 Jul 2022 19:54:45 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+<msg timestamp="20220708 17:37:39.708" level="INFO">GET Response : url=http://localhost:3000/carrinhos 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '967451e3-cf74-4138-aab7-1bda30f9aa4e', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '11199', 'Date': 'Fri, 08 Jul 2022 20:37:39 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
  body={
-    "message": "Cadastro realizado com sucesso",
-    "_id": "zR1bzPhv7KImN1AZ"
-} 
+    "quantidade": 25,
+    "carrinhos": [
+        {
+            "produtos": [
+                {
+                    "idProduto": "1OFx9bLLTkhgiYJa",
+                    "quantidade": 5,
+                    "precoUnitario": 939
+                },
+                {
+                    "idProduto": "5IB7bIL7NQw1cS7l",
+                    "quantidade": 1,
+                    "precoUnitario": 1376
+                },
+                {
+                    "idProduto": "AbPxTfheokX9IIWa",
+                    "quantidade": 2,
+                    "precoUnitario": 887
+                }
+            ],
+            "precoTotal": 7845,
+            "quantidadeTotal": 8,
+            "idUsuario": "ZgIlCBf00tEqkDKI",
+            "_id": "0YDjo63aXx6rDdv4"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "igKBnET30mNwMnOc",
+                    "quantidade": 11,
+                    "precoUnitario": 278
+                }
+            ],
+            "precoTotal": 3058,
+            "quantidadeTotal": 11,
+            "idUsuario": "NsMOrz4zVrhV88tT",
+            "_id": "20ZttOEAfU480E0T"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "MT947x4S0kCSRp5d",
+                    "quantidade": 5,
+                    "precoUnitario": 987
+                }
+            ],
+            "precoTotal": 4935,
+            "quantidadeTotal": 5,
+            "idUsuario": "um1UJq84EQAQiP2J",
+            "_id": "EivvvjOKXMEG0QM6"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "1lOnlkl3xGn0wtbD",
+                    "quantidade": 11,
+                    "precoUnitario": 725
+                }
+            ],
+            "precoTotal": 7975,
+            "quantidadeTotal": 11,
+            "idUsuario": "JiHFKVOHoUFiB7a2",
+            "_id": "Ju5AcJDioZSiSPRk"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "SEBkeL8ahkhrD4FG",
+                    "quantidade": 7,
+                    "precoUnitario": 284
+                },
+                {
+                    "idProduto": "Fe14qQgETpB5Vkq8",
+                    "quantidade": 2,
+                    "precoUnitario": 1295
+                }
+            ],
+            "precoTotal": 4578,
+            "quantidadeTotal": 9,
+            "idUsuario": "xmsNwGvY2JHkspN2",
+            "_id": "KzaTXuXdLuBzR3co"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "PTjEsRRuedZrrOFq",
+                    "quantidade": 6,
+                    "precoUnitario": 599
+                }
+            ],
+            "precoTotal": 3594,
+            "quantidadeTotal": 6,
+            "idUsuario": "b1FMqQxLhGm2xgEW",
+            "_id": "M8fkcTD8rSjLCZZH"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "EmmDUOjbxeoMNxTE",
+                    "quantidade": 8,
+                    "precoUnitario": 148
+                },
+                {
+                    "idProduto": "IhkT3BXO9AkiDOGJ",
+                    "quantidade": 4,
+                    "precoUnitario": 1333
+                },
+                {
+                    "idProduto": "EmmDUOjbxeoMNxTE",
+                    "quantidade": 4,
+                    "precoUnitario": 148
+                },
+                {
+                    "idProduto": "LnTzOmemBu8en2xt",
+                    "quantidade": 6,
+                    "precoUnitario": 245
+                }
+            ],
+            "precoTotal": 8578,
+            "quantidadeTotal": 22,
+            "idUsuario": "MFPwKm8V0K9SpX9W",
+            "_id": "NMBt1GyS00LB8YNL"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "1OFx9bLLTkhgiYJa",
+                    "quantidade": 4,
+                    "precoUnitario": 939
+                }
+            ],
+            "precoTotal": 3756,
+            "quantidadeTotal": 4,
+            "idUsuario": "OQM8Q65xt8D47KIX",
+            "_id": "NXQjkDs8aJdEUIwR"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "E2LE8bRUPuTN0rh3",
+                    "quantidade": 8,
+                    "precoUnitario": 873
+                }
+            ],
+            "precoTotal": 6984,
+            "quantidadeTotal": 8,
+            "idUsuario": "5vX7jMRXThoIq6xn",
+            "_id": "T7nzRcWi23CyJgCX"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "fowe6jbNEvU0t540",
+                    "quantidade": 6,
+                    "precoUnitario": 215
+                }
+            ],
+            "precoTotal": 1290,
+            "quantidadeTotal": 6,
+            "idUsuario": "Cf9XUFQH13ePoqA4",
+            "_id": "UFDQ9uh9dkTLEWNg"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "yyfW9Y7ZYEpIcMkt",
+                    "quantidade": 4,
+                    "precoUnitario": 793
+                },
+                {
+                    "idProduto": "LnTzOmemBu8en2xt",
+                    "quantidade": 5,
+                    "precoUnitario": 245
+                }
+            ],
+            "precoTotal": 4397,
+            "quantidadeTotal": 9,
+            "idUsuario": "mYe0Q3IQoEtA1Nf3",
+            "_id": "VndL5svMT5dACpS6"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "jRZEF1sdOGqNWmt9",
+                    "quantidade": 7,
+                    "precoUnitario": 324
+                }
+            ],
+            "precoTotal": 2268,
+            "quantidadeTotal": 7,
+            "idUsuario": "gckxRmz2bWKfFUuG",
+            "_id": "X6Po3QqMHjBI53xb"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "tBjbiurkkP74the0",
+                    "quantidade": 5,
+                    "precoUnitario": 562
+                }
+            ],
+            "precoTotal": 2810,
+            "quantidadeTotal": 5,
+            "idUsuario": "geSxSKDMvy8XRcb6",
+            "_id": "fsln4L9QgZ3BJ5Jx"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "LnTzOmemBu8en2xt",
+                    "quantidade": 10,
+                    "precoUnitario": 245
+                }
+            ],
+            "precoTotal": 2450,
+            "quantidadeTotal": 10,
+            "idUsuario": "1MKq9JhuDZE5kJfy",
+            "_id": "icnvrwW6Te0d0U1k"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "tvPOVxv3SKFHEsT3",
+                    "quantidade": 13,
+                    "precoUnitario": 811
+                }
+            ],
+            "precoTotal": 10543,
+            "quantidadeTotal": 13,
+            "idUsuario": "JXEd45tlWLwieuf6",
+            "_id": "kUG51168bedlJCnB"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "E2LE8bRUPuTN0rh3",
+                    "quantidade": 6,
+                    "precoUnitario": 873
+                }
+            ],
+            "precoTotal": 5238,
+            "quantidadeTotal": 6,
+            "idUsuario": "gzJosRpDZC7lZnCT",
+            "_id": "nb5oNRUPr58GCPSn"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "0sDwNzcObBurNr1n",
+                    "quantidade": 4,
+                    "precoUnitario": 1146
+                }
+            ],
+            "precoTotal": 4584,
+            "quantidadeTotal": 4,
+            "idUsuario": "6WBB7vLpTeJVLMUo",
+            "_id": "py6I3RYkVulhpgu8"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "BeeJh5lz3k6kSIzA",
+                    "quantidade": 2,
+                    "precoUnitario": 470
+                },
+                {
+                    "idProduto": "K6leHdftCeOJj8BJ",
+                    "quantidade": 1,
+                    "precoUnitario": 5240
+                }
+            ],
+            "precoTotal": 6180,
+            "quantidadeTotal": 3,
+            "idUsuario": "oUb7aGkMtSEPf6BZ",
+            "_id": "qbMqntef4iTOwWfg"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "cgnTdZqNHLZHquNM",
+                    "quantidade": 11,
+                    "precoUnitario": 228
+                }
+            ],
+            "precoTotal": 2508,
+            "quantidadeTotal": 11,
+            "idUsuario": "MA1i0VIFHiUBLwzA",
+            "_id": "rCKdcvnuFg6n64wR"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "1OFx9bLLTkhgiYJa",
+                    "quantidade": 5,
+                    "precoUnitario": 939
+                }
+            ],
+            "precoTotal": 4695,
+            "quantidadeTotal": 5,
+            "idUsuario": "DsKC9RgRQEBu0Nmk",
+            "_id": "rTHieR4gXHVJ0psV"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "5AMTR6qLK44cAhdt",
+                    "quantidade": 6,
+                    "precoUnitario": 767
+                }
+            ],
+            "precoTotal": 4602,
+            "quantidadeTotal": 6,
+            "idUsuario": "M8iVa4AOCRsFesIV",
+            "_id": "u7HkWutgp9ZUOYhq"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "vswzGMk22WMB46oD",
+                    "quantidade": 10,
+                    "precoUnitario": 988
+                }
+            ],
+            "precoTotal": 9880,
+            "quantidadeTotal": 10,
+            "idUsuario": "hTRjiil6340H4Nnw",
+            "_id": "uEM2EjTnPSgL4f7X"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "otvoXfi7reBnVl4A",
+                    "quantidade": 7,
+                    "precoUnitario": 553
+                }
+            ],
+            "precoTotal": 3871,
+            "quantidadeTotal... (set the log level to DEBUG or TRACE to see the full content) 
  </msg>
-<msg timestamp="20220708 16:54:45.768" level="INFO">${response} = &lt;Response [201]&gt;</msg>
-<status status="PASS" starttime="20220708 16:54:45.761" endtime="20220708 16:54:45.768"/>
-</kw>
-<kw name="Log To Console" library="BuiltIn">
-<arg>Response: ${response.content}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20220708 16:54:45.769" endtime="20220708 16:54:45.769"/>
+<msg timestamp="20220708 17:37:39.708" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.703" endtime="20220708 17:37:39.708"/>
 </kw>
 <kw name="Set Global Variable" library="BuiltIn">
 <arg>${response}</arg>
 <doc>Makes a variable available globally in all tests and suites.</doc>
-<msg timestamp="20220708 16:54:45.769" level="INFO">${response} = &lt;Response [201]&gt;</msg>
-<status status="PASS" starttime="20220708 16:54:45.769" endtime="20220708 16:54:45.769"/>
+<msg timestamp="20220708 17:37:39.709" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.709" endtime="20220708 17:37:39.709"/>
 </kw>
-<status status="PASS" starttime="20220708 16:54:45.761" endtime="20220708 16:54:45.769"/>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Response: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220708 17:37:39.709" endtime="20220708 17:37:39.710"/>
 </kw>
-<kw name="POST Endpoint /login Dinamico" library="login_keywords">
+<status status="PASS" starttime="20220708 17:37:39.702" endtime="20220708 17:37:39.711"/>
+</kw>
+<kw name="Validar Status Code &quot;200&quot;" library="common" sourcename="Validar Status Code &quot;${statuscode}&quot;">
+<kw name="Should Be True" library="BuiltIn">
+<arg>${response.status_code} == ${statuscode}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20220708 17:37:39.711" endtime="20220708 17:37:39.711"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.711" endtime="20220708 17:37:39.711"/>
+</kw>
+<tag>GET</tag>
+<tag>GET_carrinhos</tag>
+<status status="PASS" starttime="20220708 17:37:39.702" endtime="20220708 17:37:39.712"/>
+</test>
+<test id="s1-t2" name="Cenário: GET Carrinho por ID 200" line="17">
+<kw name="Coletar ID Carrinho Aleatorio" library="carrinhos_keywords">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/carrinhos</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220708 17:37:39.714" level="INFO">GET Request : url=http://localhost:3000/carrinhos 
+ path_url=/carrinhos 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220708 17:37:39.714" level="INFO">GET Response : url=http://localhost:3000/carrinhos 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '60ef0e78-9b5c-4ff6-a4a5-389cbb6b9649', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '11199', 'Date': 'Fri, 08 Jul 2022 20:37:39 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "quantidade": 25,
+    "carrinhos": [
+        {
+            "produtos": [
+                {
+                    "idProduto": "1OFx9bLLTkhgiYJa",
+                    "quantidade": 5,
+                    "precoUnitario": 939
+                },
+                {
+                    "idProduto": "5IB7bIL7NQw1cS7l",
+                    "quantidade": 1,
+                    "precoUnitario": 1376
+                },
+                {
+                    "idProduto": "AbPxTfheokX9IIWa",
+                    "quantidade": 2,
+                    "precoUnitario": 887
+                }
+            ],
+            "precoTotal": 7845,
+            "quantidadeTotal": 8,
+            "idUsuario": "ZgIlCBf00tEqkDKI",
+            "_id": "0YDjo63aXx6rDdv4"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "igKBnET30mNwMnOc",
+                    "quantidade": 11,
+                    "precoUnitario": 278
+                }
+            ],
+            "precoTotal": 3058,
+            "quantidadeTotal": 11,
+            "idUsuario": "NsMOrz4zVrhV88tT",
+            "_id": "20ZttOEAfU480E0T"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "MT947x4S0kCSRp5d",
+                    "quantidade": 5,
+                    "precoUnitario": 987
+                }
+            ],
+            "precoTotal": 4935,
+            "quantidadeTotal": 5,
+            "idUsuario": "um1UJq84EQAQiP2J",
+            "_id": "EivvvjOKXMEG0QM6"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "1lOnlkl3xGn0wtbD",
+                    "quantidade": 11,
+                    "precoUnitario": 725
+                }
+            ],
+            "precoTotal": 7975,
+            "quantidadeTotal": 11,
+            "idUsuario": "JiHFKVOHoUFiB7a2",
+            "_id": "Ju5AcJDioZSiSPRk"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "SEBkeL8ahkhrD4FG",
+                    "quantidade": 7,
+                    "precoUnitario": 284
+                },
+                {
+                    "idProduto": "Fe14qQgETpB5Vkq8",
+                    "quantidade": 2,
+                    "precoUnitario": 1295
+                }
+            ],
+            "precoTotal": 4578,
+            "quantidadeTotal": 9,
+            "idUsuario": "xmsNwGvY2JHkspN2",
+            "_id": "KzaTXuXdLuBzR3co"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "PTjEsRRuedZrrOFq",
+                    "quantidade": 6,
+                    "precoUnitario": 599
+                }
+            ],
+            "precoTotal": 3594,
+            "quantidadeTotal": 6,
+            "idUsuario": "b1FMqQxLhGm2xgEW",
+            "_id": "M8fkcTD8rSjLCZZH"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "EmmDUOjbxeoMNxTE",
+                    "quantidade": 8,
+                    "precoUnitario": 148
+                },
+                {
+                    "idProduto": "IhkT3BXO9AkiDOGJ",
+                    "quantidade": 4,
+                    "precoUnitario": 1333
+                },
+                {
+                    "idProduto": "EmmDUOjbxeoMNxTE",
+                    "quantidade": 4,
+                    "precoUnitario": 148
+                },
+                {
+                    "idProduto": "LnTzOmemBu8en2xt",
+                    "quantidade": 6,
+                    "precoUnitario": 245
+                }
+            ],
+            "precoTotal": 8578,
+            "quantidadeTotal": 22,
+            "idUsuario": "MFPwKm8V0K9SpX9W",
+            "_id": "NMBt1GyS00LB8YNL"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "1OFx9bLLTkhgiYJa",
+                    "quantidade": 4,
+                    "precoUnitario": 939
+                }
+            ],
+            "precoTotal": 3756,
+            "quantidadeTotal": 4,
+            "idUsuario": "OQM8Q65xt8D47KIX",
+            "_id": "NXQjkDs8aJdEUIwR"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "E2LE8bRUPuTN0rh3",
+                    "quantidade": 8,
+                    "precoUnitario": 873
+                }
+            ],
+            "precoTotal": 6984,
+            "quantidadeTotal": 8,
+            "idUsuario": "5vX7jMRXThoIq6xn",
+            "_id": "T7nzRcWi23CyJgCX"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "fowe6jbNEvU0t540",
+                    "quantidade": 6,
+                    "precoUnitario": 215
+                }
+            ],
+            "precoTotal": 1290,
+            "quantidadeTotal": 6,
+            "idUsuario": "Cf9XUFQH13ePoqA4",
+            "_id": "UFDQ9uh9dkTLEWNg"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "yyfW9Y7ZYEpIcMkt",
+                    "quantidade": 4,
+                    "precoUnitario": 793
+                },
+                {
+                    "idProduto": "LnTzOmemBu8en2xt",
+                    "quantidade": 5,
+                    "precoUnitario": 245
+                }
+            ],
+            "precoTotal": 4397,
+            "quantidadeTotal": 9,
+            "idUsuario": "mYe0Q3IQoEtA1Nf3",
+            "_id": "VndL5svMT5dACpS6"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "jRZEF1sdOGqNWmt9",
+                    "quantidade": 7,
+                    "precoUnitario": 324
+                }
+            ],
+            "precoTotal": 2268,
+            "quantidadeTotal": 7,
+            "idUsuario": "gckxRmz2bWKfFUuG",
+            "_id": "X6Po3QqMHjBI53xb"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "tBjbiurkkP74the0",
+                    "quantidade": 5,
+                    "precoUnitario": 562
+                }
+            ],
+            "precoTotal": 2810,
+            "quantidadeTotal": 5,
+            "idUsuario": "geSxSKDMvy8XRcb6",
+            "_id": "fsln4L9QgZ3BJ5Jx"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "LnTzOmemBu8en2xt",
+                    "quantidade": 10,
+                    "precoUnitario": 245
+                }
+            ],
+            "precoTotal": 2450,
+            "quantidadeTotal": 10,
+            "idUsuario": "1MKq9JhuDZE5kJfy",
+            "_id": "icnvrwW6Te0d0U1k"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "tvPOVxv3SKFHEsT3",
+                    "quantidade": 13,
+                    "precoUnitario": 811
+                }
+            ],
+            "precoTotal": 10543,
+            "quantidadeTotal": 13,
+            "idUsuario": "JXEd45tlWLwieuf6",
+            "_id": "kUG51168bedlJCnB"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "E2LE8bRUPuTN0rh3",
+                    "quantidade": 6,
+                    "precoUnitario": 873
+                }
+            ],
+            "precoTotal": 5238,
+            "quantidadeTotal": 6,
+            "idUsuario": "gzJosRpDZC7lZnCT",
+            "_id": "nb5oNRUPr58GCPSn"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "0sDwNzcObBurNr1n",
+                    "quantidade": 4,
+                    "precoUnitario": 1146
+                }
+            ],
+            "precoTotal": 4584,
+            "quantidadeTotal": 4,
+            "idUsuario": "6WBB7vLpTeJVLMUo",
+            "_id": "py6I3RYkVulhpgu8"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "BeeJh5lz3k6kSIzA",
+                    "quantidade": 2,
+                    "precoUnitario": 470
+                },
+                {
+                    "idProduto": "K6leHdftCeOJj8BJ",
+                    "quantidade": 1,
+                    "precoUnitario": 5240
+                }
+            ],
+            "precoTotal": 6180,
+            "quantidadeTotal": 3,
+            "idUsuario": "oUb7aGkMtSEPf6BZ",
+            "_id": "qbMqntef4iTOwWfg"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "cgnTdZqNHLZHquNM",
+                    "quantidade": 11,
+                    "precoUnitario": 228
+                }
+            ],
+            "precoTotal": 2508,
+            "quantidadeTotal": 11,
+            "idUsuario": "MA1i0VIFHiUBLwzA",
+            "_id": "rCKdcvnuFg6n64wR"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "1OFx9bLLTkhgiYJa",
+                    "quantidade": 5,
+                    "precoUnitario": 939
+                }
+            ],
+            "precoTotal": 4695,
+            "quantidadeTotal": 5,
+            "idUsuario": "DsKC9RgRQEBu0Nmk",
+            "_id": "rTHieR4gXHVJ0psV"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "5AMTR6qLK44cAhdt",
+                    "quantidade": 6,
+                    "precoUnitario": 767
+                }
+            ],
+            "precoTotal": 4602,
+            "quantidadeTotal": 6,
+            "idUsuario": "M8iVa4AOCRsFesIV",
+            "_id": "u7HkWutgp9ZUOYhq"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "vswzGMk22WMB46oD",
+                    "quantidade": 10,
+                    "precoUnitario": 988
+                }
+            ],
+            "precoTotal": 9880,
+            "quantidadeTotal": 10,
+            "idUsuario": "hTRjiil6340H4Nnw",
+            "_id": "uEM2EjTnPSgL4f7X"
+        },
+        {
+            "produtos": [
+                {
+                    "idProduto": "otvoXfi7reBnVl4A",
+                    "quantidade": 7,
+                    "precoUnitario": 553
+                }
+            ],
+            "precoTotal": 3871,
+            "quantidadeTotal... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20220708 17:37:39.714" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.712" endtime="20220708 17:37:39.714"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${numbers}</var>
+<arg>random.sample(range(0, ${response.json()["quantidade"]}),1)</arg>
+<arg>random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220708 17:37:39.714" level="INFO">${numbers} = [21]</msg>
+<status status="PASS" starttime="20220708 17:37:39.714" endtime="20220708 17:37:39.715"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id_carrinho}</var>
+<arg>${response.json()["carrinhos"][${numbers}[0]]["_id"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220708 17:37:39.715" level="INFO">${id_carrinho} = uEM2EjTnPSgL4f7X</msg>
+<status status="PASS" starttime="20220708 17:37:39.715" endtime="20220708 17:37:39.715"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${id_carrinho}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220708 17:37:39.715" level="INFO">${id_carrinho} = uEM2EjTnPSgL4f7X</msg>
+<status status="PASS" starttime="20220708 17:37:39.715" endtime="20220708 17:37:39.715"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.712" endtime="20220708 17:37:39.715"/>
+</kw>
+<kw name="GET Endpoint /carrinhos por ID" library="carrinhos_keywords">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/carrinhos/${id_carrinho}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220708 17:37:39.717" level="INFO">GET Request : url=http://localhost:3000/carrinhos/uEM2EjTnPSgL4f7X 
+ path_url=/carrinhos/uEM2EjTnPSgL4f7X 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220708 17:37:39.717" level="INFO">GET Response : url=http://localhost:3000/carrinhos/uEM2EjTnPSgL4f7X 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '354d4976-ae9c-4f3f-a014-0e1d6caa27e2', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '274', 'Date': 'Fri, 08 Jul 2022 20:37:39 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "produtos": [
+        {
+            "idProduto": "vswzGMk22WMB46oD",
+            "quantidade": 10,
+            "precoUnitario": 988
+        }
+    ],
+    "precoTotal": 9880,
+    "quantidadeTotal": 10,
+    "idUsuario": "hTRjiil6340H4Nnw",
+    "_id": "uEM2EjTnPSgL4f7X"
+} 
+ </msg>
+<msg timestamp="20220708 17:37:39.717" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.716" endtime="20220708 17:37:39.717"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220708 17:37:39.717" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.717" endtime="20220708 17:37:39.717"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Response: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220708 17:37:39.717" endtime="20220708 17:37:39.718"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.715" endtime="20220708 17:37:39.718"/>
+</kw>
+<kw name="Validar Status Code &quot;200&quot;" library="common" sourcename="Validar Status Code &quot;${statuscode}&quot;">
+<kw name="Should Be True" library="BuiltIn">
+<arg>${response.status_code} == ${statuscode}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20220708 17:37:39.718" endtime="20220708 17:37:39.719"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.718" endtime="20220708 17:37:39.719"/>
+</kw>
+<tag>GET</tag>
+<tag>GET_carrinho_id</tag>
+<status status="PASS" starttime="20220708 17:37:39.712" endtime="20220708 17:37:39.719"/>
+</test>
+<test id="s1-t3" name="Cenário: GET Não Encontrar Carrinho Por ID 400" line="23">
+<kw name="Definir Id Carrinho &quot;2cn9r8y29cn&quot;" library="carrinhos_keywords" sourcename="Definir Id Carrinho &quot;${id_carrinho}&quot;">
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${id_carrinho}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220708 17:37:39.728" level="INFO">${id_carrinho} = 2cn9r8y29cn</msg>
+<status status="PASS" starttime="20220708 17:37:39.720" endtime="20220708 17:37:39.728"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.719" endtime="20220708 17:37:39.728"/>
+</kw>
+<kw name="GET Endpoint /carrinhos por ID" library="carrinhos_keywords">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/carrinhos/${id_carrinho}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220708 17:37:39.729" level="INFO">GET Request : url=http://localhost:3000/carrinhos/2cn9r8y29cn 
+ path_url=/carrinhos/2cn9r8y29cn 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220708 17:37:39.729" level="INFO">GET Response : url=http://localhost:3000/carrinhos/2cn9r8y29cn 
+ status=400, reason=Bad Request 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '172c13a3-e499-487a-83ff-897c05191b6c', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '45', 'Date': 'Fri, 08 Jul 2022 20:37:39 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Carrinho não encontrado"
+} 
+ </msg>
+<msg timestamp="20220708 17:37:39.730" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.728" endtime="20220708 17:37:39.730"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220708 17:37:39.730" level="INFO">${response} = &lt;Response [400]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.730" endtime="20220708 17:37:39.730"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Response: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220708 17:37:39.730" endtime="20220708 17:37:39.730"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.728" endtime="20220708 17:37:39.730"/>
+</kw>
+<kw name="Validar Status Code &quot;400&quot;" library="common" sourcename="Validar Status Code &quot;${statuscode}&quot;">
+<kw name="Should Be True" library="BuiltIn">
+<arg>${response.status_code} == ${statuscode}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20220708 17:37:39.731" endtime="20220708 17:37:39.731"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.730" endtime="20220708 17:37:39.731"/>
+</kw>
+<kw name="Validar Se &quot;message&quot; Contem &quot;Carrinho não encontrado&quot;" library="common" sourcename="Validar Se &quot;${chave}&quot; Contem &quot;${texto}&quot;">
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response.json()["${chave}"]}</arg>
+<arg>${texto}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20220708 17:37:39.731" endtime="20220708 17:37:39.732"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.731" endtime="20220708 17:37:39.732"/>
+</kw>
+<tag>GET</tag>
+<tag>GET_carrinho_id_invalido</tag>
+<status status="PASS" starttime="20220708 17:37:39.719" endtime="20220708 17:37:39.732"/>
+</test>
+<test id="s1-t4" name="Cenário: POST Cadastrar Carrinho Dinamico 200" line="31">
+<kw name="Fazer Login Aleatorio e Armazenar Token" library="common">
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/usuarios</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220708 17:37:39.736" level="INFO">GET Request : url=http://localhost:3000/usuarios 
+ path_url=/usuarios 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220708 17:37:39.736" level="INFO">GET Response : url=http://localhost:3000/usuarios 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': 'b060ee4a-18e3-480c-b6ee-5664761d1fc1', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '258278', 'Date': 'Fri, 08 Jul 2022 20:37:39 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "quantidade": 1211,
+    "usuarios": [
+        {
+            "nome": "Lacey Love",
+            "email": "brianna91@example.com",
+            "password": "7RLjv",
+            "administrador": "true",
+            "_id": "01ISEmJGikqexkOY"
+        },
+        {
+            "nome": "Ronald Mora",
+            "email": "jbonilla@example.org",
+            "password": ")8CEx",
+            "administrador": "true",
+            "_id": "09BdQThxS9hYVtct"
+        },
+        {
+            "nome": "Christina Conrad MD",
+            "email": "benjamincarter@example.net",
+            "password": "(3#Co",
+            "administrador": "true",
+            "_id": "0CpnKv4SJvziqSjt"
+        },
+        {
+            "nome": "Amber Johnston",
+            "email": "larrylynch@example.org",
+            "password": "&amp;8Tqd",
+            "administrador": "true",
+            "_id": "0HgOeK9Q7TbVEr92"
+        },
+        {
+            "nome": "Travis Compton",
+            "email": "changrichard@example.org",
+            "password": "^1Qoq",
+            "administrador": "true",
+            "_id": "0Hipn1yJ8PnDufJ2"
+        },
+        {
+            "nome": "Brent Moody",
+            "email": "qserrano@example.net",
+            "password": "O$3Uz",
+            "administrador": "false",
+            "_id": "0JWj9KmmxODgzgi0"
+        },
+        {
+            "nome": "Christian Gilbert",
+            "email": "rogersheather@example.net",
+            "password": ")3+Dn",
+            "administrador": "true",
+            "_id": "0Jmp6UjRv9V5X0RP"
+        },
+        {
+            "nome": "Karen Keller",
+            "email": "fgreene@example.org",
+            "password": "!2Ifq",
+            "administrador": "true",
+            "_id": "0VNdIv3cPqLfZesQ"
+        },
+        {
+            "nome": "John Brock PhD",
+            "email": "andrew07@example.org",
+            "password": "_7&amp;Gk",
+            "administrador": "true",
+            "_id": "0YKmb6eLonEatyyp"
+        },
+        {
+            "nome": "David Gonzales",
+            "email": "jamiesmith@example.net",
+            "password": "c!8In",
+            "administrador": "true",
+            "_id": "0cUHeGT2jV8IQGTg"
+        },
+        {
+            "nome": "Katie Peterson",
+            "email": "amber80@example.org",
+            "password": "$0YKu",
+            "administrador": "true",
+            "_id": "0eW0pJUBxjrsVJMh"
+        },
+        {
+            "nome": "Peggy Reese",
+            "email": "cheryl09@example.net",
+            "password": "S^5Yf",
+            "administrador": "true",
+            "_id": "0fkWJw8Q6rvtv6YL"
+        },
+        {
+            "nome": "Barry Hall",
+            "email": "ihernandez@example.net",
+            "password": "b$4Ox",
+            "administrador": "true",
+            "_id": "0lv4EZklWpaaozSg"
+        },
+        {
+            "nome": "Robert Park",
+            "email": "tsmith@example.com",
+            "password": ")P0Ob",
+            "administrador": "true",
+            "_id": "0uxuPY0cbmQhpEz1"
+        },
+        {
+            "nome": "John Smith",
+            "email": "etucker@example.net",
+            "password": "$9Cp1",
+            "administrador": "true",
+            "_id": "0vySvfV7o2K1SRyK"
+        },
+        {
+            "nome": "Jessica Benton",
+            "email": "hsanchez@example.com",
+            "password": "l(8Rd",
+            "administrador": "true",
+            "_id": "0xqGNDmGifSprIvV"
+        },
+        {
+            "nome": "Nicole Carney",
+            "email": "hedwards@example.org",
+            "password": "@t2Ak",
+            "administrador": "true",
+            "_id": "0ySR4PdKlMcCaGXg"
+        },
+        {
+            "nome": "Jennifer Franco",
+            "email": "johnsonjohn@example.com",
+            "password": "7NrHn",
+            "administrador": "true",
+            "_id": "12w2X0t430b4KQdR"
+        },
+        {
+            "nome": "Natasha Anderson",
+            "email": "kennedyjulie@example.org",
+            "password": ")6XPq",
+            "administrador": "true",
+            "_id": "17V7aMwaUj58a32l"
+        },
+        {
+            "nome": "Maria Marquez",
+            "email": "brandonhill@example.com",
+            "password": "(K7Uj",
+            "administrador": "true",
+            "_id": "18Q4KE9m0m4ihTLg"
+        },
+        {
+            "nome": "Timothy Donaldson",
+            "email": "mcdowellmelinda@example.net",
+            "password": "&amp;%7Wj",
+            "administrador": "true",
+            "_id": "18XiVwvfVO3NZFYo"
+        },
+        {
+            "nome": "Michelle Pruitt",
+            "email": "velezmary@example.org",
+            "password": "_y9Qt",
+            "administrador": "true",
+            "_id": "18pIGcW8ReKIM7Al"
+        },
+        {
+            "nome": "Christine Franklin",
+            "email": "wallercarol@example.com",
+            "password": "0Ogkv",
+            "administrador": "true",
+            "_id": "1FtMhr95ObhdhMbd"
+        },
+        {
+            "nome": "Mark Flores",
+            "email": "joseray@example.org",
+            "password": "%3Umh",
+            "administrador": "true",
+            "_id": "1GSOeGCpWtDk2Mh8"
+        },
+        {
+            "nome": "Kelsey Nash",
+            "email": "travislee@example.com",
+            "password": ")3PgQ",
+            "administrador": "false",
+            "_id": "1Hwr6eiBudEIa2TD"
+        },
+        {
+            "nome": "Kenneth James",
+            "email": "renee10@example.net",
+            "password": "^0_Hx",
+            "administrador": "true",
+            "_id": "1Kaza8IKFlBN7y00"
+        },
+        {
+            "nome": "Caleb Bond",
+            "email": "martinezjeremiah@example.org",
+            "password": "E(9Vy",
+            "administrador": "true",
+            "_id": "1MJjGqJPQBGIi5Kh"
+        },
+        {
+            "nome": "David Davis",
+            "email": "mahoneypatrick@example.org",
+            "password": "@30Uy",
+            "administrador": "true",
+            "_id": "1MKq9JhuDZE5kJfy"
+        },
+        {
+            "nome": "Michael Williams",
+            "email": "johnhenry@example.com",
+            "password": "_9ATe",
+            "administrador": "true",
+            "_id": "1NBxle8MSwpse02g"
+        },
+        {
+            "nome": "Amanda Shah",
+            "email": "christophersimpson@example.net",
+            "password": "%n2Cv",
+            "administrador": "true",
+            "_id": "1NPdU6SP6MBxvbzA"
+        },
+        {
+            "nome": "Monica Gonzalez",
+            "email": "vhoward@example.org",
+            "password": "!6C5w",
+            "administrador": "true",
+            "_id": "1Ns9CQOZ672osSKJ"
+        },
+        {
+            "nome": "Steven Graham",
+            "email": "michelle01@example.com",
+            "password": "&amp;5VCc",
+            "administrador": "true",
+            "_id": "1RvVTOF6qNxnAkvo"
+        },
+        {
+            "nome": "Kimberly Gallegos",
+            "email": "rmorgan@example.org",
+            "password": "A&amp;2Zd",
+            "administrador": "true",
+            "_id": "1S3fSNhw4BrnRWo6"
+        },
+        {
+            "nome": "Dawn Thompson",
+            "email": "kevinalexander@example.net",
+            "password": "*3HJy",
+            "administrador": "true",
+            "_id": "1WyW7JvKbQQfmtZx"
+        },
+        {
+            "nome": "Chris Black",
+            "email": "dstanton@example.org",
+            "password": "_1PfJ",
+            "administrador": "true",
+            "_id": "1Zj53Qb0ld7UVFXw"
+        },
+        {
+            "nome": "Lisa Franklin",
+            "email": "prangel@example.net",
+            "password": ")6+Nt",
+            "administrador": "true",
+            "_id": "1a3HwK0dFb03y9Rj"
+        },
+        {
+            "nome": "Kelly Gonzalez",
+            "email": "allenpaula@example.com",
+            "password": "_31Lj",
+            "administrador": "true",
+            "_id": "1al2ERfznEKmW7Gs"
+        },
+        {
+            "nome": "Amber Watson",
+            "email": "lwagner@example.net",
+            "password": "k_4Gk",
+            "administrador": "true",
+            "_id": "1cm5aHcUU6669PI4"
+        },
+        {
+            "nome": "Timothy Quinn",
+            "email": "fharrison@example.org",
+            "password": "f%9Gc",
+            "administrador": "true",
+            "_id": "1eduHDqsktZeXP1T"
+        },
+        {
+            "nome": "Melanie Peterson",
+            "email": "scottmueller@example.com",
+            "password": "%i0Hw",
+            "administrador": "false",
+            "_id": "1lpRLKWAlmrYcVZO"
+        },
+        {
+            "nome": "Jeffrey Davis",
+            "email": "lisavincent@example.org",
+            "password": "!4qJl",
+            "administrador": "true",
+            "_id": "1m8ErRCnbziT9kMi"
+        },
+        {
+            "nome": "Michael Porter",
+            "email": "zprice@example.com",
+            "password": "$)4Pg",
+            "administrador": "true",
+            "_id": "1pIUq0lL8gFfKMiW"
+        },
+        {
+            "nome": "Sherri Ramirez",
+            "email": "rrodriguez@example.net",
+            "password": "#T7Ps",
+            "administrador": "true",
+            "_id": "1rFQ8dxi39TOL67R"
+        },
+        {
+            "nome": "Larry Gilbert",
+            "email": "umcmahon@example.net",
+            "password": "*4HhR",
+            "administrador": "true",
+            "_id": "20G0R8A0AzxjFyLP"
+        },
+        {
+            "nome": "Emily Henderson",
+            "email": "princelaurie@example.net",
+            "password": "Q#1Hz",
+            "administrador": "true",
+            "_id": "23V567S8XTocSHTM"
+        },
+        {
+            "nome": "Alexander Ray",
+            "email": "susan27@example.org",
+            "password": "#1IRl",
+            "administrador": "true",
+            "_id": "246hs56hjT5g162d"
+        },
+        {
+            "nome": "Amy Sawyer",
+            "email": "brett31@example.com",
+            "password": "u)0Wt",
+            "administrador": "... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20220708 17:37:39.736" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.733" endtime="20220708 17:37:39.736"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${numbers}</var>
+<arg>random.sample(range(0, ${response.json()["quantidade"]}),1)</arg>
+<arg>random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220708 17:37:39.738" level="INFO">${numbers} = [1028]</msg>
+<status status="PASS" starttime="20220708 17:37:39.736" endtime="20220708 17:37:39.738"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${email}</var>
+<arg>${response.json()["usuarios"][${numbers}[0]]["email"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220708 17:37:39.739" level="INFO">${email} = obrienbrianna@example.org</msg>
+<status status="PASS" starttime="20220708 17:37:39.738" endtime="20220708 17:37:39.739"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${password}</var>
+<arg>${response.json()["usuarios"][${numbers}[0]]["password"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220708 17:37:39.740" level="INFO">${password} = @o9Pm</msg>
+<status status="PASS" starttime="20220708 17:37:39.739" endtime="20220708 17:37:39.740"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${payload}</var>
+<arg>email=${email}</arg>
+<arg>password=${password}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220708 17:37:39.740" level="INFO">${payload} = {'email': 'obrienbrianna@example.org', 'password': '@o9Pm'}</msg>
+<status status="PASS" starttime="20220708 17:37:39.740" endtime="20220708 17:37:39.740"/>
+</kw>
 <kw name="POST On Session" library="RequestsLibrary">
 <var>${response}</var>
 <arg>serverest</arg>
@@ -110,78 +1284,1629 @@
 <arg>data=&amp;{payload}</arg>
 <arg>expected_status=any</arg>
 <doc>Sends a POST request on a previously created HTTP Session.</doc>
-<msg timestamp="20220708 16:54:45.773" level="INFO">POST Request : url=http://localhost:3000/login 
+<msg timestamp="20220708 17:37:39.743" level="INFO">POST Request : url=http://localhost:3000/login 
  path_url=/login 
- headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '83', 'Content-Type': 'application/x-www-form-urlencoded'} 
- body=nome=Monica+Cox&amp;email=edwardpage%40example.com&amp;password=%40J2Dw&amp;administrador=false 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '50', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=obrienbrianna%40example.org&amp;password=%40o9Pm 
  </msg>
-<msg timestamp="20220708 16:54:45.773" level="INFO">POST Response : url=http://localhost:3000/login 
- status=400, reason=Bad Request 
- headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '147a833d-41f9-41e3-a149-6f93a9d759a9', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '96', 'Date': 'Fri, 08 Jul 2022 19:54:45 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+<msg timestamp="20220708 17:37:39.743" level="INFO">POST Response : url=http://localhost:3000/login 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': 'd4e9edd7-3e9a-4775-8200-2861db540a04', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '281', 'Date': 'Fri, 08 Jul 2022 20:37:39 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
  body={
-    "nome": "nome não é permitido",
-    "administrador": "administrador não é permitido"
+    "message": "Login realizado com sucesso",
+    "authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9icmllbmJyaWFubmFAZXhhbXBsZS5vcmciLCJwYXNzd29yZCI6IkBvOVBtIiwiaWF0IjoxNjU3MzEyNjU5LCJleHAiOjE2NTczMTMyNTl9.o9C4WtN5NZAKvWHCcjhXT3ffOHyUusqgJq9DX2_s16k"
 } 
  </msg>
-<msg timestamp="20220708 16:54:45.773" level="INFO">${response} = &lt;Response [400]&gt;</msg>
-<status status="PASS" starttime="20220708 16:54:45.770" endtime="20220708 16:54:45.773"/>
-</kw>
-<kw name="Log To Console" library="BuiltIn">
-<arg>Response: ${response.content}</arg>
-<doc>Logs the given message to the console.</doc>
-<status status="PASS" starttime="20220708 16:54:45.773" endtime="20220708 16:54:45.773"/>
-</kw>
-<kw name="Set Global Variable" library="BuiltIn">
-<arg>${response}</arg>
-<doc>Makes a variable available globally in all tests and suites.</doc>
-<msg timestamp="20220708 16:54:45.773" level="INFO">${response} = &lt;Response [400]&gt;</msg>
-<status status="PASS" starttime="20220708 16:54:45.773" endtime="20220708 16:54:45.773"/>
-</kw>
-<status status="PASS" starttime="20220708 16:54:45.769" endtime="20220708 16:54:45.774"/>
+<msg timestamp="20220708 17:37:39.743" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.740" endtime="20220708 17:37:39.743"/>
 </kw>
 <kw name="Set Variable" library="BuiltIn">
 <var>${token_auth}</var>
 <arg>${response.json()["authorization"]}</arg>
 <doc>Returns the given values which can then be assigned to a variables.</doc>
-<msg timestamp="20220708 16:54:45.774" level="FAIL">Resolving variable '${response.json()["authorization"]}' failed: KeyError: 'authorization'</msg>
-<status status="FAIL" starttime="20220708 16:54:45.774" endtime="20220708 16:54:45.774"/>
+<msg timestamp="20220708 17:37:39.744" level="INFO">${token_auth} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9icmllbmJyaWFubmFAZXhhbXBsZS5vcmciLCJwYXNzd29yZCI6IkBvOVBtIiwiaWF0IjoxNjU3MzEyNjU5LCJleHAiOjE2NTczMTMyNTl9.o9C4WtN5NZAKvWHCcjhXT3ffOHyUusqgJq9...</msg>
+<status status="PASS" starttime="20220708 17:37:39.744" endtime="20220708 17:37:39.744"/>
 </kw>
 <kw name="Set Global Variable" library="BuiltIn">
 <arg>${token_auth}</arg>
 <doc>Makes a variable available globally in all tests and suites.</doc>
-<status status="NOT RUN" starttime="20220708 16:54:45.774" endtime="20220708 16:54:45.774"/>
+<msg timestamp="20220708 17:37:39.744" level="INFO">${token_auth} = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9icmllbmJyaWFubmFAZXhhbXBsZS5vcmciLCJwYXNzd29yZCI6IkBvOVBtIiwiaWF0IjoxNjU3MzEyNjU5LCJleHAiOjE2NTczMTMyNTl9.o9C4WtN5NZAKvWHCcjhXT3ffOHyUusqgJq9...</msg>
+<status status="PASS" starttime="20220708 17:37:39.744" endtime="20220708 17:37:39.744"/>
 </kw>
-<status status="FAIL" starttime="20220708 16:54:45.759" endtime="20220708 16:54:45.775"/>
+<status status="PASS" starttime="20220708 17:37:39.733" endtime="20220708 17:37:39.744"/>
 </kw>
-<kw name="Criar Dados para Produto Dinamico Válido" library="dynamics">
-<status status="NOT RUN" starttime="20220708 16:54:45.775" endtime="20220708 16:54:45.775"/>
+<kw name="Criar Carrinho Dinamico Valido" library="dynamics">
+<kw name="Evaluate" library="BuiltIn">
+<var>${quant_produtos}</var>
+<arg>random.sample(range(1, 5),1)</arg>
+<arg>random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220708 17:37:39.745" level="INFO">${quant_produtos} = [4]</msg>
+<status status="PASS" starttime="20220708 17:37:39.745" endtime="20220708 17:37:39.745"/>
 </kw>
-<kw name="POST Endpoint /produtos" library="produtos_keywords">
-<status status="NOT RUN" starttime="20220708 16:54:45.775" endtime="20220708 16:54:45.775"/>
+<kw name="Create List" library="BuiltIn">
+<var>@{lista}</var>
+<doc>Returns a list containing given items.</doc>
+<msg timestamp="20220708 17:37:39.745" level="INFO">@{lista} = [ ]</msg>
+<status status="PASS" starttime="20220708 17:37:39.745" endtime="20220708 17:37:39.745"/>
 </kw>
-<kw name="Validar Status Code &quot;403&quot;" library="common" sourcename="Validar Status Code &quot;${statuscode}&quot;">
-<status status="NOT RUN" starttime="20220708 16:54:45.775" endtime="20220708 16:54:45.775"/>
+<for flavor="IN RANGE">
+<var>${C}</var>
+<value>${quant_produtos[0]}</value>
+<iter>
+<var name="${C}">0</var>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/produtos</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220708 17:37:39.748" level="INFO">GET Request : url=http://localhost:3000/produtos 
+ path_url=/produtos 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220708 17:37:39.748" level="INFO">GET Response : url=http://localhost:3000/produtos 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '47cf2efc-9c97-41ae-b66c-0c9bf0120c0a', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '161879', 'Date': 'Fri, 08 Jul 2022 20:37:39 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "quantidade": 700,
+    "produtos": [
+        {
+            "nome": "Gun hope opportunity.",
+            "preco": 655,
+            "descricao": "Yourself sister painting ago.",
+            "quantidade": 4066,
+            "_id": "00JgOldHnOiRZLP9"
+        },
+        {
+            "nome": "Account Mrs stand house.",
+            "preco": 33,
+            "descricao": "Look share around soldier knowledge born.",
+            "quantidade": 4014,
+            "_id": "0SdsdIXHzPKE5n3K"
+        },
+        {
+            "nome": "Voice box decide mind.",
+            "preco": 278,
+            "descricao": "They bag task order maybe explain including from.",
+            "quantidade": 4612,
+            "_id": "0TvtGSEQArpvWuRI"
+        },
+        {
+            "nome": "Knowledge be dream our.",
+            "preco": 88,
+            "descricao": "Include board city me join seat political.",
+            "quantidade": 507,
+            "_id": "0X1Z5H7qxdN505Vf"
+        },
+        {
+            "nome": "Store number why long.",
+            "preco": 330,
+            "descricao": "Would home newspaper least believe which step.",
+            "quantidade": 647,
+            "_id": "0XTgQTHYFwMH394r"
+        },
+        {
+            "nome": "Dinner anyone image we.",
+            "preco": 842,
+            "descricao": "Enjoy others public management ever son require.",
+            "quantidade": 4671,
+            "_id": "0eunSpUVhxtfdgpO"
+        },
+        {
+            "nome": "Event amount follow cut.",
+            "preco": 1385,
+            "descricao": "Thing author talk western. By police majority feeling.",
+            "quantidade": 3752,
+            "_id": "0gOhAoZ6rbzMJGqX"
+        },
+        {
+            "nome": "Add child customer.",
+            "preco": 34,
+            "descricao": "Action design how better.",
+            "quantidade": 953,
+            "_id": "0ip1uHgj9OVq3UqM"
+        },
+        {
+            "nome": "That in baby it six.",
+            "preco": 851,
+            "descricao": "Speak power health story open. Air another safe human.",
+            "quantidade": 1296,
+            "_id": "0isseSxgJODyWv3R"
+        },
+        {
+            "nome": "Hair with total.",
+            "preco": 494,
+            "descricao": "Score myself light clearly. Cover watch six significant.",
+            "quantidade": 3492,
+            "_id": "0ma8NNLgwDQ2xeQ3"
+        },
+        {
+            "nome": "Around form star.",
+            "preco": 455,
+            "descricao": "Who lead forget actually.",
+            "quantidade": 1144,
+            "_id": "0pcmANI5yuFbLSCT"
+        },
+        {
+            "nome": "Walk them attack.",
+            "preco": 1200,
+            "descricao": "Arrive employee outside audience me general physical.",
+            "quantidade": 820,
+            "_id": "0rdWIuG6Ey56SUhf"
+        },
+        {
+            "nome": "His onto return church.",
+            "preco": 1146,
+            "descricao": "Over magazine challenge stock.",
+            "quantidade": 91,
+            "_id": "0sDwNzcObBurNr1n"
+        },
+        {
+            "nome": "Someone ready price cup.",
+            "preco": 900,
+            "descricao": "Me leader per yet available set toward somebody.",
+            "quantidade": 645,
+            "_id": "0yaOMWsWju8roN2e"
+        },
+        {
+            "nome": "Page nice blue guy.",
+            "preco": 256,
+            "descricao": "Put time without short society.",
+            "quantidade": 2292,
+            "_id": "0z4vgulILuycmMX5"
+        },
+        {
+            "nome": "Her west see.",
+            "preco": 1063,
+            "descricao": "Beautiful treatment house threat direction.",
+            "quantidade": 661,
+            "_id": "11shZChh6K4IxMuT"
+        },
+        {
+            "nome": "Check wish news.",
+            "preco": 1121,
+            "descricao": "Oil scene you indeed partner administration reality.",
+            "quantidade": 1136,
+            "_id": "19sbmTUSGGugOiIe"
+        },
+        {
+            "nome": "Receive table from.",
+            "preco": 920,
+            "descricao": "Structure hear design act. Common outside church war.",
+            "quantidade": 4544,
+            "_id": "1IAtq3E9DtdDfZo1"
+        },
+        {
+            "nome": "Under trip but never.",
+            "preco": 939,
+            "descricao": "Option receive dog always me daughter table.",
+            "quantidade": 20,
+            "_id": "1OFx9bLLTkhgiYJa"
+        },
+        {
+            "nome": "True believe old rate.",
+            "preco": 1260,
+            "descricao": "Laugh entire everybody among west.",
+            "quantidade": 1718,
+            "_id": "1U1SAX5KuPuL8Co1"
+        },
+        {
+            "nome": "Final part into others.",
+            "preco": 1209,
+            "descricao": "Benefit forward deep accept back set appear.",
+            "quantidade": 4655,
+            "_id": "1Xgh5nskTxaQGTaX"
+        },
+        {
+            "nome": "Sometimes need case.",
+            "preco": 725,
+            "descricao": "Report benefit example writer room why fall.",
+            "quantidade": 187,
+            "_id": "1lOnlkl3xGn0wtbD"
+        },
+        {
+            "nome": "Hand thousand someone.",
+            "preco": 454,
+            "descricao": "Relationship hit condition garden.",
+            "quantidade": 2326,
+            "_id": "1pcItiAzjz8arKSi"
+        },
+        {
+            "nome": "Ever great eye consider.",
+            "preco": 437,
+            "descricao": "Day population ever tree action kitchen.",
+            "quantidade": 1096,
+            "_id": "1pk9xJbdGw5TjjhJ"
+        },
+        {
+            "nome": "Me star people time.",
+            "preco": 563,
+            "descricao": "Blood everything style suddenly.",
+            "quantidade": 544,
+            "_id": "1sYzPA1vndXyT0gh"
+        },
+        {
+            "nome": "South much floor rule.",
+            "preco": 1276,
+            "descricao": "Task improve to end.",
+            "quantidade": 4228,
+            "_id": "1seviQ7tuzzsUQPE"
+        },
+        {
+            "nome": "Unit data son him.",
+            "preco": 135,
+            "descricao": "Instead simple Democrat health ok media.",
+            "quantidade": 1976,
+            "_id": "1t3heuH4UFS7Igdl"
+        },
+        {
+            "nome": "Spend join affect ever.",
+            "preco": 886,
+            "descricao": "Student doctor laugh education middle.",
+            "quantidade": 2852,
+            "_id": "2GzFwdItGqbq27VG"
+        },
+        {
+            "nome": "Television wish page.",
+            "preco": 141,
+            "descricao": "Outside value social reveal course full late general.",
+            "quantidade": 0,
+            "_id": "2numHYRnQI0l443g"
+        },
+        {
+            "nome": "Now happen best.",
+            "preco": 476,
+            "descricao": "Discover prevent let thus public.",
+            "quantidade": 4600,
+            "_id": "31e2y8HWhyHes8ZQ"
+        },
+        {
+            "nome": "Defense common line.",
+            "preco": 931,
+            "descricao": "Few down improve learn plant.",
+            "quantidade": 0,
+            "_id": "370GDntM8lO0HTNf"
+        },
+        {
+            "nome": "Must guy leave.",
+            "preco": 446,
+            "descricao": "Someone science doctor building factor can.",
+            "quantidade": 165,
+            "_id": "39LcMsregao9QiJu"
+        },
+        {
+            "nome": "Kid science same down.",
+            "preco": 1345,
+            "descricao": "Because team central check blue.",
+            "quantidade": 1207,
+            "_id": "3ApUj4fZMutLviAU"
+        },
+        {
+            "nome": "Mrs true soldier.",
+            "preco": 919,
+            "descricao": "Sit move wrong west PM tax spring sport.",
+            "quantidade": 2016,
+            "_id": "3BbxjojIz0dbwM9N"
+        },
+        {
+            "nome": "Spend nor fund.",
+            "preco": 1284,
+            "descricao": "Idea girl small song. Age order which.",
+            "quantidade": 392,
+            "_id": "3KcjMQnMbYPL5exY"
+        },
+        {
+            "nome": "Film rock watch gas.",
+            "preco": 523,
+            "descricao": "Ten at human feeling address. Perform blue want value.",
+            "quantidade": 4173,
+            "_id": "3NacCdlc7U8lGF1L"
+        },
+        {
+            "nome": "Shoulder in range.",
+            "preco": 973,
+            "descricao": "Summer marriage buy case majority resource threat.",
+            "quantidade": 2467,
+            "_id": "3Zig7B3sCICcVmwT"
+        },
+        {
+            "nome": "Record building born.",
+            "preco": 873,
+            "descricao": "Particular policy serious low money around civil.",
+            "quantidade": 728,
+            "_id": "3av66lRO2oWopkvQ"
+        },
+        {
+            "nome": "Cup gun anyone size.",
+            "preco": 597,
+            "descricao": "Yourself leader next but how low friend.",
+            "quantidade": 2426,
+            "_id": "3e3fQYlii2skZrp4"
+        },
+        {
+            "nome": "He air everyone central.",
+            "preco": 1294,
+            "descricao": "Year field its explain should thank sit.",
+            "quantidade": 2433,
+            "_id": "3qB7CCWErvZ8JZyF"
+        },
+        {
+            "nome": "Customer wide certainly.",
+            "preco": 105,
+            "descricao": "Some everything item son new indeed.",
+            "quantidade": 2128,
+            "_id": "3tTPnVApp9UQPles"
+        },
+        {
+            "nome": "Where enter investment.",
+            "preco": 1336,
+            "descricao": "Peace fight small magazine send fight.",
+            "quantidade": 2440,
+            "_id": "3yNmuo9RCv2fuQKo"
+        },
+        {
+            "nome": "World trade as.",
+            "preco": 291,
+            "descricao": "But garden way type fish western stay.",
+            "quantidade": 2894,
+            "_id": "3yr85ocXG8JbSzMI"
+        },
+        {
+            "nome":... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20220708 17:37:39.748" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.745" endtime="20220708 17:37:39.748"/>
 </kw>
-<kw name="Validar Se &quot;message&quot; Contem &quot;Rota exclusiva para administradores&quot;" library="common" sourcename="Validar Se &quot;${chave}&quot; Contem &quot;${texto}&quot;">
-<status status="NOT RUN" starttime="20220708 16:54:45.775" endtime="20220708 16:54:45.775"/>
+<kw name="Evaluate" library="BuiltIn">
+<var>${numbers}</var>
+<arg>random.sample(range(0, ${response.json()["quantidade"]}),1)</arg>
+<arg>random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220708 17:37:39.749" level="INFO">${numbers} = [355]</msg>
+<status status="PASS" starttime="20220708 17:37:39.748" endtime="20220708 17:37:39.749"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${response.json()["produtos"][${numbers}[0]]["_id"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220708 17:37:39.750" level="INFO">${id} = V5h6HO2UWjXvBhvK</msg>
+<status status="PASS" starttime="20220708 17:37:39.749" endtime="20220708 17:37:39.750"/>
+</kw>
+<kw name="Random Int" library="FakerLibrary">
+<var>${quantidade}</var>
+<arg>min=2</arg>
+<arg>max=10</arg>
+<doc>Generate a random integer between two integers ``min`` and ``max`` inclusive
+while observing the provided ``step`` value.</doc>
+<msg timestamp="20220708 17:37:39.750" level="INFO">${quantidade} = 6</msg>
+<status status="PASS" starttime="20220708 17:37:39.750" endtime="20220708 17:37:39.750"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${pedido}</var>
+<arg>idProduto=${id}</arg>
+<arg>quantidade=${quantidade}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220708 17:37:39.750" level="INFO">${pedido} = {'idProduto': 'V5h6HO2UWjXvBhvK', 'quantidade': 6}</msg>
+<status status="PASS" starttime="20220708 17:37:39.750" endtime="20220708 17:37:39.750"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${lista}</arg>
+<arg>${pedido}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220708 17:37:39.750" endtime="20220708 17:37:39.750"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.745" endtime="20220708 17:37:39.750"/>
+</iter>
+<iter>
+<var name="${C}">1</var>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/produtos</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220708 17:37:39.753" level="INFO">GET Request : url=http://localhost:3000/produtos 
+ path_url=/produtos 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220708 17:37:39.753" level="INFO">GET Response : url=http://localhost:3000/produtos 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': 'c82e3621-d3f4-4a93-a224-9259372dfa66', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '161879', 'Date': 'Fri, 08 Jul 2022 20:37:39 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "quantidade": 700,
+    "produtos": [
+        {
+            "nome": "Gun hope opportunity.",
+            "preco": 655,
+            "descricao": "Yourself sister painting ago.",
+            "quantidade": 4066,
+            "_id": "00JgOldHnOiRZLP9"
+        },
+        {
+            "nome": "Account Mrs stand house.",
+            "preco": 33,
+            "descricao": "Look share around soldier knowledge born.",
+            "quantidade": 4014,
+            "_id": "0SdsdIXHzPKE5n3K"
+        },
+        {
+            "nome": "Voice box decide mind.",
+            "preco": 278,
+            "descricao": "They bag task order maybe explain including from.",
+            "quantidade": 4612,
+            "_id": "0TvtGSEQArpvWuRI"
+        },
+        {
+            "nome": "Knowledge be dream our.",
+            "preco": 88,
+            "descricao": "Include board city me join seat political.",
+            "quantidade": 507,
+            "_id": "0X1Z5H7qxdN505Vf"
+        },
+        {
+            "nome": "Store number why long.",
+            "preco": 330,
+            "descricao": "Would home newspaper least believe which step.",
+            "quantidade": 647,
+            "_id": "0XTgQTHYFwMH394r"
+        },
+        {
+            "nome": "Dinner anyone image we.",
+            "preco": 842,
+            "descricao": "Enjoy others public management ever son require.",
+            "quantidade": 4671,
+            "_id": "0eunSpUVhxtfdgpO"
+        },
+        {
+            "nome": "Event amount follow cut.",
+            "preco": 1385,
+            "descricao": "Thing author talk western. By police majority feeling.",
+            "quantidade": 3752,
+            "_id": "0gOhAoZ6rbzMJGqX"
+        },
+        {
+            "nome": "Add child customer.",
+            "preco": 34,
+            "descricao": "Action design how better.",
+            "quantidade": 953,
+            "_id": "0ip1uHgj9OVq3UqM"
+        },
+        {
+            "nome": "That in baby it six.",
+            "preco": 851,
+            "descricao": "Speak power health story open. Air another safe human.",
+            "quantidade": 1296,
+            "_id": "0isseSxgJODyWv3R"
+        },
+        {
+            "nome": "Hair with total.",
+            "preco": 494,
+            "descricao": "Score myself light clearly. Cover watch six significant.",
+            "quantidade": 3492,
+            "_id": "0ma8NNLgwDQ2xeQ3"
+        },
+        {
+            "nome": "Around form star.",
+            "preco": 455,
+            "descricao": "Who lead forget actually.",
+            "quantidade": 1144,
+            "_id": "0pcmANI5yuFbLSCT"
+        },
+        {
+            "nome": "Walk them attack.",
+            "preco": 1200,
+            "descricao": "Arrive employee outside audience me general physical.",
+            "quantidade": 820,
+            "_id": "0rdWIuG6Ey56SUhf"
+        },
+        {
+            "nome": "His onto return church.",
+            "preco": 1146,
+            "descricao": "Over magazine challenge stock.",
+            "quantidade": 91,
+            "_id": "0sDwNzcObBurNr1n"
+        },
+        {
+            "nome": "Someone ready price cup.",
+            "preco": 900,
+            "descricao": "Me leader per yet available set toward somebody.",
+            "quantidade": 645,
+            "_id": "0yaOMWsWju8roN2e"
+        },
+        {
+            "nome": "Page nice blue guy.",
+            "preco": 256,
+            "descricao": "Put time without short society.",
+            "quantidade": 2292,
+            "_id": "0z4vgulILuycmMX5"
+        },
+        {
+            "nome": "Her west see.",
+            "preco": 1063,
+            "descricao": "Beautiful treatment house threat direction.",
+            "quantidade": 661,
+            "_id": "11shZChh6K4IxMuT"
+        },
+        {
+            "nome": "Check wish news.",
+            "preco": 1121,
+            "descricao": "Oil scene you indeed partner administration reality.",
+            "quantidade": 1136,
+            "_id": "19sbmTUSGGugOiIe"
+        },
+        {
+            "nome": "Receive table from.",
+            "preco": 920,
+            "descricao": "Structure hear design act. Common outside church war.",
+            "quantidade": 4544,
+            "_id": "1IAtq3E9DtdDfZo1"
+        },
+        {
+            "nome": "Under trip but never.",
+            "preco": 939,
+            "descricao": "Option receive dog always me daughter table.",
+            "quantidade": 20,
+            "_id": "1OFx9bLLTkhgiYJa"
+        },
+        {
+            "nome": "True believe old rate.",
+            "preco": 1260,
+            "descricao": "Laugh entire everybody among west.",
+            "quantidade": 1718,
+            "_id": "1U1SAX5KuPuL8Co1"
+        },
+        {
+            "nome": "Final part into others.",
+            "preco": 1209,
+            "descricao": "Benefit forward deep accept back set appear.",
+            "quantidade": 4655,
+            "_id": "1Xgh5nskTxaQGTaX"
+        },
+        {
+            "nome": "Sometimes need case.",
+            "preco": 725,
+            "descricao": "Report benefit example writer room why fall.",
+            "quantidade": 187,
+            "_id": "1lOnlkl3xGn0wtbD"
+        },
+        {
+            "nome": "Hand thousand someone.",
+            "preco": 454,
+            "descricao": "Relationship hit condition garden.",
+            "quantidade": 2326,
+            "_id": "1pcItiAzjz8arKSi"
+        },
+        {
+            "nome": "Ever great eye consider.",
+            "preco": 437,
+            "descricao": "Day population ever tree action kitchen.",
+            "quantidade": 1096,
+            "_id": "1pk9xJbdGw5TjjhJ"
+        },
+        {
+            "nome": "Me star people time.",
+            "preco": 563,
+            "descricao": "Blood everything style suddenly.",
+            "quantidade": 544,
+            "_id": "1sYzPA1vndXyT0gh"
+        },
+        {
+            "nome": "South much floor rule.",
+            "preco": 1276,
+            "descricao": "Task improve to end.",
+            "quantidade": 4228,
+            "_id": "1seviQ7tuzzsUQPE"
+        },
+        {
+            "nome": "Unit data son him.",
+            "preco": 135,
+            "descricao": "Instead simple Democrat health ok media.",
+            "quantidade": 1976,
+            "_id": "1t3heuH4UFS7Igdl"
+        },
+        {
+            "nome": "Spend join affect ever.",
+            "preco": 886,
+            "descricao": "Student doctor laugh education middle.",
+            "quantidade": 2852,
+            "_id": "2GzFwdItGqbq27VG"
+        },
+        {
+            "nome": "Television wish page.",
+            "preco": 141,
+            "descricao": "Outside value social reveal course full late general.",
+            "quantidade": 0,
+            "_id": "2numHYRnQI0l443g"
+        },
+        {
+            "nome": "Now happen best.",
+            "preco": 476,
+            "descricao": "Discover prevent let thus public.",
+            "quantidade": 4600,
+            "_id": "31e2y8HWhyHes8ZQ"
+        },
+        {
+            "nome": "Defense common line.",
+            "preco": 931,
+            "descricao": "Few down improve learn plant.",
+            "quantidade": 0,
+            "_id": "370GDntM8lO0HTNf"
+        },
+        {
+            "nome": "Must guy leave.",
+            "preco": 446,
+            "descricao": "Someone science doctor building factor can.",
+            "quantidade": 165,
+            "_id": "39LcMsregao9QiJu"
+        },
+        {
+            "nome": "Kid science same down.",
+            "preco": 1345,
+            "descricao": "Because team central check blue.",
+            "quantidade": 1207,
+            "_id": "3ApUj4fZMutLviAU"
+        },
+        {
+            "nome": "Mrs true soldier.",
+            "preco": 919,
+            "descricao": "Sit move wrong west PM tax spring sport.",
+            "quantidade": 2016,
+            "_id": "3BbxjojIz0dbwM9N"
+        },
+        {
+            "nome": "Spend nor fund.",
+            "preco": 1284,
+            "descricao": "Idea girl small song. Age order which.",
+            "quantidade": 392,
+            "_id": "3KcjMQnMbYPL5exY"
+        },
+        {
+            "nome": "Film rock watch gas.",
+            "preco": 523,
+            "descricao": "Ten at human feeling address. Perform blue want value.",
+            "quantidade": 4173,
+            "_id": "3NacCdlc7U8lGF1L"
+        },
+        {
+            "nome": "Shoulder in range.",
+            "preco": 973,
+            "descricao": "Summer marriage buy case majority resource threat.",
+            "quantidade": 2467,
+            "_id": "3Zig7B3sCICcVmwT"
+        },
+        {
+            "nome": "Record building born.",
+            "preco": 873,
+            "descricao": "Particular policy serious low money around civil.",
+            "quantidade": 728,
+            "_id": "3av66lRO2oWopkvQ"
+        },
+        {
+            "nome": "Cup gun anyone size.",
+            "preco": 597,
+            "descricao": "Yourself leader next but how low friend.",
+            "quantidade": 2426,
+            "_id": "3e3fQYlii2skZrp4"
+        },
+        {
+            "nome": "He air everyone central.",
+            "preco": 1294,
+            "descricao": "Year field its explain should thank sit.",
+            "quantidade": 2433,
+            "_id": "3qB7CCWErvZ8JZyF"
+        },
+        {
+            "nome": "Customer wide certainly.",
+            "preco": 105,
+            "descricao": "Some everything item son new indeed.",
+            "quantidade": 2128,
+            "_id": "3tTPnVApp9UQPles"
+        },
+        {
+            "nome": "Where enter investment.",
+            "preco": 1336,
+            "descricao": "Peace fight small magazine send fight.",
+            "quantidade": 2440,
+            "_id": "3yNmuo9RCv2fuQKo"
+        },
+        {
+            "nome": "World trade as.",
+            "preco": 291,
+            "descricao": "But garden way type fish western stay.",
+            "quantidade": 2894,
+            "_id": "3yr85ocXG8JbSzMI"
+        },
+        {
+            "nome":... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20220708 17:37:39.754" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.751" endtime="20220708 17:37:39.754"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${numbers}</var>
+<arg>random.sample(range(0, ${response.json()["quantidade"]}),1)</arg>
+<arg>random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220708 17:37:39.755" level="INFO">${numbers} = [575]</msg>
+<status status="PASS" starttime="20220708 17:37:39.754" endtime="20220708 17:37:39.755"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${response.json()["produtos"][${numbers}[0]]["_id"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220708 17:37:39.756" level="INFO">${id} = pBy53REz3BCr8H5l</msg>
+<status status="PASS" starttime="20220708 17:37:39.755" endtime="20220708 17:37:39.756"/>
+</kw>
+<kw name="Random Int" library="FakerLibrary">
+<var>${quantidade}</var>
+<arg>min=2</arg>
+<arg>max=10</arg>
+<doc>Generate a random integer between two integers ``min`` and ``max`` inclusive
+while observing the provided ``step`` value.</doc>
+<msg timestamp="20220708 17:37:39.756" level="INFO">${quantidade} = 10</msg>
+<status status="PASS" starttime="20220708 17:37:39.756" endtime="20220708 17:37:39.756"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${pedido}</var>
+<arg>idProduto=${id}</arg>
+<arg>quantidade=${quantidade}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220708 17:37:39.756" level="INFO">${pedido} = {'idProduto': 'pBy53REz3BCr8H5l', 'quantidade': 10}</msg>
+<status status="PASS" starttime="20220708 17:37:39.756" endtime="20220708 17:37:39.756"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${lista}</arg>
+<arg>${pedido}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220708 17:37:39.756" endtime="20220708 17:37:39.756"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.751" endtime="20220708 17:37:39.756"/>
+</iter>
+<iter>
+<var name="${C}">2</var>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/produtos</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220708 17:37:39.759" level="INFO">GET Request : url=http://localhost:3000/produtos 
+ path_url=/produtos 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220708 17:37:39.759" level="INFO">GET Response : url=http://localhost:3000/produtos 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': 'bf57a632-8b3f-4be6-baf5-c3ce89c5bfe5', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '161879', 'Date': 'Fri, 08 Jul 2022 20:37:39 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "quantidade": 700,
+    "produtos": [
+        {
+            "nome": "Gun hope opportunity.",
+            "preco": 655,
+            "descricao": "Yourself sister painting ago.",
+            "quantidade": 4066,
+            "_id": "00JgOldHnOiRZLP9"
+        },
+        {
+            "nome": "Account Mrs stand house.",
+            "preco": 33,
+            "descricao": "Look share around soldier knowledge born.",
+            "quantidade": 4014,
+            "_id": "0SdsdIXHzPKE5n3K"
+        },
+        {
+            "nome": "Voice box decide mind.",
+            "preco": 278,
+            "descricao": "They bag task order maybe explain including from.",
+            "quantidade": 4612,
+            "_id": "0TvtGSEQArpvWuRI"
+        },
+        {
+            "nome": "Knowledge be dream our.",
+            "preco": 88,
+            "descricao": "Include board city me join seat political.",
+            "quantidade": 507,
+            "_id": "0X1Z5H7qxdN505Vf"
+        },
+        {
+            "nome": "Store number why long.",
+            "preco": 330,
+            "descricao": "Would home newspaper least believe which step.",
+            "quantidade": 647,
+            "_id": "0XTgQTHYFwMH394r"
+        },
+        {
+            "nome": "Dinner anyone image we.",
+            "preco": 842,
+            "descricao": "Enjoy others public management ever son require.",
+            "quantidade": 4671,
+            "_id": "0eunSpUVhxtfdgpO"
+        },
+        {
+            "nome": "Event amount follow cut.",
+            "preco": 1385,
+            "descricao": "Thing author talk western. By police majority feeling.",
+            "quantidade": 3752,
+            "_id": "0gOhAoZ6rbzMJGqX"
+        },
+        {
+            "nome": "Add child customer.",
+            "preco": 34,
+            "descricao": "Action design how better.",
+            "quantidade": 953,
+            "_id": "0ip1uHgj9OVq3UqM"
+        },
+        {
+            "nome": "That in baby it six.",
+            "preco": 851,
+            "descricao": "Speak power health story open. Air another safe human.",
+            "quantidade": 1296,
+            "_id": "0isseSxgJODyWv3R"
+        },
+        {
+            "nome": "Hair with total.",
+            "preco": 494,
+            "descricao": "Score myself light clearly. Cover watch six significant.",
+            "quantidade": 3492,
+            "_id": "0ma8NNLgwDQ2xeQ3"
+        },
+        {
+            "nome": "Around form star.",
+            "preco": 455,
+            "descricao": "Who lead forget actually.",
+            "quantidade": 1144,
+            "_id": "0pcmANI5yuFbLSCT"
+        },
+        {
+            "nome": "Walk them attack.",
+            "preco": 1200,
+            "descricao": "Arrive employee outside audience me general physical.",
+            "quantidade": 820,
+            "_id": "0rdWIuG6Ey56SUhf"
+        },
+        {
+            "nome": "His onto return church.",
+            "preco": 1146,
+            "descricao": "Over magazine challenge stock.",
+            "quantidade": 91,
+            "_id": "0sDwNzcObBurNr1n"
+        },
+        {
+            "nome": "Someone ready price cup.",
+            "preco": 900,
+            "descricao": "Me leader per yet available set toward somebody.",
+            "quantidade": 645,
+            "_id": "0yaOMWsWju8roN2e"
+        },
+        {
+            "nome": "Page nice blue guy.",
+            "preco": 256,
+            "descricao": "Put time without short society.",
+            "quantidade": 2292,
+            "_id": "0z4vgulILuycmMX5"
+        },
+        {
+            "nome": "Her west see.",
+            "preco": 1063,
+            "descricao": "Beautiful treatment house threat direction.",
+            "quantidade": 661,
+            "_id": "11shZChh6K4IxMuT"
+        },
+        {
+            "nome": "Check wish news.",
+            "preco": 1121,
+            "descricao": "Oil scene you indeed partner administration reality.",
+            "quantidade": 1136,
+            "_id": "19sbmTUSGGugOiIe"
+        },
+        {
+            "nome": "Receive table from.",
+            "preco": 920,
+            "descricao": "Structure hear design act. Common outside church war.",
+            "quantidade": 4544,
+            "_id": "1IAtq3E9DtdDfZo1"
+        },
+        {
+            "nome": "Under trip but never.",
+            "preco": 939,
+            "descricao": "Option receive dog always me daughter table.",
+            "quantidade": 20,
+            "_id": "1OFx9bLLTkhgiYJa"
+        },
+        {
+            "nome": "True believe old rate.",
+            "preco": 1260,
+            "descricao": "Laugh entire everybody among west.",
+            "quantidade": 1718,
+            "_id": "1U1SAX5KuPuL8Co1"
+        },
+        {
+            "nome": "Final part into others.",
+            "preco": 1209,
+            "descricao": "Benefit forward deep accept back set appear.",
+            "quantidade": 4655,
+            "_id": "1Xgh5nskTxaQGTaX"
+        },
+        {
+            "nome": "Sometimes need case.",
+            "preco": 725,
+            "descricao": "Report benefit example writer room why fall.",
+            "quantidade": 187,
+            "_id": "1lOnlkl3xGn0wtbD"
+        },
+        {
+            "nome": "Hand thousand someone.",
+            "preco": 454,
+            "descricao": "Relationship hit condition garden.",
+            "quantidade": 2326,
+            "_id": "1pcItiAzjz8arKSi"
+        },
+        {
+            "nome": "Ever great eye consider.",
+            "preco": 437,
+            "descricao": "Day population ever tree action kitchen.",
+            "quantidade": 1096,
+            "_id": "1pk9xJbdGw5TjjhJ"
+        },
+        {
+            "nome": "Me star people time.",
+            "preco": 563,
+            "descricao": "Blood everything style suddenly.",
+            "quantidade": 544,
+            "_id": "1sYzPA1vndXyT0gh"
+        },
+        {
+            "nome": "South much floor rule.",
+            "preco": 1276,
+            "descricao": "Task improve to end.",
+            "quantidade": 4228,
+            "_id": "1seviQ7tuzzsUQPE"
+        },
+        {
+            "nome": "Unit data son him.",
+            "preco": 135,
+            "descricao": "Instead simple Democrat health ok media.",
+            "quantidade": 1976,
+            "_id": "1t3heuH4UFS7Igdl"
+        },
+        {
+            "nome": "Spend join affect ever.",
+            "preco": 886,
+            "descricao": "Student doctor laugh education middle.",
+            "quantidade": 2852,
+            "_id": "2GzFwdItGqbq27VG"
+        },
+        {
+            "nome": "Television wish page.",
+            "preco": 141,
+            "descricao": "Outside value social reveal course full late general.",
+            "quantidade": 0,
+            "_id": "2numHYRnQI0l443g"
+        },
+        {
+            "nome": "Now happen best.",
+            "preco": 476,
+            "descricao": "Discover prevent let thus public.",
+            "quantidade": 4600,
+            "_id": "31e2y8HWhyHes8ZQ"
+        },
+        {
+            "nome": "Defense common line.",
+            "preco": 931,
+            "descricao": "Few down improve learn plant.",
+            "quantidade": 0,
+            "_id": "370GDntM8lO0HTNf"
+        },
+        {
+            "nome": "Must guy leave.",
+            "preco": 446,
+            "descricao": "Someone science doctor building factor can.",
+            "quantidade": 165,
+            "_id": "39LcMsregao9QiJu"
+        },
+        {
+            "nome": "Kid science same down.",
+            "preco": 1345,
+            "descricao": "Because team central check blue.",
+            "quantidade": 1207,
+            "_id": "3ApUj4fZMutLviAU"
+        },
+        {
+            "nome": "Mrs true soldier.",
+            "preco": 919,
+            "descricao": "Sit move wrong west PM tax spring sport.",
+            "quantidade": 2016,
+            "_id": "3BbxjojIz0dbwM9N"
+        },
+        {
+            "nome": "Spend nor fund.",
+            "preco": 1284,
+            "descricao": "Idea girl small song. Age order which.",
+            "quantidade": 392,
+            "_id": "3KcjMQnMbYPL5exY"
+        },
+        {
+            "nome": "Film rock watch gas.",
+            "preco": 523,
+            "descricao": "Ten at human feeling address. Perform blue want value.",
+            "quantidade": 4173,
+            "_id": "3NacCdlc7U8lGF1L"
+        },
+        {
+            "nome": "Shoulder in range.",
+            "preco": 973,
+            "descricao": "Summer marriage buy case majority resource threat.",
+            "quantidade": 2467,
+            "_id": "3Zig7B3sCICcVmwT"
+        },
+        {
+            "nome": "Record building born.",
+            "preco": 873,
+            "descricao": "Particular policy serious low money around civil.",
+            "quantidade": 728,
+            "_id": "3av66lRO2oWopkvQ"
+        },
+        {
+            "nome": "Cup gun anyone size.",
+            "preco": 597,
+            "descricao": "Yourself leader next but how low friend.",
+            "quantidade": 2426,
+            "_id": "3e3fQYlii2skZrp4"
+        },
+        {
+            "nome": "He air everyone central.",
+            "preco": 1294,
+            "descricao": "Year field its explain should thank sit.",
+            "quantidade": 2433,
+            "_id": "3qB7CCWErvZ8JZyF"
+        },
+        {
+            "nome": "Customer wide certainly.",
+            "preco": 105,
+            "descricao": "Some everything item son new indeed.",
+            "quantidade": 2128,
+            "_id": "3tTPnVApp9UQPles"
+        },
+        {
+            "nome": "Where enter investment.",
+            "preco": 1336,
+            "descricao": "Peace fight small magazine send fight.",
+            "quantidade": 2440,
+            "_id": "3yNmuo9RCv2fuQKo"
+        },
+        {
+            "nome": "World trade as.",
+            "preco": 291,
+            "descricao": "But garden way type fish western stay.",
+            "quantidade": 2894,
+            "_id": "3yr85ocXG8JbSzMI"
+        },
+        {
+            "nome":... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20220708 17:37:39.759" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.756" endtime="20220708 17:37:39.759"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${numbers}</var>
+<arg>random.sample(range(0, ${response.json()["quantidade"]}),1)</arg>
+<arg>random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220708 17:37:39.760" level="INFO">${numbers} = [71]</msg>
+<status status="PASS" starttime="20220708 17:37:39.759" endtime="20220708 17:37:39.760"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${response.json()["produtos"][${numbers}[0]]["_id"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220708 17:37:39.761" level="INFO">${id} = 6GwHdWPlhvpUOaVe</msg>
+<status status="PASS" starttime="20220708 17:37:39.760" endtime="20220708 17:37:39.761"/>
+</kw>
+<kw name="Random Int" library="FakerLibrary">
+<var>${quantidade}</var>
+<arg>min=2</arg>
+<arg>max=10</arg>
+<doc>Generate a random integer between two integers ``min`` and ``max`` inclusive
+while observing the provided ``step`` value.</doc>
+<msg timestamp="20220708 17:37:39.761" level="INFO">${quantidade} = 4</msg>
+<status status="PASS" starttime="20220708 17:37:39.761" endtime="20220708 17:37:39.761"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${pedido}</var>
+<arg>idProduto=${id}</arg>
+<arg>quantidade=${quantidade}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220708 17:37:39.761" level="INFO">${pedido} = {'idProduto': '6GwHdWPlhvpUOaVe', 'quantidade': 4}</msg>
+<status status="PASS" starttime="20220708 17:37:39.761" endtime="20220708 17:37:39.761"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${lista}</arg>
+<arg>${pedido}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220708 17:37:39.761" endtime="20220708 17:37:39.761"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.756" endtime="20220708 17:37:39.761"/>
+</iter>
+<iter>
+<var name="${C}">3</var>
+<kw name="GET On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/produtos</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20220708 17:37:39.764" level="INFO">GET Request : url=http://localhost:3000/produtos 
+ path_url=/produtos 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20220708 17:37:39.764" level="INFO">GET Response : url=http://localhost:3000/produtos 
+ status=200, reason=OK 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '6f8186d3-930a-40e5-9766-6a963ecaa89b', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '161879', 'Date': 'Fri, 08 Jul 2022 20:37:39 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "quantidade": 700,
+    "produtos": [
+        {
+            "nome": "Gun hope opportunity.",
+            "preco": 655,
+            "descricao": "Yourself sister painting ago.",
+            "quantidade": 4066,
+            "_id": "00JgOldHnOiRZLP9"
+        },
+        {
+            "nome": "Account Mrs stand house.",
+            "preco": 33,
+            "descricao": "Look share around soldier knowledge born.",
+            "quantidade": 4014,
+            "_id": "0SdsdIXHzPKE5n3K"
+        },
+        {
+            "nome": "Voice box decide mind.",
+            "preco": 278,
+            "descricao": "They bag task order maybe explain including from.",
+            "quantidade": 4612,
+            "_id": "0TvtGSEQArpvWuRI"
+        },
+        {
+            "nome": "Knowledge be dream our.",
+            "preco": 88,
+            "descricao": "Include board city me join seat political.",
+            "quantidade": 507,
+            "_id": "0X1Z5H7qxdN505Vf"
+        },
+        {
+            "nome": "Store number why long.",
+            "preco": 330,
+            "descricao": "Would home newspaper least believe which step.",
+            "quantidade": 647,
+            "_id": "0XTgQTHYFwMH394r"
+        },
+        {
+            "nome": "Dinner anyone image we.",
+            "preco": 842,
+            "descricao": "Enjoy others public management ever son require.",
+            "quantidade": 4671,
+            "_id": "0eunSpUVhxtfdgpO"
+        },
+        {
+            "nome": "Event amount follow cut.",
+            "preco": 1385,
+            "descricao": "Thing author talk western. By police majority feeling.",
+            "quantidade": 3752,
+            "_id": "0gOhAoZ6rbzMJGqX"
+        },
+        {
+            "nome": "Add child customer.",
+            "preco": 34,
+            "descricao": "Action design how better.",
+            "quantidade": 953,
+            "_id": "0ip1uHgj9OVq3UqM"
+        },
+        {
+            "nome": "That in baby it six.",
+            "preco": 851,
+            "descricao": "Speak power health story open. Air another safe human.",
+            "quantidade": 1296,
+            "_id": "0isseSxgJODyWv3R"
+        },
+        {
+            "nome": "Hair with total.",
+            "preco": 494,
+            "descricao": "Score myself light clearly. Cover watch six significant.",
+            "quantidade": 3492,
+            "_id": "0ma8NNLgwDQ2xeQ3"
+        },
+        {
+            "nome": "Around form star.",
+            "preco": 455,
+            "descricao": "Who lead forget actually.",
+            "quantidade": 1144,
+            "_id": "0pcmANI5yuFbLSCT"
+        },
+        {
+            "nome": "Walk them attack.",
+            "preco": 1200,
+            "descricao": "Arrive employee outside audience me general physical.",
+            "quantidade": 820,
+            "_id": "0rdWIuG6Ey56SUhf"
+        },
+        {
+            "nome": "His onto return church.",
+            "preco": 1146,
+            "descricao": "Over magazine challenge stock.",
+            "quantidade": 91,
+            "_id": "0sDwNzcObBurNr1n"
+        },
+        {
+            "nome": "Someone ready price cup.",
+            "preco": 900,
+            "descricao": "Me leader per yet available set toward somebody.",
+            "quantidade": 645,
+            "_id": "0yaOMWsWju8roN2e"
+        },
+        {
+            "nome": "Page nice blue guy.",
+            "preco": 256,
+            "descricao": "Put time without short society.",
+            "quantidade": 2292,
+            "_id": "0z4vgulILuycmMX5"
+        },
+        {
+            "nome": "Her west see.",
+            "preco": 1063,
+            "descricao": "Beautiful treatment house threat direction.",
+            "quantidade": 661,
+            "_id": "11shZChh6K4IxMuT"
+        },
+        {
+            "nome": "Check wish news.",
+            "preco": 1121,
+            "descricao": "Oil scene you indeed partner administration reality.",
+            "quantidade": 1136,
+            "_id": "19sbmTUSGGugOiIe"
+        },
+        {
+            "nome": "Receive table from.",
+            "preco": 920,
+            "descricao": "Structure hear design act. Common outside church war.",
+            "quantidade": 4544,
+            "_id": "1IAtq3E9DtdDfZo1"
+        },
+        {
+            "nome": "Under trip but never.",
+            "preco": 939,
+            "descricao": "Option receive dog always me daughter table.",
+            "quantidade": 20,
+            "_id": "1OFx9bLLTkhgiYJa"
+        },
+        {
+            "nome": "True believe old rate.",
+            "preco": 1260,
+            "descricao": "Laugh entire everybody among west.",
+            "quantidade": 1718,
+            "_id": "1U1SAX5KuPuL8Co1"
+        },
+        {
+            "nome": "Final part into others.",
+            "preco": 1209,
+            "descricao": "Benefit forward deep accept back set appear.",
+            "quantidade": 4655,
+            "_id": "1Xgh5nskTxaQGTaX"
+        },
+        {
+            "nome": "Sometimes need case.",
+            "preco": 725,
+            "descricao": "Report benefit example writer room why fall.",
+            "quantidade": 187,
+            "_id": "1lOnlkl3xGn0wtbD"
+        },
+        {
+            "nome": "Hand thousand someone.",
+            "preco": 454,
+            "descricao": "Relationship hit condition garden.",
+            "quantidade": 2326,
+            "_id": "1pcItiAzjz8arKSi"
+        },
+        {
+            "nome": "Ever great eye consider.",
+            "preco": 437,
+            "descricao": "Day population ever tree action kitchen.",
+            "quantidade": 1096,
+            "_id": "1pk9xJbdGw5TjjhJ"
+        },
+        {
+            "nome": "Me star people time.",
+            "preco": 563,
+            "descricao": "Blood everything style suddenly.",
+            "quantidade": 544,
+            "_id": "1sYzPA1vndXyT0gh"
+        },
+        {
+            "nome": "South much floor rule.",
+            "preco": 1276,
+            "descricao": "Task improve to end.",
+            "quantidade": 4228,
+            "_id": "1seviQ7tuzzsUQPE"
+        },
+        {
+            "nome": "Unit data son him.",
+            "preco": 135,
+            "descricao": "Instead simple Democrat health ok media.",
+            "quantidade": 1976,
+            "_id": "1t3heuH4UFS7Igdl"
+        },
+        {
+            "nome": "Spend join affect ever.",
+            "preco": 886,
+            "descricao": "Student doctor laugh education middle.",
+            "quantidade": 2852,
+            "_id": "2GzFwdItGqbq27VG"
+        },
+        {
+            "nome": "Television wish page.",
+            "preco": 141,
+            "descricao": "Outside value social reveal course full late general.",
+            "quantidade": 0,
+            "_id": "2numHYRnQI0l443g"
+        },
+        {
+            "nome": "Now happen best.",
+            "preco": 476,
+            "descricao": "Discover prevent let thus public.",
+            "quantidade": 4600,
+            "_id": "31e2y8HWhyHes8ZQ"
+        },
+        {
+            "nome": "Defense common line.",
+            "preco": 931,
+            "descricao": "Few down improve learn plant.",
+            "quantidade": 0,
+            "_id": "370GDntM8lO0HTNf"
+        },
+        {
+            "nome": "Must guy leave.",
+            "preco": 446,
+            "descricao": "Someone science doctor building factor can.",
+            "quantidade": 165,
+            "_id": "39LcMsregao9QiJu"
+        },
+        {
+            "nome": "Kid science same down.",
+            "preco": 1345,
+            "descricao": "Because team central check blue.",
+            "quantidade": 1207,
+            "_id": "3ApUj4fZMutLviAU"
+        },
+        {
+            "nome": "Mrs true soldier.",
+            "preco": 919,
+            "descricao": "Sit move wrong west PM tax spring sport.",
+            "quantidade": 2016,
+            "_id": "3BbxjojIz0dbwM9N"
+        },
+        {
+            "nome": "Spend nor fund.",
+            "preco": 1284,
+            "descricao": "Idea girl small song. Age order which.",
+            "quantidade": 392,
+            "_id": "3KcjMQnMbYPL5exY"
+        },
+        {
+            "nome": "Film rock watch gas.",
+            "preco": 523,
+            "descricao": "Ten at human feeling address. Perform blue want value.",
+            "quantidade": 4173,
+            "_id": "3NacCdlc7U8lGF1L"
+        },
+        {
+            "nome": "Shoulder in range.",
+            "preco": 973,
+            "descricao": "Summer marriage buy case majority resource threat.",
+            "quantidade": 2467,
+            "_id": "3Zig7B3sCICcVmwT"
+        },
+        {
+            "nome": "Record building born.",
+            "preco": 873,
+            "descricao": "Particular policy serious low money around civil.",
+            "quantidade": 728,
+            "_id": "3av66lRO2oWopkvQ"
+        },
+        {
+            "nome": "Cup gun anyone size.",
+            "preco": 597,
+            "descricao": "Yourself leader next but how low friend.",
+            "quantidade": 2426,
+            "_id": "3e3fQYlii2skZrp4"
+        },
+        {
+            "nome": "He air everyone central.",
+            "preco": 1294,
+            "descricao": "Year field its explain should thank sit.",
+            "quantidade": 2433,
+            "_id": "3qB7CCWErvZ8JZyF"
+        },
+        {
+            "nome": "Customer wide certainly.",
+            "preco": 105,
+            "descricao": "Some everything item son new indeed.",
+            "quantidade": 2128,
+            "_id": "3tTPnVApp9UQPles"
+        },
+        {
+            "nome": "Where enter investment.",
+            "preco": 1336,
+            "descricao": "Peace fight small magazine send fight.",
+            "quantidade": 2440,
+            "_id": "3yNmuo9RCv2fuQKo"
+        },
+        {
+            "nome": "World trade as.",
+            "preco": 291,
+            "descricao": "But garden way type fish western stay.",
+            "quantidade": 2894,
+            "_id": "3yr85ocXG8JbSzMI"
+        },
+        {
+            "nome":... (set the log level to DEBUG or TRACE to see the full content) 
+ </msg>
+<msg timestamp="20220708 17:37:39.764" level="INFO">${response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.761" endtime="20220708 17:37:39.764"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${numbers}</var>
+<arg>random.sample(range(0, ${response.json()["quantidade"]}),1)</arg>
+<arg>random</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220708 17:37:39.765" level="INFO">${numbers} = [410]</msg>
+<status status="PASS" starttime="20220708 17:37:39.764" endtime="20220708 17:37:39.765"/>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<var>${id}</var>
+<arg>${response.json()["produtos"][${numbers}[0]]["_id"]}</arg>
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<msg timestamp="20220708 17:37:39.766" level="INFO">${id} = aCwcl5eKFX5Jns7N</msg>
+<status status="PASS" starttime="20220708 17:37:39.765" endtime="20220708 17:37:39.766"/>
+</kw>
+<kw name="Random Int" library="FakerLibrary">
+<var>${quantidade}</var>
+<arg>min=2</arg>
+<arg>max=10</arg>
+<doc>Generate a random integer between two integers ``min`` and ``max`` inclusive
+while observing the provided ``step`` value.</doc>
+<msg timestamp="20220708 17:37:39.766" level="INFO">${quantidade} = 7</msg>
+<status status="PASS" starttime="20220708 17:37:39.766" endtime="20220708 17:37:39.766"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${pedido}</var>
+<arg>idProduto=${id}</arg>
+<arg>quantidade=${quantidade}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220708 17:37:39.766" level="INFO">${pedido} = {'idProduto': 'aCwcl5eKFX5Jns7N', 'quantidade': 7}</msg>
+<status status="PASS" starttime="20220708 17:37:39.766" endtime="20220708 17:37:39.766"/>
+</kw>
+<kw name="Append To List" library="Collections">
+<arg>${lista}</arg>
+<arg>${pedido}</arg>
+<doc>Adds ``values`` to the end of ``list``.</doc>
+<status status="PASS" starttime="20220708 17:37:39.766" endtime="20220708 17:37:39.766"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.761" endtime="20220708 17:37:39.766"/>
+</iter>
+<status status="PASS" starttime="20220708 17:37:39.745" endtime="20220708 17:37:39.766"/>
+</for>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>${payload}</var>
+<arg>produtos=${lista}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220708 17:37:39.767" level="INFO">${payload} = {'produtos': [{'idProduto': 'V5h6HO2UWjXvBhvK', 'quantidade': 6}, {'idProduto': 'pBy53REz3BCr8H5l', 'quantidade': 10}, {'idProduto': '6GwHdWPlhvpUOaVe', 'quantidade': 4}, {'idProduto': 'aCwcl5eKFX5Jns...</msg>
+<status status="PASS" starttime="20220708 17:37:39.767" endtime="20220708 17:37:39.767"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${payload}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220708 17:37:39.767" level="INFO">${payload} = {'produtos': [{'idProduto': 'V5h6HO2UWjXvBhvK', 'quantidade': 6}, {'idProduto': 'pBy53REz3BCr8H5l', 'quantidade': 10}, {'idProduto': '6GwHdWPlhvpUOaVe', 'quantidade': 4}, {'idProduto': 'aCwcl5eKFX5Jns...</msg>
+<status status="PASS" starttime="20220708 17:37:39.767" endtime="20220708 17:37:39.767"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.744" endtime="20220708 17:37:39.767"/>
+</kw>
+<kw name="POST Endpoint /carrinhos" library="carrinhos_keywords">
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{header}</var>
+<arg>Authorization=${token_auth}</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20220708 17:37:39.767" level="INFO">&amp;{header} = { Authorization=Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9icmllbmJyaWFubmFAZXhhbXBsZS5vcmciLCJwYXNzd29yZCI6IkBvOVBtIiwiaWF0IjoxNjU3MzEyNjU5LCJleHAiOjE2NTczMTMyNTl9.o9C4WtN5NZAKvWHCcjh...</msg>
+<status status="PASS" starttime="20220708 17:37:39.767" endtime="20220708 17:37:39.768"/>
+</kw>
+<kw name="Set To Dictionary" library="Collections">
+<arg>${header}</arg>
+<arg>Content-Type=application/json</arg>
+<doc>Adds the given ``key_value_pairs`` and ``items`` to the ``dictionary``.</doc>
+<status status="PASS" starttime="20220708 17:37:39.768" endtime="20220708 17:37:39.768"/>
+</kw>
+<kw name="Evaluate" library="BuiltIn">
+<var>${payload}</var>
+<arg>json.dumps(${payload})</arg>
+<arg>json</arg>
+<doc>Evaluates the given expression in Python and returns the result.</doc>
+<msg timestamp="20220708 17:37:39.768" level="INFO">${payload} = {"produtos": [{"idProduto": "V5h6HO2UWjXvBhvK", "quantidade": 6}, {"idProduto": "pBy53REz3BCr8H5l", "quantidade": 10}, {"idProduto": "6GwHdWPlhvpUOaVe", "quantidade": 4}, {"idProduto": "aCwcl5eKFX5Jns...</msg>
+<status status="PASS" starttime="20220708 17:37:39.768" endtime="20220708 17:37:39.768"/>
+</kw>
+<kw name="POST On Session" library="RequestsLibrary">
+<var>${response}</var>
+<arg>serverest</arg>
+<arg>/carrinhos</arg>
+<arg>data=${payload}</arg>
+<arg>headers=${header}</arg>
+<arg>expected_status=any</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<msg timestamp="20220708 17:37:39.772" level="INFO">POST Request : url=http://localhost:3000/carrinhos 
+ path_url=/carrinhos 
+ headers={'User-Agent': 'python-requests/2.28.0', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9icmllbmJyaWFubmFAZXhhbXBsZS5vcmciLCJwYXNzd29yZCI6IkBvOVBtIiwiaWF0IjoxNjU3MzEyNjU5LCJleHAiOjE2NTczMTMyNTl9.o9C4WtN5NZAKvWHCcjhXT3ffOHyUusqgJq9DX2_s16k', 'Content-Type': 'application/json', 'Content-Length': '223'} 
+ body={"produtos": [{"idProduto": "V5h6HO2UWjXvBhvK", "quantidade": 6}, {"idProduto": "pBy53REz3BCr8H5l", "quantidade": 10}, {"idProduto": "6GwHdWPlhvpUOaVe", "quantidade": 4}, {"idProduto": "aCwcl5eKFX5Jns7N", "quantidade": 7}]} 
+ </msg>
+<msg timestamp="20220708 17:37:39.772" level="INFO">POST Response : url=http://localhost:3000/carrinhos 
+ status=201, reason=Created 
+ headers={'Access-Control-Allow-Origin': '*', 'x-dns-prefetch-control': 'off', 'x-frame-options': 'SAMEORIGIN', 'strict-transport-security': 'max-age=15552000; includeSubDomains', 'x-download-options': 'noopen', 'x-content-type-options': 'nosniff', 'x-xss-protection': '1; mode=block', 'x-moesif-transaction-id': '8798eb22-5cb3-46c8-9157-7bc8a5060ef4', 'Content-Type': 'application/json; charset=utf-8', 'Content-Length': '82', 'Date': 'Fri, 08 Jul 2022 20:37:39 GMT', 'Connection': 'keep-alive', 'Keep-Alive': 'timeout=5'} 
+ body={
+    "message": "Cadastro realizado com sucesso",
+    "_id": "fenMmehc29YVf5VY"
+} 
+ </msg>
+<msg timestamp="20220708 17:37:39.773" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.768" endtime="20220708 17:37:39.773"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>Response: ${response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20220708 17:37:39.773" endtime="20220708 17:37:39.773"/>
+</kw>
+<kw name="Set Global Variable" library="BuiltIn">
+<arg>${response}</arg>
+<doc>Makes a variable available globally in all tests and suites.</doc>
+<msg timestamp="20220708 17:37:39.773" level="INFO">${response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20220708 17:37:39.773" endtime="20220708 17:37:39.773"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.767" endtime="20220708 17:37:39.773"/>
+</kw>
+<kw name="Validar Status Code &quot;201&quot;" library="common" sourcename="Validar Status Code &quot;${statuscode}&quot;">
+<kw name="Should Be True" library="BuiltIn">
+<arg>${response.status_code} == ${statuscode}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" starttime="20220708 17:37:39.774" endtime="20220708 17:37:39.774"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.774" endtime="20220708 17:37:39.774"/>
+</kw>
+<kw name="Validar Se &quot;message&quot; Contem &quot;Cadastro realizado com sucesso&quot;" library="common" sourcename="Validar Se &quot;${chave}&quot; Contem &quot;${texto}&quot;">
+<kw name="Should Contain" library="BuiltIn">
+<arg>${response.json()["${chave}"]}</arg>
+<arg>${texto}</arg>
+<doc>Fails if ``container`` does not contain ``item`` one or more times.</doc>
+<status status="PASS" starttime="20220708 17:37:39.775" endtime="20220708 17:37:39.775"/>
+</kw>
+<status status="PASS" starttime="20220708 17:37:39.774" endtime="20220708 17:37:39.775"/>
 </kw>
 <tag>POST</tag>
-<tag>POST_cadastrar_sem_adm</tag>
-<status status="FAIL" starttime="20220708 16:54:45.758" endtime="20220708 16:54:45.776">Resolving variable '${response.json()["authorization"]}' failed: KeyError: 'authorization'</status>
+<tag>POST_carrinho_dinamico</tag>
+<status status="PASS" starttime="20220708 17:37:39.732" endtime="20220708 17:37:39.775"/>
 </test>
-<doc>Arquivo de Testes para o endpoint /produtos</doc>
-<status status="FAIL" starttime="20220708 16:54:45.433" endtime="20220708 16:54:45.776"/>
+<doc>Arquivo de Testes para o endpoint /carrinhos</doc>
+<status status="PASS" starttime="20220708 17:37:39.368" endtime="20220708 17:37:39.776"/>
 </suite>
 <statistics>
 <total>
-<stat pass="0" fail="1" skip="0">All Tests</stat>
+<stat pass="4" fail="0" skip="0">All Tests</stat>
 </total>
 <tag>
-<stat pass="0" fail="1" skip="0">POST</stat>
-<stat pass="0" fail="1" skip="0">POST_cadastrar_sem_adm</stat>
+<stat pass="3" fail="0" skip="0">GET</stat>
+<stat pass="1" fail="0" skip="0">GET_carrinho_id</stat>
+<stat pass="1" fail="0" skip="0">GET_carrinho_id_invalido</stat>
+<stat pass="1" fail="0" skip="0">GET_carrinhos</stat>
+<stat pass="1" fail="0" skip="0">POST</stat>
+<stat pass="1" fail="0" skip="0">POST_carrinho_dinamico</stat>
 </tag>
 <suite>
-<stat pass="0" fail="1" skip="0" id="s1" name="Produtos Tests">Produtos Tests</stat>
+<stat pass="4" fail="0" skip="0" id="s1" name="Carrinhos Tests">Carrinhos Tests</stat>
 </suite>
 </statistics>
 <errors>
