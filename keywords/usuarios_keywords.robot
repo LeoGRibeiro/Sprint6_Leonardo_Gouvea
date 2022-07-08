@@ -50,7 +50,7 @@ Coletar ID Usuario
 
 Coletar ID Usuario Aleatorio
     ${response}             GET on Session      serverest   /usuarios
-    ${numbers}=             Evaluate            random.sample(range(1, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
+    ${numbers}=             Evaluate            random.sample(range(0, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
     ${id_usuario}           Set Variable        ${response.json()["usuarios"][${numbers}[0]]["_id"]}
     Set Global Variable     ${id_usuario}
     Log To Console          ${id_usuario}

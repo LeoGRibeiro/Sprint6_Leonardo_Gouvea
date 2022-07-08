@@ -2,9 +2,11 @@
 Documentation           Keywords e variáveis gerais
 Library                 OperatingSystem
 Library                 RequestsLibrary
+Library                 Collections
 
 Resource                ../variables/serverest_variaveis.robot
-
+Resource                ../../keywords/usuarios_keywords.robot
+Resource                ../../keywords/login_keywords.robot
 * Keywords *
 Criar Sessao
     Create Session      serverest       ${BASE_URL} 
@@ -44,8 +46,21 @@ Fazer Login e Armazenar Token
     ${token_auth}           Set Variable        ${response.json()["authorization"]}
     Set Global Variable     ${token_auth}
 
+Fazer Login Aleatorio e Armazenar Token
+    ${response}             GET on Session      serverest   /usuarios
+    ${numbers}=             Evaluate            random.sample(range(0, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
+    ${email}                Set Variable        ${response.json()["usuarios"][${numbers}[0]]["email"]}
+    ${password}             Set Variable        ${response.json()["usuarios"][${numbers}[0]]["password"]}
+    ${payload}              Create Dictionary   email=${email}      password=${password}
+    ${response}             POST on Session     serverest      /login          data=&{payload}        expected_status=any
+    ${token_auth}           Set Variable        ${response.json()["authorization"]}
+    Set Global Variable     ${token_auth}
+
 Fazer Login Sem Adm e Armazenar Token
-    POST Endpoint /login "user_sem_adm"
+    Criar Dados para Usuario Válido
+    Set to Dictionary          ${payload}          administrador=false
+    POST Endpoint /usuarios
+    POST Endpoint /login Dinamico
     ${token_auth}           Set Variable        ${response.json()["authorization"]}
     Set Global Variable     ${token_auth}
 

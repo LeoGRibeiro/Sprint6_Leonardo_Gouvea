@@ -46,7 +46,7 @@ DELETE Endpoint /produtos
 
 Coletar ID Produto Aleatorio
     ${response}             GET on Session      serverest   /produtos
-    ${numbers}=             Evaluate            random.sample(range(1, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
+    ${numbers}=             Evaluate            random.sample(range(0, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
     ${id_produto}           Set Variable        ${response.json()["produtos"][${numbers}[0]]["_id"]}
     Set Global Variable     ${id_produto}
 
