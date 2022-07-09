@@ -37,16 +37,6 @@ Cenário: POST Criar Usuario Dinâmico 201
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
 
-Cenário: POST Criar Usuario Valido 201
-    [tags]      POST_criar_usuario_valido     POST
-    Pegar Dados Usuarios Estatico "user_valido"
-    POST Endpoint /usuarios
-
-Cenário: POST Criar Usuario Sem Adm 201          # Para evitar erros com falta de usuarios sem adm
-    [tags]     POST_criar_sem_adm       POST
-    Pegar Dados Usuarios Estatico "user_sem_adm"
-    POST Endpoint /usuarios
-
 Cenário: POST Criar Usuario Já Existente 400
     [tags]      POST_usuario_email_usado    POST
     Pegar Dados Usuarios Estatico "user_email_usado"
