@@ -4,6 +4,7 @@ Documentation   Arquivo de Testes para o endpoint /produtos
 
 Resource        ../support/common/common.robot
 Resource        ../keywords/produtos_keywords.robot
+Resource        ../keywords/carrinhos_keywords.robot
 
 Suite Setup     Criar Sessao        # Fazer algo antes de começar cada teste
 
@@ -30,16 +31,16 @@ Cenário: GET Não Encontrar Produto Por ID 400
 # POST CENÁRIOS #########################################################################################################################################
 Cenário: POST Cadastrar Produtos 201
     [tags]      POST_cadastrar_dinamico    POST
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Criar Dados para Produto Dinamico Válido
     POST Endpoint /produtos
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
-    
+
 Cenário: POST Cadastrar Produto Já Existente 400
     [tags]      POST_produto_ja_existente   POST
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Pegar Dados Produtos Estatico "produto_repetido"
     POST Endpoint /produtos
     Validar Status Code "400"
@@ -55,7 +56,7 @@ Cenário: POST Cadastrar Produto Com Token Inválido 401
 
 Cenário: POST Cadastrar Produto Sem Adm 403
     [tags]      POST_cadastrar_sem_adm  POST
-    Fazer Login Sem Adm e Armazenar Token
+    Fazer Login e Armazenar Token Adm "false"
     Criar Dados para Produto Dinamico Válido
     POST Endpoint /produtos
     Validar Status Code "403"
@@ -63,7 +64,7 @@ Cenário: POST Cadastrar Produto Sem Adm 403
 
 Cenário: POST Cadastrar Produto Sem Nome 400
     [tags]      POST_cadastrar_sem_nome     POST
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Pegar Dados Produtos Estatico "produto_sem_nome"
     POST Endpoint /produtos
     Validar Status Code "400"
@@ -71,7 +72,7 @@ Cenário: POST Cadastrar Produto Sem Nome 400
 
 Cenário: POST Cadastrar Produto Com Preco Zero 400
     [tags]      POST_cadastrar_preco_zero     POST
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Pegar Dados Produtos Estatico "produto_preco_zero"
     POST Endpoint /produtos
     Validar Status Code "400"
@@ -79,7 +80,7 @@ Cenário: POST Cadastrar Produto Com Preco Zero 400
 
 Cenário: POST Cadastrar Produto Com Preco Invalido 400
     [tags]      POST_cadastrar_preco_invalido     POST
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Pegar Dados Produtos Estatico "produto_preco_invalido"
     POST Endpoint /produtos
     Validar Status Code "400"
@@ -87,7 +88,7 @@ Cenário: POST Cadastrar Produto Com Preco Invalido 400
 
 Cenário: POST Cadastrar Produto Com Preco Negativo 400
     [tags]      POST_cadastrar_preco_negativo     POST
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Pegar Dados Produtos Estatico "produto_preco_negativo"
     POST Endpoint /produtos
     Validar Status Code "400"
@@ -95,7 +96,7 @@ Cenário: POST Cadastrar Produto Com Preco Negativo 400
 
 Cenário: POST Cadastrar Produto Sem Descricao 400
     [tags]      POST_cadastrar_sem_descricao     POST
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Pegar Dados Produtos Estatico "produto_sem_descricao"
     POST Endpoint /produtos
     Validar Status Code "400"
@@ -103,7 +104,7 @@ Cenário: POST Cadastrar Produto Sem Descricao 400
 
 Cenário: POST Cadastrar Produto Com Quantidade Zero 400
     [tags]      POST_cadastrar_quantidade_zero     POST
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Criar Dados para Produto Dinamico Válido
     Alterar Payload Quantidade "0"
     POST Endpoint /produtos
@@ -112,7 +113,7 @@ Cenário: POST Cadastrar Produto Com Quantidade Zero 400
 
 Cenário: POST Cadastrar Produto Com Quantidade Invalida 400
     [tags]      POST_cadastrar_quantidade_invalida     POST
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Criar Dados para Produto Dinamico Válido
     Alterar Payload Quantidade "57.4"
     POST Endpoint /produtos
@@ -121,7 +122,7 @@ Cenário: POST Cadastrar Produto Com Quantidade Invalida 400
 
 Cenário: POST Cadastrar Produto Com Quantidade Negativa 400
     [tags]      POST_cadastrar_quantidade_negativa     POST
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Criar Dados para Produto Dinamico Válido
     Alterar Payload Quantidade "-5"
     POST Endpoint /produtos
@@ -132,7 +133,7 @@ Cenário: POST Cadastrar Produto Com Quantidade Negativa 400
 # PUT CENÁRIOS ##########################################################################################################################################
 Cenário: PUT Editar Produto Dinamico 200
     [tags]      PUT_editar_todos_dados   PUT
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
     PUT Endpoint /produtos 
@@ -141,7 +142,7 @@ Cenário: PUT Editar Produto Dinamico 200
 
 Cenário: PUT Criar Produto Dinamico 201
     [tags]      PUT_cadastrar_produto   PUT
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Definir Id Produto "crfn2349cr9"
     Criar Dados para Produto Dinamico Válido
     PUT Endpoint /produtos 
@@ -151,7 +152,7 @@ Cenário: PUT Criar Produto Dinamico 201
 
 Cenário: PUT Editar Nome 200
     [tags]     PUT_editar_nome   PUT
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Alterar Payload Nome Dinamico
     PUT Endpoint /produtos
@@ -160,7 +161,7 @@ Cenário: PUT Editar Nome 200
 
 Cenário: PUT Editar Preco 200
     [tags]     PUT_editar_preco   PUT
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Alterar Payload Preco Dinamico
     PUT Endpoint /produtos
@@ -169,7 +170,7 @@ Cenário: PUT Editar Preco 200
 
 Cenário: PUT Editar Descricao 200
     [tags]     PUT_editar_descricao   PUT
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Alterar Payload Descricao Dinamico
     PUT Endpoint /produtos
@@ -178,7 +179,7 @@ Cenário: PUT Editar Descricao 200
 
 Cenário: PUT Editar Quantidade 200
     [tags]     PUT_editar_quantidade   PUT
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Alterar Payload Quantidade Dinamico
     PUT Endpoint /produtos
@@ -196,7 +197,7 @@ Cenário: PUT Editar Produto Token Inválido 401
 
 Cenário: PUT Editar Produto Sem Adm 403
     [tags]     PUT_editar_sem_adm    PUT
-    Fazer Login Sem Adm e Armazenar Token
+    Fazer Login e Armazenar Token Adm "false"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
     PUT Endpoint /produtos
@@ -205,7 +206,7 @@ Cenário: PUT Editar Produto Sem Adm 403
 
 Cenário: PUT Editar Produto Nome Já Existente 400
     [tags]     PUT_nome_ja_usado    PUT
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Pegar Dados Produtos Estatico "produto_repetido"
     PUT Endpoint /produtos 
@@ -214,7 +215,7 @@ Cenário: PUT Editar Produto Nome Já Existente 400
 
 Cenário: PUT Editar Sem Nome 200
     [tags]     PUT_editar_sem_nome   PUT
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
     Alterar Payload Nome ""
@@ -224,7 +225,7 @@ Cenário: PUT Editar Sem Nome 200
 
 Cenário: PUT Editar Preco Invalido 200
     [tags]     PUT_editar_preco_invalido   PUT
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
     Alterar Payload Preco "50.4"
@@ -234,7 +235,7 @@ Cenário: PUT Editar Preco Invalido 200
 
 Cenário: PUT Editar Sem Descricao 400
     [tags]     PUT_editar_sem_descricao   PUT
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
     Alterar Payload Descricao ""
@@ -244,7 +245,7 @@ Cenário: PUT Editar Sem Descricao 400
 
 Cenário: PUT Editar Quantidade Invalida 200
     [tags]     PUT_editar_quantidade_invalida   PUT
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
     Alterar Payload Quantidade "150.8"
@@ -255,15 +256,25 @@ Cenário: PUT Editar Quantidade Invalida 200
 # DELETE CENÁRIOS ########################################################################################################################################    
 Cenário: DELETE Excluir produto 200
     [tags]      DELETE_produto        DELETE
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     DELETE Endpoint /produtos
     Validar Status Code "200"
     Validar Se "message" Contem "Registro excluído com sucesso"
 
+Cenário: DELETE Excluir Produto Em Carrinho 400
+    [tags]      DELETE_produto_em_carrinho  DELETE
+    Fazer Login e Armazenar Token Adm "true"
+    Criar Carrinho Dinamico Valido
+    POST Endpoint /carrinhos
+    Extrair ID Produto
+    DELETE Endpoint /produtos
+    Validar Status Code "400"
+    Validar Se "message" Contem "Não é permitido excluir produto que faz parte de carrinho"
+
 Cenário: DELETE Excluir Id Invalido 200
     [tags]      DELETE_produto_id_invalido      DELETE
-    Fazer Login e Armazenar Token
+    Fazer Login e Armazenar Token Adm "true"
     Definir ID Produto "2cf0mu58v2c9u52cm"
     DELETE Endpoint /produtos
     Validar Status Code "200"
@@ -279,10 +290,10 @@ Cenário: DELETE Excluir Token Inválido 401
 
 Cenário: DELETE Excluir Sem Adm 403
     [tags]      DELETE_produto_sem_adm      DELETE
-    Fazer Login Sem Adm e Armazenar Token
+    Fazer Login e Armazenar Token Adm "false"
     Coletar ID Produto Aleatorio
     DELETE Endpoint /produtos
     Validar Status Code "403"
     Validar Se "message" Contem "Rota exclusiva para administradores"
 
-#Cenário: DELETE Excluir Produto Em Carrinho 400
+

@@ -19,7 +19,7 @@ GET Endpoint /produtos por ID
 
 # POST KEYWORDS #######################################################################################################
 POST Endpoint /produtos
-    &{header}           Create Dictionary       Authorization=${token_auth}
+    &{header}           Create Dictionary       Authorization=${token_auth}      
     ${response}         POST on Session         serverest       /produtos       data=&{payload}                  headers=${header}          expected_status=any
     Log to Console      ${payload}
     Log to Console      Response: ${response.content}  
@@ -51,6 +51,10 @@ Coletar ID Produto Aleatorio
     Set Global Variable     ${id_produto}
 
 Definir ID Produto "${id_produto}"
+    Set Global Variable     ${id_produto}
+
+Extrair ID Produto
+    ${id_produto}           Set Variable        ${payload["produtos"][0]["idProduto"]}
     Set Global Variable     ${id_produto}
 
 Pegar Dados Produtos Estatico "${produto}"

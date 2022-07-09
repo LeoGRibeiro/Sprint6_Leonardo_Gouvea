@@ -25,16 +25,31 @@ POST Endpoint /carrinhos
     &{header}           Create Dictionary       Authorization=${token_auth}  
     Set to Dictionary   ${header}               Content-Type=application/json
     ${payload}          Evaluate                json.dumps(${payload})       json
+    Log To Console      ${payload}
     ${response}         POST on Session         serverest       /carrinhos          data=${payload}     headers=${header}       expected_status=any
     Log to Console      Response: ${response.content}  # Para printar a resposta no console
     Set Global Variable     ${response}
 
-# PUT KEYWORDS #######################################################################################################
+
 
 # DELETE KEYWORDS ####################################################################################################
-Criar Carrinho Estatico Valido
+DELETE Endpoint /carrinhos Concluir Compra
+    &{header}           Create Dictionary       Authorization=${token_auth}  
+    ${response}         DELETE on Session      serverest       /carrinhos/concluir-compra       headers=${header}    expected_status=any
+    Set Global Variable  ${response}  
+    Log to Console      Response: ${response.content}
+
+DELETE Endpoint /carrinhos Cancelar Compra
+    &{header}           Create Dictionary       Authorization=${token_auth}  
+    ${response}         DELETE on Session      serverest       /carrinhos/cancelar-compra       headers=${header}    expected_status=any
+    Set Global Variable  ${response}  
+    Log to Console      Response: ${response.content}
+
+# GENERAL KEYWORDS ###################################################################################################
+
+Criar Carrinho Estatico "${carrinho}"
     ${json}                 Importar Json Estatico  json_carrinhos.json
-    ${payload}              Set Variable            ${json}
+    ${payload}              Set Variable            ${json["${carrinho}"]}
     Set Global Variable     ${payload}
 
 Coletar ID Carrinho Aleatorio

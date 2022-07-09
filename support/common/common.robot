@@ -7,6 +7,7 @@ Library                 Collections
 Resource                ../variables/serverest_variaveis.robot
 Resource                ../../keywords/usuarios_keywords.robot
 Resource                ../../keywords/login_keywords.robot
+Resource                ../../keywords/carrinhos_keywords.robot
 * Keywords *
 Criar Sessao
     Create Session      serverest       ${BASE_URL} 
@@ -49,10 +50,11 @@ Fazer Login Aleatorio e Armazenar Token
     ${token_auth}           Set Variable        ${response.json()["authorization"]}
     Set Global Variable     ${token_auth}
 
-Fazer Login Sem Adm e Armazenar Token
+Fazer Login e Armazenar Token Adm "${boolean}"
     Criar Dados para Usuario Válido
-    Set to Dictionary          ${payload}          administrador=false
+    Set to Dictionary          ${payload}          administrador=${boolean}
     POST Endpoint /usuarios
+    Coletar ID Usuario
     ${payload}      Create Dictionary     email=${email}     password=${senha}
     Set Global Variable     ${payload}
     POST Endpoint /login Dinamico
@@ -62,3 +64,6 @@ Fazer Login Sem Adm e Armazenar Token
 Definir Token Invalido "${token_auth}"
     Set Global Variable     ${token_auth}
     Log to Console        Token Inválido: ${token_auth}
+
+Alterar "${dic}" = "${valor}" No Payload "${objeto}"
+    Set to Dictionary   ${payload}          ${dic}=${valor}

@@ -1,16 +1,104 @@
 {
-  "produtos": [
-    {
-      "idProduto": "1OFx9bLLTkhgiYJa",
-      "quantidade": 5
-    },
-    {
-      "idProduto": "5IB7bIL7NQw1cS7l",
-      "quantidade": 1
-    },
-    {
-      "idProduto": "AbPxTfheokX9IIWa",
-      "quantidade": 2
-    }
-  ]
+  "carrinho_repetido":
+  {
+    "produtos": [
+      {
+        "idProduto": "0SdsdIXHzPKE5n3K",
+        "quantidade": 5
+      },
+      {
+        "idProduto": "0SdsdIXHzPKE5n3K",
+        "quantidade": 1
+      },
+      {
+        "idProduto": "AbPxTfheokX9IIWa",
+        "quantidade": 2
+      }
+    ]
+  },
+  "carrinho_valido":
+  {
+    "produtos": [
+      {
+        "idProduto": "0eunSpUVhxtfdgpO",
+        "quantidade": 5
+      },
+      {
+        "idProduto": "1IAtq3E9DtdDfZo1",
+        "quantidade": 1
+      },
+      {
+        "idProduto": "AbPxTfheokX9IIWa",
+        "quantidade": 2
+      }
+    ]
+  },
+  "carrinho_produto_invalido":
+  {
+    "produtos": [
+      {
+        "idProduto": "0eunSpUVhxtfdgpO",
+        "quantidade": 5
+      },
+      {
+        "idProduto": "1IAtq3E9DtdDgreggo1",
+        "quantidade": 1
+      },
+      {
+        "idProduto": "AbPxTfheokX9IIWa",
+        "quantidade": 2
+      }
+    ]
+  },
+  "carrinho_produto_insuficiente":
+  {
+    "produtos": [
+      {
+        "idProduto": "0eunSpUVhxtfdgpO",
+        "quantidade": 60000
+      },
+      {
+        "idProduto": "1IAtq3E9DtdDfZo1",
+        "quantidade": 1
+      },
+      {
+        "idProduto": "AbPxTfheokX9IIWa",
+        "quantidade": 2
+      }
+    ]
+  },
+  "carrinho_sem_id":
+  {
+    "produtos": [
+      {
+        "idProduto": "",
+        "quantidade": 4
+      },
+      {
+        "idProduto": "1IAtq3E9DtdDfZo1",
+        "quantidade": 1
+      },
+      {
+        "idProduto": "AbPxTfheokX9IIWa",
+        "quantidade": 2
+      }
+    ]
+  },
+  "carrinho_quantidade_zero":
+  {
+    "produtos": [
+      {
+        "idProduto": "0eunSpUVhxtfdgpO",
+        "quantidade": 0
+      },
+      {
+        "idProduto": "1IAtq3E9DtdDfZo1",
+        "quantidade": 1
+      },
+      {
+        "idProduto": "AbPxTfheokX9IIWa",
+        "quantidade": 2
+      }
+    ]
+  }
 }

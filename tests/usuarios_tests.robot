@@ -5,6 +5,7 @@ Documentation   Arquivo de Testes para o endpoint /usuarios
 Resource        ../support/common/common.robot
 Resource        ../keywords/usuarios_keywords.robot
 
+
 Suite Setup     Criar Sessao        # Fazer algo antes de começar cada teste
 
 * Test Cases *
@@ -133,23 +134,23 @@ Cenário: PUT Atualizar Senha 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-#Cenário: PUT Atualizar Administrador True 200
-#    [tags]      PUT_atualizar_adm_true   PUT
-#    Coletar ID Usuario Aleatorio
-#    GET Endpoint /usuarios por ID
-#    Alterar Dados Payload Administrador True
-#    PUT Endpoint /usuarios
-#    Validar Status Code "200"
-#    Validar Se "message" Contem "Registro alterado com sucesso"
+Cenário: PUT Atualizar Administrador True 200
+    [tags]      PUT_atualizar_adm_true   PUT
+    Coletar ID Usuario Aleatorio
+    GET Endpoint /usuarios por ID
+    Alterar Dados Payload Administrador True
+    PUT Endpoint /usuarios
+    Validar Status Code "200"
+    Validar Se "message" Contem "Registro alterado com sucesso"
 
-#Cenário: PUT Atualizar Administrador False 200
-#    [tags]      PUT_atualizar_adm_false   PUT
-#    Coletar ID Usuario Aleatorio
-#    GET Endpoint /usuarios por ID
-#    Alterar Dados Payload Administrador False
-#    PUT Endpoint /usuarios
-#    Validar Status Code "200"
-#    Validar Se "message" Contem "Registro alterado com sucesso"
+Cenário: PUT Atualizar Administrador False 200
+    [tags]      PUT_atualizar_adm_false   PUT
+    Coletar ID Usuario Aleatorio
+    GET Endpoint /usuarios por ID
+    Alterar Dados Payload Administrador False
+    PUT Endpoint /usuarios
+    Validar Status Code "200"
+    Validar Se "message" Contem "Registro alterado com sucesso"
 
 Cenário: PUT Email Usado 400
     [tags]      PUT_email_usado     PUT
@@ -215,4 +216,11 @@ Cenário: DELETE Não Encontrar Usuario 200
     Validar Status Code "200"
     Validar Se "message" Contem "Nenhum registro excluído"
 
-#Cenário: DELETE Usuario Com Carrinho 400
+Cenário: DELETE Usuario Com Carrinho 400
+    [tags]      DELETE_usuario_com_carrinho     DELETE
+    Fazer Login e Armazenar Token Adm "true"
+    Criar Carrinho Dinamico Valido
+    POST Endpoint /carrinhos
+    DELETE Endpoint /usuarios
+    Validar Status Code "400"
+    Validar Se "message" Contem "Não é permitido excluir usuário com carrinho cadastrado"
