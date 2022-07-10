@@ -66,4 +66,4 @@ Definir Token Invalido "${token_auth}"
     Log to Console        Token Inválido: ${token_auth}
 
 Alterar "${dic}" = "${valor}" No Payload "${objeto}"
-    Set to Dictionary   ${payload}          ${dic}=${valor}
+    Set to Dictionary   ${objeto}          ${dic}=${valor}

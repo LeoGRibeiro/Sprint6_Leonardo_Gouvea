@@ -154,7 +154,7 @@ Cenário: PUT Editar Nome 200
     [tags]     PUT_editar_nome   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
-    Alterar Payload Nome Dinamico
+    Alterar "nome" Payload Dinamico
     PUT Endpoint /produtos
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -163,7 +163,7 @@ Cenário: PUT Editar Preco 200
     [tags]     PUT_editar_preco   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
-    Alterar Payload Preco Dinamico
+    Alterar "preco" Payload Dinamico
     PUT Endpoint /produtos
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -172,7 +172,7 @@ Cenário: PUT Editar Descricao 200
     [tags]     PUT_editar_descricao   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
-    Alterar Payload Descricao Dinamico
+    Alterar "descricao" Payload Dinamico
     PUT Endpoint /produtos
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -181,7 +181,7 @@ Cenário: PUT Editar Quantidade 200
     [tags]     PUT_editar_quantidade   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
-    Alterar Payload Quantidade Dinamico
+    Alterar "quantidade" Payload Dinamico
     PUT Endpoint /produtos
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -218,7 +218,7 @@ Cenário: PUT Editar Sem Nome 200
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
-    Alterar Payload Nome ""
+    Definir "nome" = "" Payload
     PUT Endpoint /produtos
     Validar Status Code "400"
     Validar Se "nome" Contem "nome não pode ficar em branco"
@@ -228,7 +228,7 @@ Cenário: PUT Editar Preco Invalido 200
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
-    Alterar Payload Preco "50.4"
+    Definir "preco" = "50.65" Payload
     PUT Endpoint /produtos
     Validar Status Code "400"
     Validar Se "preco" Contem "preco deve ser um inteiro"
@@ -238,7 +238,7 @@ Cenário: PUT Editar Sem Descricao 400
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
-    Alterar Payload Descricao ""
+    Definir "descricao" = "" Payload
     PUT Endpoint /produtos
     Validar Status Code "400"
     Validar Se "descricao" Contem "descricao não pode ficar em branco"
@@ -248,7 +248,7 @@ Cenário: PUT Editar Quantidade Invalida 200
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
-    Alterar Payload Quantidade "150.8"
+    Definir "quantidade" = "67.2" Payload
     PUT Endpoint /produtos
     Validar Status Code "400"
     Validar Se "quantidade" Contem "quantidade deve ser um inteiro"

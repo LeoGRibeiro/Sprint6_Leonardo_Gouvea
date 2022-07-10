@@ -63,46 +63,18 @@ Pegar Dados Produtos Estatico "${produto}"
     log To Console          ${payload}
     Set Global Variable     ${payload}
 
-Alterar Payload Nome Dinamico
+Alterar "${obj}" Payload Dinamico
     ${response}             GET on Session      serverest   /produtos/${id_produto}        expected_status=any
     ${nome}                 FakerLibrary.Text            max_nb_chars=25
-    ${payload}              Create Dictionary       nome=${nome}      preco=${response.json()["preco"]}     descricao=${response.json()["descricao"]}   quantidade=${response.json()["quantidade"]}
-    Set Global Variable     ${payload}
-
-Alterar Payload Preco Dinamico
-    ${response}             GET on Session      serverest   /produtos/${id_produto}        expected_status=any
     ${preco}                FakerLibrary.Random Int      min=20      max=1500
-    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      preco=${preco}     descricao=${response.json()["descricao"]}   quantidade=${response.json()["quantidade"]}
+    ${descricao}            FakerLibrary.Text            max_nb_chars=60
+    ${quantidade}           FakerLibrary.Random Int      min=2       max=500
+    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      preco=${response.json()["preco"]}     descricao=${response.json()["descricao"]}   quantidade=${response.json()["quantidade"]}
+    Set to Dictionary       ${payload}               ${obj}=${${obj}}
     Set Global Variable     ${payload}
 
-Alterar Payload Descricao Dinamico
-    ${response}             GET on Session      serverest   /produtos/${id_produto}        expected_status=any
-    ${descricao}            FakerLibrary.Text       max_nb_chars=60   
-    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      preco=${response.json()["preco"]}     descricao=${descricao}   quantidade=${response.json()["quantidade"]}
-    Set Global Variable     ${payload}
-
-Alterar Payload Quantidade Dinamico
-    ${response}             GET on Session      serverest   /produtos/${id_produto}        expected_status=any
-    ${quantidade}           FakerLibrary.Random Int      min=2       max=500   
-    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      preco=${response.json()["preco"]}     descricao=${response.json()["descricao"]}   quantidade=${quantidade}
-    Set Global Variable     ${payload}
-
-Alterar Payload Quantidade "${valor}"
-    ${payload}              Create Dictionary       nome=${payload["nome"]}      preco=${payload["preco"]}     descricao=${payload["descricao"]}   quantidade=${valor}
-    Set Global Variable     ${payload}
-    Log To Console          Nova Quantidade: ${valor}
-
-Alterar Payload Preco "${valor}"
-    ${payload}              Create Dictionary       nome=${payload["nome"]}      preco=${valor}     descricao=${payload["descricao"]}   quantidade=${payload["quantidade"]}
-    Set Global Variable     ${payload}
-    Log To Console          Novo Valor: ${valor}
-
-Alterar Payload Nome "${valor}"
-    ${payload}              Create Dictionary       nome=${valor}      preco=${payload["preco"]}     descricao=${payload["descricao"]}   quantidade=${payload["quantidade"]}
-    Set Global Variable     ${payload}
-    Log To Console          Novo Valor: ${valor}
-
-Alterar Payload Descricao "${valor}"
-    ${payload}              Create Dictionary       nome=${payload["nome"]}      preco=${payload["preco"]}     descricao=${valor}   quantidade=${payload["quantidade"]}
+Definir "${obj}" = "${valor}" Payload
+    ${payload}              Create Dictionary       nome=${payload["nome"]}      preco=${payload["preco"]}     descricao=${payload["descricao"]}   quantidade=${payload["quantidade"]}
+    Set to Dictionary       ${payload}              ${obj}=${valor}
     Set Global Variable     ${payload}
     Log To Console          Novo Valor: ${valor}
