@@ -6,6 +6,8 @@ Library                 FakerLibrary
 Criar Dados para Usuario Válido
     ${nome}                 FakerLibrary.Name
     ${email}                FakerLibrary.Email
+    ${num}                  FakerLibrary.Random Int     min=0       max=1000
+    ${email}                Catenate                  SEPARATOR=         ${num}            ${email}
     ${senha}                FakerLibrary.Password     length=5          special_chars=False     digits=True    upper_case=True    lower_case=True
     Set Global Variable     ${senha}
     Set Global Variable     ${email}

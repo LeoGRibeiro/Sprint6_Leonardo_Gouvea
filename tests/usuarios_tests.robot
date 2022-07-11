@@ -101,7 +101,7 @@ Cenário: PUT Atualizar Nome 200
     [tags]     PUT_atualizar_nome   PUT
     Coletar ID Usuario Aleatorio
     GET Endpoint /usuarios por ID
-    Alterar Dados Payload Nome
+    Alterar "nome" Payload Usuario
     PUT Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -110,7 +110,7 @@ Cenário: PUT Atualizar Email 200
     [tags]     PUT_atualizar_email  PUT
     Coletar ID Usuario Aleatorio
     GET Endpoint /usuarios por ID
-    Alterar Dados Payload Email
+    Alterar "email" Payload Usuario
     PUT Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -119,7 +119,7 @@ Cenário: PUT Atualizar Senha 200
     [tags]     PUT_atualizar_senha  PUT
     Coletar ID Usuario Aleatorio
     GET Endpoint /usuarios por ID
-    Alterar Dados Payload Senha
+    Alterar "password" Payload Usuario
     PUT Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -128,7 +128,7 @@ Cenário: PUT Atualizar Administrador True 200
     [tags]      PUT_atualizar_adm_true   PUT
     Coletar ID Usuario Aleatorio
     GET Endpoint /usuarios por ID
-    Alterar Dados Payload Administrador True
+    Alterar Dados Payload Administrador "true"
     PUT Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -137,7 +137,7 @@ Cenário: PUT Atualizar Administrador False 200
     [tags]      PUT_atualizar_adm_false   PUT
     Coletar ID Usuario Aleatorio
     GET Endpoint /usuarios por ID
-    Alterar Dados Payload Administrador False
+    Alterar Dados Payload Administrador "false"
     PUT Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -193,15 +193,17 @@ Cenário: POST Editar Dados Administrador Invalido 400
 # DELETE CENÁRIOS ########################################################################################################################################
 Cenário: DELETE Deletar Usuario 200
     [tags]      DELETE_usuario  DELETE
-    Coletar ID Usuario Aleatorio
-    GET Endpoint /usuarios por ID
+    Criar Dados para Usuario Válido
+    POST Endpoint /usuarios
+    Coletar ID Usuario
     DELETE Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Registro excluído com sucesso"
+    GET Endpoint /usuarios por ID
 
 Cenário: DELETE Não Encontrar Usuario 200
     [tags]      DELETE_id_invalido  DELETE
-    Definir ID Usuario "IDinvalido"
+    Definir ID Usuario "n2c7rgt354ygi"
     DELETE Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Nenhum registro excluído"

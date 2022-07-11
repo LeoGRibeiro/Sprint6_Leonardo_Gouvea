@@ -37,7 +37,7 @@ Cenário: POST Cadastrar Produtos 201
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
-
+    
 Cenário: POST Cadastrar Produto Já Existente 400
     [tags]      POST_produto_ja_existente   POST
     Fazer Login e Armazenar Token Adm "true"
@@ -106,7 +106,7 @@ Cenário: POST Cadastrar Produto Com Quantidade Zero 400
     [tags]      POST_cadastrar_quantidade_zero     POST
     Fazer Login e Armazenar Token Adm "true"
     Criar Dados para Produto Dinamico Válido
-    Alterar Payload Quantidade "0"
+    Definir "quantidade" = "0" Payload Produto
     POST Endpoint /produtos
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
@@ -115,7 +115,7 @@ Cenário: POST Cadastrar Produto Com Quantidade Invalida 400
     [tags]      POST_cadastrar_quantidade_invalida     POST
     Fazer Login e Armazenar Token Adm "true"
     Criar Dados para Produto Dinamico Válido
-    Alterar Payload Quantidade "57.4"
+    Definir "quantidade" = "78.9" Payload Produto
     POST Endpoint /produtos
     Validar Status Code "400"
     Validar Se "quantidade" Contem "quantidade deve ser um inteiro"
@@ -124,7 +124,7 @@ Cenário: POST Cadastrar Produto Com Quantidade Negativa 400
     [tags]      POST_cadastrar_quantidade_negativa     POST
     Fazer Login e Armazenar Token Adm "true"
     Criar Dados para Produto Dinamico Válido
-    Alterar Payload Quantidade "-5"
+    Definir "quantidade" = "-5" Payload Produto
     POST Endpoint /produtos
     Validar Status Code "400"
     Validar Se "quantidade" Contem "quantidade deve ser maior ou igual a 0"
@@ -154,7 +154,7 @@ Cenário: PUT Editar Nome 200
     [tags]     PUT_editar_nome   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
-    Alterar "nome" Payload Dinamico
+    Alterar "nome" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -163,7 +163,7 @@ Cenário: PUT Editar Preco 200
     [tags]     PUT_editar_preco   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
-    Alterar "preco" Payload Dinamico
+    Alterar "preco" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -172,7 +172,7 @@ Cenário: PUT Editar Descricao 200
     [tags]     PUT_editar_descricao   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
-    Alterar "descricao" Payload Dinamico
+    Alterar "descricao" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -181,7 +181,7 @@ Cenário: PUT Editar Quantidade 200
     [tags]     PUT_editar_quantidade   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
-    Alterar "quantidade" Payload Dinamico
+    Alterar "quantidade" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -218,7 +218,7 @@ Cenário: PUT Editar Sem Nome 200
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
-    Definir "nome" = "" Payload
+    Definir "nome" = "" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "400"
     Validar Se "nome" Contem "nome não pode ficar em branco"
@@ -228,7 +228,7 @@ Cenário: PUT Editar Preco Invalido 200
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
-    Definir "preco" = "50.65" Payload
+    Definir "preco" = "50.65" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "400"
     Validar Se "preco" Contem "preco deve ser um inteiro"
@@ -238,7 +238,7 @@ Cenário: PUT Editar Sem Descricao 400
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
-    Definir "descricao" = "" Payload
+    Definir "descricao" = "" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "400"
     Validar Se "descricao" Contem "descricao não pode ficar em branco"
@@ -248,7 +248,7 @@ Cenário: PUT Editar Quantidade Invalida 200
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
     Criar Dados para Produto Dinamico Válido
-    Definir "quantidade" = "67.2" Payload
+    Definir "quantidade" = "67.2" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "400"
     Validar Se "quantidade" Contem "quantidade deve ser um inteiro"
@@ -257,20 +257,24 @@ Cenário: PUT Editar Quantidade Invalida 200
 Cenário: DELETE Excluir produto 200
     [tags]      DELETE_produto        DELETE
     Fazer Login e Armazenar Token Adm "true"
-    Coletar ID Produto Aleatorio
+    Criar Dados para Produto Dinamico Válido
+    POST Endpoint /produtos
+    Coletar ID Produto
     DELETE Endpoint /produtos
     Validar Status Code "200"
     Validar Se "message" Contem "Registro excluído com sucesso"
+    GET Endpoint /produtos por ID
 
 Cenário: DELETE Excluir Produto Em Carrinho 400
     [tags]      DELETE_produto_em_carrinho  DELETE
     Fazer Login e Armazenar Token Adm "true"
     Criar Carrinho Dinamico Valido
     POST Endpoint /carrinhos
-    Extrair ID Produto
+    Extrair ID Produto De Carrinho
     DELETE Endpoint /produtos
     Validar Status Code "400"
     Validar Se "message" Contem "Não é permitido excluir produto que faz parte de carrinho"
+    GET Endpoint /produtos por ID
 
 Cenário: DELETE Excluir Id Invalido 200
     [tags]      DELETE_produto_id_invalido      DELETE
@@ -295,5 +299,3 @@ Cenário: DELETE Excluir Sem Adm 403
     DELETE Endpoint /produtos
     Validar Status Code "403"
     Validar Se "message" Contem "Rota exclusiva para administradores"
-
-

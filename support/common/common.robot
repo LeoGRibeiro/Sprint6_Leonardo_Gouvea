@@ -64,6 +64,3 @@ Fazer Login e Armazenar Token Adm "${boolean}"
 Definir Token Invalido "${token_auth}"
     Set Global Variable     ${token_auth}
     Log to Console        Token Inválido: ${token_auth}
-
-Alterar "${dic}" = "${valor}" No Payload "${objeto}"
-    Set to Dictionary   ${objeto}          ${dic}=${valor}

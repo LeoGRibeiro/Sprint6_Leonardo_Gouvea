@@ -24,7 +24,7 @@ POST Endpoint /usuarios
     ${response}             POST on Session         serverest       /usuarios   data=&{payload}     expected_status=any
     Log to Console          Response: ${response.content}  
     Set Global Variable     ${response}
-
+    
 # PUT KEYWORDS #######################################################################################################
 PUT Endpoint /usuarios
     ${response}         PUT on Session      serverest   /usuarios/${id_usuario}    json=&{payload}        expected_status=any
@@ -58,32 +58,17 @@ Coletar ID Usuario Aleatorio
 Definir ID Usuario "${id_usuario}"
     Set Global Variable     ${id_usuario}
 
-Alterar Dados Payload Nome
+Alterar "${obj}" Payload Usuario
     ${nome}                 FakerLibrary.Name
-    ${payload}              Create Dictionary       nome=${nome}     email=${response.json()["email"]}     password=${response.json()["password"]}   administrador=${response.json()["administrador"]}
-    log To Console          ${payload}
-    Set Global Variable     ${payload}
-
-Alterar Dados Payload Email
     ${email}                FakerLibrary.Email
-    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      email=${email}     password=${response.json()["password"]}   administrador=${response.json()["administrador"]}
-    log To Console          ${payload}
-    Set Global Variable     ${payload}
-
-Alterar Dados Payload Senha   
-    ${senha}                FakerLibrary.Password     length=5          special_chars=True     digits=True    upper_case=True    lower_case=True
-    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      email=${response.json()["email"]}     password=${senha}  administrador=${response.json()["administrador"]}
+    ${password}             FakerLibrary.Password     length=5          special_chars=False     digits=True    upper_case=True    lower_case=True
+    ${payload}              Create Dictionary       nome=${response.json()["nome"]}     email=${response.json()["email"]}     password=${response.json()["password"]}   administrador=${response.json()["administrador"]}
+    Set to Dictionary       ${payload}              ${obj}=${${obj}}
     Log To Console          ${payload}
     Set Global Variable     ${payload}
 
-Alterar Dados Payload Administrador True
+Alterar Dados Payload Administrador "${resp}"
     ${senha}                FakerLibrary.Password     length=5          special_chars=True     digits=True    upper_case=True    lower_case=True
-    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      email=${response.json()["email"]}     password=${response.json()["password"]}  administrador=true
-    Log To Console          ${payload}
-    Set Global Variable     ${payload}
-
-Alterar Dados Payload Administrador False
-    ${senha}                FakerLibrary.Password     length=5          special_chars=True     digits=True    upper_case=True    lower_case=True
-    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      email=${response.json()["email"]}     password=${response.json()["password"]}  administrador=false
+    ${payload}              Create Dictionary       nome=${response.json()["nome"]}      email=${response.json()["email"]}     password=${response.json()["password"]}  administrador=${resp}
     Log To Console          ${payload}
     Set Global Variable     ${payload}

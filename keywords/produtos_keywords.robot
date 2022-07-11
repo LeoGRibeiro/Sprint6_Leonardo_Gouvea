@@ -53,8 +53,12 @@ Coletar ID Produto Aleatorio
 Definir ID Produto "${id_produto}"
     Set Global Variable     ${id_produto}
 
-Extrair ID Produto
+Extrair ID Produto De Carrinho
     ${id_produto}           Set Variable        ${payload["produtos"][0]["idProduto"]}
+    Set Global Variable     ${id_produto}
+
+Coletar ID Produto
+    ${id_produto}           Set Variable        ${response.json()["_id"]}
     Set Global Variable     ${id_produto}
 
 Pegar Dados Produtos Estatico "${produto}"
@@ -63,7 +67,7 @@ Pegar Dados Produtos Estatico "${produto}"
     log To Console          ${payload}
     Set Global Variable     ${payload}
 
-Alterar "${obj}" Payload Dinamico
+Alterar "${obj}" Payload Produto
     ${response}             GET on Session      serverest   /produtos/${id_produto}        expected_status=any
     ${nome}                 FakerLibrary.Text            max_nb_chars=25
     ${preco}                FakerLibrary.Random Int      min=20      max=1500
@@ -73,7 +77,7 @@ Alterar "${obj}" Payload Dinamico
     Set to Dictionary       ${payload}               ${obj}=${${obj}}
     Set Global Variable     ${payload}
 
-Definir "${obj}" = "${valor}" Payload
+Definir "${obj}" = "${valor}" Payload Produto
     ${payload}              Create Dictionary       nome=${payload["nome"]}      preco=${payload["preco"]}     descricao=${payload["descricao"]}   quantidade=${payload["quantidade"]}
     Set to Dictionary       ${payload}              ${obj}=${valor}
     Set Global Variable     ${payload}
