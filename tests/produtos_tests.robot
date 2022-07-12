@@ -10,7 +10,7 @@ Suite Setup     Criar Sessao        # Fazer algo antes de começar cada teste
 
 * Test Cases *
 # GET CENÁRIOS ##########################################################################################################################################
-Cenário: GET Todos os Produtos 200
+Cenário: GET Retornar Todos os Produtos 200
     [tags]       GET_produtos   GET
     GET Endpoint /produtos
     Validar Status Code "200"
@@ -37,8 +37,8 @@ Cenário: POST Cadastrar Produtos 201
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
-    
-Cenário: POST Cadastrar Produto Já Existente 400
+
+Cenário: POST Cadastrar Produto com Nome Usado 400
     [tags]      POST_produto_ja_existente   POST
     Fazer Login e Armazenar Token Adm "true"
     Pegar Dados Produtos Estatico "produto_repetido"
@@ -131,7 +131,7 @@ Cenário: POST Cadastrar Produto Com Quantidade Negativa 400
 
 
 # PUT CENÁRIOS ##########################################################################################################################################
-Cenário: PUT Editar Produto Dinamico 200
+Cenário: PUT Editar Todos Dados Produto 200
     [tags]      PUT_editar_todos_dados   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
@@ -140,7 +140,7 @@ Cenário: PUT Editar Produto Dinamico 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Criar Produto Dinamico 201
+Cenário: PUT Cadastrar Produto 201
     [tags]      PUT_cadastrar_produto   PUT
     Fazer Login e Armazenar Token Adm "true"
     Definir Id Produto "crfn2349cr9"
@@ -149,6 +149,33 @@ Cenário: PUT Criar Produto Dinamico 201
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
+
+Cenário: PUT Editar Produto Token Inválido 401
+    [tags]     PUT_editar_token_invalido    PUT
+    Definir Token Invalido "fhn23cn429n45c43tc"
+    Coletar ID Produto Aleatorio
+    Criar Dados para Produto Dinamico Válido
+    PUT Endpoint /produtos 
+    Validar Status Code "401"
+    Validar Se "message" Contem "Token de acesso ausente, inválido, expirado ou usuário do token não existe mais"
+
+Cenário: PUT Editar Produto Sem Adm 403
+    [tags]     PUT_editar_sem_adm    PUT
+    Fazer Login e Armazenar Token Adm "false"
+    Coletar ID Produto Aleatorio
+    Criar Dados para Produto Dinamico Válido
+    PUT Endpoint /produtos
+    Validar Status Code "403"
+    Validar Se "message" Contem "Rota exclusiva para administradores"
+
+Cenário: PUT Editar Produto com Nome Usado 400
+    [tags]     PUT_nome_ja_usado    PUT
+    Fazer Login e Armazenar Token Adm "true"
+    Coletar ID Produto Aleatorio
+    Pegar Dados Produtos Estatico "produto_repetido"
+    PUT Endpoint /produtos 
+    Validar Status Code "400"
+    Validar Se "message" Contem "Já existe produto com esse nome"
 
 Cenário: PUT Editar Nome 200
     [tags]     PUT_editar_nome   PUT
@@ -186,33 +213,6 @@ Cenário: PUT Editar Quantidade 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Editar Produto Token Inválido 401
-    [tags]     PUT_editar_token_invalido    PUT
-    Definir Token Invalido "fhn23cn429n45c43tc"
-    Coletar ID Produto Aleatorio
-    Criar Dados para Produto Dinamico Válido
-    PUT Endpoint /produtos 
-    Validar Status Code "401"
-    Validar Se "message" Contem "Token de acesso ausente, inválido, expirado ou usuário do token não existe mais"
-
-Cenário: PUT Editar Produto Sem Adm 403
-    [tags]     PUT_editar_sem_adm    PUT
-    Fazer Login e Armazenar Token Adm "false"
-    Coletar ID Produto Aleatorio
-    Criar Dados para Produto Dinamico Válido
-    PUT Endpoint /produtos
-    Validar Status Code "403"
-    Validar Se "message" Contem "Rota exclusiva para administradores"
-
-Cenário: PUT Editar Produto Nome Já Existente 400
-    [tags]     PUT_nome_ja_usado    PUT
-    Fazer Login e Armazenar Token Adm "true"
-    Coletar ID Produto Aleatorio
-    Pegar Dados Produtos Estatico "produto_repetido"
-    PUT Endpoint /produtos 
-    Validar Status Code "400"
-    Validar Se "message" Contem "Já existe produto com esse nome"
-
 Cenário: PUT Editar Sem Nome 200
     [tags]     PUT_editar_sem_nome   PUT
     Fazer Login e Armazenar Token Adm "true"
@@ -223,7 +223,7 @@ Cenário: PUT Editar Sem Nome 200
     Validar Status Code "400"
     Validar Se "nome" Contem "nome não pode ficar em branco"
 
-Cenário: PUT Editar Preco Invalido 200
+Cenário: PUT Editar para Preco Invalido 200
     [tags]     PUT_editar_preco_invalido   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
@@ -233,7 +233,7 @@ Cenário: PUT Editar Preco Invalido 200
     Validar Status Code "400"
     Validar Se "preco" Contem "preco deve ser um inteiro"
 
-Cenário: PUT Editar Sem Descricao 400
+Cenário: PUT Editar para Sem Descricao 400
     [tags]     PUT_editar_sem_descricao   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
@@ -243,7 +243,7 @@ Cenário: PUT Editar Sem Descricao 400
     Validar Status Code "400"
     Validar Se "descricao" Contem "descricao não pode ficar em branco"
 
-Cenário: PUT Editar Quantidade Invalida 200
+Cenário: PUT Editar para Quantidade Invalida 200
     [tags]     PUT_editar_quantidade_invalida   PUT
     Fazer Login e Armazenar Token Adm "true"
     Coletar ID Produto Aleatorio
@@ -254,7 +254,7 @@ Cenário: PUT Editar Quantidade Invalida 200
     Validar Se "quantidade" Contem "quantidade deve ser um inteiro"
 
 # DELETE CENÁRIOS ########################################################################################################################################    
-Cenário: DELETE Excluir produto 200
+Cenário: DELETE Excluir Produto 200
     [tags]      DELETE_produto        DELETE
     Fazer Login e Armazenar Token Adm "true"
     Criar Dados para Produto Dinamico Válido
