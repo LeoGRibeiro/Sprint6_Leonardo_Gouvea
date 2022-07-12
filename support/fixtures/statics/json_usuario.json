@@ -1,8 +1,8 @@
 {
     "user_valido":{
         "nome": "Alberto Junior",
-        "email": "fulano@qa.com",
-        "password": "teste",
+        "email": "fulano123@qa.com",
+        "password": "teste123",
         "administrador": "true"
     },
     "user_invalido":{

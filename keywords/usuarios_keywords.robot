@@ -50,7 +50,7 @@ Coletar ID Usuario
 
 Coletar ID Usuario Aleatorio
     ${response}             GET on Session      serverest   /usuarios
-    ${numbers}=             Evaluate            random.sample(range(0, ${response.json()["quantidade"]}),1)    random  # Função pega deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
+    ${numbers}=             Evaluate            random.sample(range(0, ${response.json()["quantidade"]}),1)    random  # Código pego deste post https://stackoverflow.com/questions/22524771/robot-framework-generating-unique-random-number
     ${id_usuario}           Set Variable        ${response.json()["usuarios"][${numbers}[0]]["_id"]}
     Set Global Variable     ${id_usuario}
     Log To Console          ${id_usuario}
@@ -72,3 +72,8 @@ Alterar Dados Payload Administrador "${resp}"
     ${payload}              Create Dictionary       nome=${response.json()["nome"]}      email=${response.json()["email"]}     password=${response.json()["password"]}  administrador=${resp}
     Log To Console          ${payload}
     Set Global Variable     ${payload}
+
+Criar Usuario
+    Criar Dados para Usuario Válido
+    POST Endpoint /usuarios
+    Coletar ID Usuario

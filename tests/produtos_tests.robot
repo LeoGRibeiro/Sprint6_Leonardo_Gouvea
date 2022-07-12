@@ -3,10 +3,8 @@
 Documentation   Arquivo de Testes para o endpoint /produtos
 
 Resource        ../support/common/common.robot
-Resource        ../keywords/produtos_keywords.robot
-Resource        ../keywords/carrinhos_keywords.robot
 
-Suite Setup     Criar Sessao        # Fazer algo antes de começar cada teste
+Suite Setup     Criar Sessao        
 
 * Test Cases *
 # GET CENÁRIOS ##########################################################################################################################################
@@ -133,8 +131,7 @@ Cenário: POST Cadastrar Produto Com Quantidade Negativa 400
 # PUT CENÁRIOS ##########################################################################################################################################
 Cenário: PUT Editar Todos Dados Produto 200
     [tags]      PUT_editar_todos_dados   PUT
-    Fazer Login e Armazenar Token Adm "true"
-    Coletar ID Produto Aleatorio
+    Criar Produto
     Criar Dados para Produto Dinamico Válido
     PUT Endpoint /produtos 
     Validar Status Code "200"
@@ -179,8 +176,7 @@ Cenário: PUT Editar Produto com Nome Usado 400
 
 Cenário: PUT Editar Nome 200
     [tags]     PUT_editar_nome   PUT
-    Fazer Login e Armazenar Token Adm "true"
-    Coletar ID Produto Aleatorio
+    Criar Produto
     Alterar "nome" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "200"
@@ -188,8 +184,7 @@ Cenário: PUT Editar Nome 200
 
 Cenário: PUT Editar Preco 200
     [tags]     PUT_editar_preco   PUT
-    Fazer Login e Armazenar Token Adm "true"
-    Coletar ID Produto Aleatorio
+    Criar Produto
     Alterar "preco" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "200"
@@ -197,8 +192,7 @@ Cenário: PUT Editar Preco 200
 
 Cenário: PUT Editar Descricao 200
     [tags]     PUT_editar_descricao   PUT
-    Fazer Login e Armazenar Token Adm "true"
-    Coletar ID Produto Aleatorio
+    Criar Produto
     Alterar "descricao" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "200"
@@ -206,8 +200,7 @@ Cenário: PUT Editar Descricao 200
 
 Cenário: PUT Editar Quantidade 200
     [tags]     PUT_editar_quantidade   PUT
-    Fazer Login e Armazenar Token Adm "true"
-    Coletar ID Produto Aleatorio
+    Criar Produto
     Alterar "quantidade" Payload Produto
     PUT Endpoint /produtos
     Validar Status Code "200"
@@ -215,8 +208,7 @@ Cenário: PUT Editar Quantidade 200
 
 Cenário: PUT Editar Sem Nome 200
     [tags]     PUT_editar_sem_nome   PUT
-    Fazer Login e Armazenar Token Adm "true"
-    Coletar ID Produto Aleatorio
+    Criar Produto
     Criar Dados para Produto Dinamico Válido
     Definir "nome" = "" Payload Produto
     PUT Endpoint /produtos
@@ -225,8 +217,7 @@ Cenário: PUT Editar Sem Nome 200
 
 Cenário: PUT Editar para Preco Invalido 200
     [tags]     PUT_editar_preco_invalido   PUT
-    Fazer Login e Armazenar Token Adm "true"
-    Coletar ID Produto Aleatorio
+    Criar Produto
     Criar Dados para Produto Dinamico Válido
     Definir "preco" = "50.65" Payload Produto
     PUT Endpoint /produtos
@@ -235,8 +226,7 @@ Cenário: PUT Editar para Preco Invalido 200
 
 Cenário: PUT Editar para Sem Descricao 400
     [tags]     PUT_editar_sem_descricao   PUT
-    Fazer Login e Armazenar Token Adm "true"
-    Coletar ID Produto Aleatorio
+    Criar Produto
     Criar Dados para Produto Dinamico Válido
     Definir "descricao" = "" Payload Produto
     PUT Endpoint /produtos
@@ -245,8 +235,7 @@ Cenário: PUT Editar para Sem Descricao 400
 
 Cenário: PUT Editar para Quantidade Invalida 200
     [tags]     PUT_editar_quantidade_invalida   PUT
-    Fazer Login e Armazenar Token Adm "true"
-    Coletar ID Produto Aleatorio
+    Criar Produto
     Criar Dados para Produto Dinamico Válido
     Definir "quantidade" = "67.2" Payload Produto
     PUT Endpoint /produtos
@@ -256,10 +245,7 @@ Cenário: PUT Editar para Quantidade Invalida 200
 # DELETE CENÁRIOS ########################################################################################################################################    
 Cenário: DELETE Excluir Produto 200
     [tags]      DELETE_produto        DELETE
-    Fazer Login e Armazenar Token Adm "true"
-    Criar Dados para Produto Dinamico Válido
-    POST Endpoint /produtos
-    Coletar ID Produto
+    Criar Produto
     DELETE Endpoint /produtos
     Validar Status Code "200"
     Validar Se "message" Contem "Registro excluído com sucesso"

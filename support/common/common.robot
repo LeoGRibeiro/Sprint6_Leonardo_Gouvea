@@ -7,7 +7,10 @@ Library                 Collections
 Resource                ../variables/serverest_variaveis.robot
 Resource                ../../keywords/usuarios_keywords.robot
 Resource                ../../keywords/login_keywords.robot
+Resource                ../../keywords/produtos_keywords.robot
 Resource                ../../keywords/carrinhos_keywords.robot
+Resource                ../fixtures/dynamics.robot
+
 * Keywords *
 Criar Sessao
     Create Session      serverest       ${BASE_URL} 

@@ -3,10 +3,8 @@
 Documentation   Arquivo de Testes para o endpoint /usuarios
 
 Resource        ../support/common/common.robot
-Resource        ../keywords/usuarios_keywords.robot
 
-
-Suite Setup     Criar Sessao        # Fazer algo antes de começar cada teste
+Suite Setup     Criar Sessao        
 
 * Test Cases *
 # GET CENÁRIOS ##########################################################################################################################################
@@ -82,8 +80,8 @@ Cenário: POST Cadastrar Usuario Administrador Invalido 400
 # PUT CENÁRIOS ##########################################################################################################################################
 Cenário: PUT Editar Todos Dados Usuario 200
     [tags]      PUT_editar_todos_dados  PUT
+    Criar Usuario
     Criar Dados para Usuario Válido
-    Coletar ID Usuario Aleatorio
     PUT Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
@@ -99,7 +97,7 @@ Cenário: PUT Cadastar Novo Usuario 201
 
 Cenário: PUT Editar Nome 200
     [tags]     PUT_atualizar_nome   PUT
-    Coletar ID Usuario Aleatorio
+    Criar Usuario
     GET Endpoint /usuarios por ID
     Alterar "nome" Payload Usuario
     PUT Endpoint /usuarios
@@ -108,7 +106,7 @@ Cenário: PUT Editar Nome 200
 
 Cenário: PUT Editar Email 200
     [tags]     PUT_atualizar_email  PUT
-    Coletar ID Usuario Aleatorio
+    Criar Usuario
     GET Endpoint /usuarios por ID
     Alterar "email" Payload Usuario
     PUT Endpoint /usuarios
@@ -117,7 +115,7 @@ Cenário: PUT Editar Email 200
 
 Cenário: PUT Editar Senha 200
     [tags]     PUT_atualizar_senha  PUT
-    Coletar ID Usuario Aleatorio
+    Criar Usuario
     GET Endpoint /usuarios por ID
     Alterar "password" Payload Usuario
     PUT Endpoint /usuarios
@@ -126,7 +124,7 @@ Cenário: PUT Editar Senha 200
 
 Cenário: PUT Editar Administrador para True 200
     [tags]      PUT_atualizar_adm_true   PUT
-    Coletar ID Usuario Aleatorio
+    Criar Usuario
     GET Endpoint /usuarios por ID
     Alterar Dados Payload Administrador "true"
     PUT Endpoint /usuarios
@@ -135,7 +133,7 @@ Cenário: PUT Editar Administrador para True 200
 
 Cenário: PUT Editar Administrador False 200
     [tags]      PUT_atualizar_adm_false   PUT
-    Coletar ID Usuario Aleatorio
+    Criar Usuario
     GET Endpoint /usuarios por ID
     Alterar Dados Payload Administrador "false"
     PUT Endpoint /usuarios
@@ -144,48 +142,48 @@ Cenário: PUT Editar Administrador False 200
 
 Cenário: PUT Editar para Email Usado 400
     [tags]      PUT_email_usado     PUT
+    Criar Usuario
     Pegar Dados Usuarios Estatico "user_email_usado"
-    Coletar ID Usuario Aleatorio
     PUT Endpoint /usuarios 
     Validar Status Code "400"
     Validar Se "message" Contem "Este email já está sendo usado"
 
 Cenário: PUT Editar para Dados Invalidos 400
     [tags]      PUT_dados_invalidos     PUT
+    Criar Usuario
     Pegar Dados Usuarios Estatico "user_invalido"
-    Coletar ID Usuario Aleatorio
     PUT Endpoint /usuarios
     Validar Status Code "400"
     Validar Se "email" Contem "email deve ser um email válido"
 
 Cenário: PUT Editar Sem Nome 400
     [tags]      PUT_sem_nome    PUT
+   Criar Usuario
     Pegar Dados Usuarios Estatico "user_sem_nome"
-    Coletar ID Usuario Aleatorio
     PUT Endpoint /usuarios 
     Validar Status Code "400"
     Validar Se "nome" Contem "nome não pode ficar em branco"
 
 Cenário: PUT Editar Sem Email 400
     [tags]      PUT_sem_email   PUT
+    Criar Usuario
     Pegar Dados Usuarios Estatico "user_sem_email"
-    Coletar ID Usuario Aleatorio
     PUT Endpoint /usuarios
     Validar Status Code "400"
     Validar Se "email" Contem "email não pode ficar em branco"
 
 Cenário: PUT Editar Sem Senha 400
     [tags]      PUT_sem_senha   PUT
+    Criar Usuario
     Pegar Dados Usuarios Estatico "user_sem_senha"
-    Coletar ID Usuario Aleatorio
     PUT Endpoint /usuarios
     Validar Status Code "400"
     Validar Se "password" Contem "password não pode ficar em branco"
 
 Cenário: POST Editar Administrador Invalido 400
     [tags]      PUT_adm_invalido    PUT
+    Criar Usuario
     Pegar Dados Usuarios Estatico "user_adm_invalido"
-    Coletar ID Usuario Aleatorio
     PUT Endpoint /usuarios
     Validar Status Code "400"
     Validar Se "administrador" Contem "administrador deve ser 'true' ou 'false'"
@@ -193,9 +191,7 @@ Cenário: POST Editar Administrador Invalido 400
 # DELETE CENÁRIOS ########################################################################################################################################
 Cenário: DELETE Deletar Usuario 200
     [tags]      DELETE_usuario  DELETE
-    Criar Dados para Usuario Válido
-    POST Endpoint /usuarios
-    Coletar ID Usuario
+    Criar Usuario
     DELETE Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Registro excluído com sucesso"

@@ -3,9 +3,8 @@
 Documentation   Arquivo de Testes para o endpoint /carrinhos
 
 Resource        ../support/common/common.robot
-Resource        ../keywords/carrinhos_keywords.robot
 
-Suite Setup     Criar Sessao        # Fazer algo antes de começar cada teste
+Suite Setup     Criar Sessao        
 
 * Test Cases *
 # GET CENÁRIOS ##########################################################################################################################################

@@ -19,7 +19,6 @@ GET Endpoint /carrinhos por ID
     Set Global Variable  ${response}  
     Log to Console      Response: ${response.content}
 
-
  # POST KEYWORDS ######################################################################################################
 POST Endpoint /carrinhos
     &{header}           Create Dictionary       Authorization=${token_auth}  
@@ -29,8 +28,6 @@ POST Endpoint /carrinhos
     ${response}         POST on Session         serverest       /carrinhos          data=${payload}     headers=${header}       expected_status=any
     Log to Console      Response: ${response.content}  # Para printar a resposta no console
     Set Global Variable     ${response}
-
-
 
 # DELETE KEYWORDS ####################################################################################################
 DELETE Endpoint /carrinhos Concluir Compra
@@ -46,7 +43,6 @@ DELETE Endpoint /carrinhos Cancelar Compra
     Log to Console      Response: ${response.content}
 
 # GENERAL KEYWORDS ###################################################################################################
-
 Criar Carrinho Estatico "${carrinho}"
     ${json}                 Importar Json Estatico  json_carrinhos.json
     ${payload}              Set Variable            ${json["${carrinho}"]}

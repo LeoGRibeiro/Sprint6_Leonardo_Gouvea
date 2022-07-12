@@ -53,6 +53,12 @@ Coletar ID Produto Aleatorio
 Definir ID Produto "${id_produto}"
     Set Global Variable     ${id_produto}
 
+Criar Produto
+    Fazer Login e Armazenar Token Adm "true"
+    Criar Dados para Produto Dinamico Válido
+    POST Endpoint /produtos
+    Coletar ID Produto
+
 Extrair ID Produto De Carrinho
     ${id_produto}           Set Variable        ${payload["produtos"][0]["idProduto"]}
     Set Global Variable     ${id_produto}

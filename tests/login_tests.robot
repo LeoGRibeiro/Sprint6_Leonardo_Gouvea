@@ -6,7 +6,6 @@ Resource        ../support/common/common.robot
 
 
 Suite Setup     Criar Sessao        # Fazer algo antes de começar cada teste
-# Suite Teardown                    # Fazer algo depois dos cenários aconterecerem
 
 * Test Cases *
 Cenário: POST Realizar Login 200
