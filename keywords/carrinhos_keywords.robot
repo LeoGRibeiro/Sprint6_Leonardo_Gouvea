@@ -13,6 +13,7 @@ GET Endpoint /carrinhos
     ${response}         GET on Session      serverest       /carrinhos 
     Set Global Variable  ${response}  
     Log to Console      Response: ${response.content}
+    Log to Console      Quantidade: ${response.json()["quantidade"]}
 
 GET Endpoint /carrinhos por ID 
     ${response}         GET on Session      serverest       /carrinhos/${id_carrinho}        expected_status=any

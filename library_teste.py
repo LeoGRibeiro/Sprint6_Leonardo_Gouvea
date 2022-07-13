@@ -5,8 +5,9 @@ import random
 from faker import Faker
 
 
-#_________________Função que cadastra produtos____________________________________________________# 
+# Função que cadastra produtos de acordo com a quantidade
 def Cadastrar_Produtos(vezes):
+    lista = []
     fake = Faker()
     login = {"email": "fulano123@qa.com", "password": "teste123"}
     i = requests.post("http://localhost:3000/login", data=login)
@@ -21,10 +22,12 @@ def Cadastrar_Produtos(vezes):
         descricao = fake.text()
         quantidade = random.randint(2000, 5000)
         produto = {"nome": nome, "preco": preco, "descricao": descricao, "quantidade": quantidade}
-        i = requests.post(f"http://localhost:3000/produtos", headers=headers, data=produto)
-
-
-#_________________Função que retorna usuários com carrinho_______________________________________#
+        u = requests.post(f"http://localhost:3000/produtos", headers=headers, data=produto)
+        response = u.json()
+        lista.append(response)
+    
+    return lista
+# Função que retorna usuários com carrinho
 def Usuarios_Com_Carrinho(quantidade):
     lista_users_carrinho = []
     lista_aleatoria_users = []   
@@ -46,7 +49,7 @@ def Usuarios_Com_Carrinho(quantidade):
     
     return lista_aleatoria_users
         
-#_________________Função que retorna receita a partir de todo o estoque________________________#
+# Função que retorna receita a partir de todo o estoque
 def Receita_Esperada():
     receita_total = 0
     t = requests.get("http://localhost:3000/produtos")
@@ -60,7 +63,7 @@ def Receita_Esperada():
 
     return receita_total
 
-#_________________Função que mostra quais produtos estão abaixo da quantidade desejada_______#
+# Função que mostra quais produtos estão abaixo da quantidade desejada
 def Reposicao_Estoque(quantidade):
     lista_prods_reposicao = []
     t = requests.get("http://localhost:3000/produtos")
@@ -80,15 +83,17 @@ def Reposicao_Estoque(quantidade):
             
     return lista_prods_reposicao
    
- #_________________Função que faz a "compra" de produtos para chegar na quantidade desejada___#  
+ # Função que faz a "compra" de produtos para chegar na quantidade desejada
+ # Função foi importante no momento dos testes pois tinha problemas com a quantidade de produtos  
 def Fazer_Reposicao_Estoque(quantidade):
+    lista = []
     login = {"email": "fulano123@qa.com", "password": "teste123"}
     i = requests.post("http://localhost:3000/login", data=login)
     response = i.json()
     token_auth = response["authorization"]
 
     headers = {"monitor": 'false', "Authorization": token_auth}
-    lista_prods_reposicao = []
+    
     t = requests.get("http://localhost:3000/produtos")
     produtos = t.json()
 
@@ -100,7 +105,13 @@ def Fazer_Reposicao_Estoque(quantidade):
         idProduto = produtos["produtos"][c]["_id"]
 
         if quant_prod < quantidade:
-            quant_compra = quantidade - quant_prod
+            
             produto = {"nome": nome, "preco": preco, "descricao": descricao, "quantidade": quantidade}
 
             i = requests.put(f"http://localhost:3000/produtos/{idProduto}", headers=headers, data=produto)
+
+            u = requests.get(f"http://localhost:3000/produtos/{idProduto}", headers=headers)
+            response = u.json()
+            lista.append(response)
+
+    return lista
