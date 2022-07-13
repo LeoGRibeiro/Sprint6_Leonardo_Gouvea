@@ -32,9 +32,11 @@ Cenário: POST Cadastrar Carrinho Dinamico 200
     Fazer Login e Armazenar Token Adm "true"
     Criar Carrinho Dinamico Valido
     POST Endpoint /carrinhos
+    Coletar Id Carrinho
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
-
+    GET Endpoint /carrinhos por ID 
+    
 Cenário: POST Cadastrar Carrinho Com Produtos Repetidos 400
     [tags]      POST_produto_repetido  POST
     Fazer Login e Armazenar Token Adm "true"
@@ -64,7 +66,7 @@ Cenário: POST Cadastrar Carrinho Com Produto Invalido 400
 Cenário: POST Cadastrar Carrinho Com Produto Insuficiente 400
     [tags]     POST_carrinho_produto_insuficiente    POST
     Fazer Login e Armazenar Token Adm "true"
-    Criar Carrinho Estatico "carrinho_produto_insuficiente"
+    Criar Carrinho Dinamico Quantidade Insuficente
     POST Endpoint /carrinhos
     Validar Status Code "400"
     Validar Se "message" Contem "Produto não possui quantidade suficiente"

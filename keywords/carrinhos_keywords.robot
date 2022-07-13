@@ -55,5 +55,22 @@ Coletar ID Carrinho Aleatorio
     ${id_carrinho}          Set Variable        ${response.json()["carrinhos"][${numbers}[0]]["_id"]}
     Set Global Variable     ${id_carrinho}
 
+Coletar Id Carrinho
+    ${id_carrinho}           Set Variable        ${response.json()["_id"]}
+    Set Global Variable     ${id_carrinho}
+    
 Definir Id Carrinho "${id_carrinho}"
     Set Global Variable     ${id_carrinho}
+
+Criar Carrinho Dinamico Quantidade Insuficente
+    ${quant_produtos}=             Evaluate            random.sample(range(1, 5),1)    random
+    @{lista}                Create List
+    FOR         ${C}        IN RANGE            ${quant_produtos[0]}
+    ${response}             GET on Session      serverest   /produtos
+    ${numbers}=             Evaluate            random.sample(range(0, ${response.json()["quantidade"]}),1)    random
+    ${id}                   Set Variable        ${response.json()["produtos"][${numbers}[0]]["_id"]}
+    ${pedido}               Create Dictionary         idProduto=${id}       quantidade=6000000 
+    Append to list          ${lista}                    ${pedido}
+    END
+    ${payload}              Create Dictionary       produtos=${lista}
+    Set Global Variable     ${payload}

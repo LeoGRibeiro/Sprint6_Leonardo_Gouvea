@@ -32,13 +32,17 @@ Cenário: POST Cadastrar Produtos 201
     Fazer Login e Armazenar Token Adm "true"
     Criar Dados para Produto Dinamico Válido
     POST Endpoint /produtos
+    Coletar ID Produto
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
+    GET Endpoint /produtos por ID 
 
 Cenário: POST Cadastrar Produto com Nome Usado 400
     [tags]      POST_produto_ja_existente   POST
     Fazer Login e Armazenar Token Adm "true"
+    Pegar Dados Produtos Estatico "produto_repetido"
+    POST Endpoint /produtos
     Pegar Dados Produtos Estatico "produto_repetido"
     POST Endpoint /produtos
     Validar Status Code "400"

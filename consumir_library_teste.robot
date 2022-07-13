@@ -25,5 +25,10 @@ Fazer Reposicao Estoque
 
 Cadastrar Produtos
     [tags]              cadastrar_produtos 
-    ${prods}            Cadastrar Produtos          ${2}    # Inserir a quantidade de produtos que deseja criar
+    ${prods}            Cadastrar Produtos          ${1000}    # Inserir a quantidade de produtos que deseja criar
     Log To Console      ${prods}
+
+Cadastrar Usuarios
+    [tags]              cadastrar_usuarios
+    ${users}            Cadastrar Usuarios          ${1000}    # Inserir a quantidade de produtos que deseja criar
+    Log To Console      ${users}

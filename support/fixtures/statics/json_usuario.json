@@ -1,8 +1,8 @@
 {
     "user_valido":{
-        "nome": "Alberto Junior",
-        "email": "fulano123@qa.com",
-        "password": "teste123",
+        "nome": "Fulano",
+        "email": "fulano@qa.com",
+        "password": "teste",
         "administrador": "true"
     },
     "user_invalido":{
@@ -13,7 +13,7 @@
     },
     "user_email_usado":{
         "nome": "Neymar Jr",
-        "email": "fulano@qa.com.br",
+        "email": "fulano@qa.com",
         "password": "teste",
         "administrador": "true"
     },

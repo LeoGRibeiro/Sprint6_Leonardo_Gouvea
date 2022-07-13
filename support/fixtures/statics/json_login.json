@@ -1,7 +1,7 @@
 {
     "user_valido":{
-        "email":"fulano123@qa.com",
-        "password":"teste123"
+        "email":"fulano@qa.com",
+        "password":"teste"
     },
     "user_invalido":{
         "email":"email_inexistente@qa.com",

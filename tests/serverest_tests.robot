@@ -56,10 +56,12 @@ Cenário: POST Cadastrar Usuario Dinâmico 201
     [tags]      POST_cadastrar_dinamico     POST
     Criar Dados para Usuario Válido
     POST Endpoint /usuarios
+    Coletar ID Usuario
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
-
+    GET Endpoint /usuarios por ID
+    
 Cenário: POST Cadastrar Usuario Com Email Usado 400
     [tags]      POST_usuario_email_usado    POST
     Pegar Dados Usuarios Estatico "user_email_usado"
@@ -260,13 +262,17 @@ Cenário: POST Cadastrar Produtos 201
     Fazer Login e Armazenar Token Adm "true"
     Criar Dados para Produto Dinamico Válido
     POST Endpoint /produtos
+    Coletar ID Produto
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
+    GET Endpoint /produtos por ID 
 
 Cenário: POST Cadastrar Produto com Nome Usado 400
     [tags]      POST_produto_ja_existente   POST
     Fazer Login e Armazenar Token Adm "true"
+    Pegar Dados Produtos Estatico "produto_repetido"
+    POST Endpoint /produtos
     Pegar Dados Produtos Estatico "produto_repetido"
     POST Endpoint /produtos
     Validar Status Code "400"
@@ -400,7 +406,7 @@ Cenário: PUT Editar Produto com Nome Usado 400
     Validar Status Code "400"
     Validar Se "message" Contem "Já existe produto com esse nome"
 
-Cenário: PUT Editar Nome 200
+Cenário: PUT Editar Nome Produto 200
     [tags]     PUT_editar_nome   PUT
     Criar Produto
     Alterar "nome" Payload Produto
@@ -408,7 +414,7 @@ Cenário: PUT Editar Nome 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Editar Preco 200
+Cenário: PUT Editar Preco Produto 200
     [tags]     PUT_editar_preco   PUT
     Criar Produto
     Alterar "preco" Payload Produto
@@ -416,7 +422,7 @@ Cenário: PUT Editar Preco 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Editar Descricao 200
+Cenário: PUT Editar Descricao Produto 200
     [tags]     PUT_editar_descricao   PUT
     Criar Produto
     Alterar "descricao" Payload Produto
@@ -424,7 +430,7 @@ Cenário: PUT Editar Descricao 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Editar Quantidade 200
+Cenário: PUT Editar Quantidade Produto 200
     [tags]     PUT_editar_quantidade   PUT
     Criar Produto
     Alterar "quantidade" Payload Produto
@@ -567,7 +573,7 @@ Cenário: POST Cadastrar Carrinho Com Produto Invalido 400
 Cenário: POST Cadastrar Carrinho Com Produto Insuficiente 400
     [tags]     POST_carrinho_produto_insuficiente    POST
     Fazer Login e Armazenar Token Adm "true"
-    Criar Carrinho Estatico "carrinho_produto_insuficiente"
+    Criar Carrinho Dinamico Quantidade Insuficente
     POST Endpoint /carrinhos
     Validar Status Code "400"
     Validar Se "message" Contem "Produto não possui quantidade suficiente"

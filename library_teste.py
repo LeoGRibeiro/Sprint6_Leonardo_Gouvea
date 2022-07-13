@@ -9,7 +9,7 @@ from faker import Faker
 def Cadastrar_Produtos(vezes):
     lista = []
     fake = Faker()
-    login = {"email": "fulano123@qa.com", "password": "teste123"}
+    login = {"email": "fulano@qa.com", "password": "teste"}
     i = requests.post("http://localhost:3000/login", data=login)
     response = i.json()
     token_auth = response["authorization"]
@@ -27,6 +27,24 @@ def Cadastrar_Produtos(vezes):
         lista.append(response)
     
     return lista
+
+# Função que Cadastra usuários de acordo com a quantidade
+def Cadastrar_Usuarios(vezes):
+    lista = []
+    fake = Faker()
+    headers = {"monitor": 'false'} 
+
+    for c in range(vezes):
+        nome = fake.name()
+        email = fake.email()
+        password = fake.password()
+        usuario = {"nome": nome, "email": email, "password": password, "administrador": "true"}
+        u = requests.post(f"http://localhost:3000/usuarios", headers=headers, data=usuario)
+        response = u.json()
+        lista.append(response)
+    
+    return lista
+
 # Função que retorna usuários com carrinho
 def Usuarios_Com_Carrinho(quantidade):
     lista_users_carrinho = []
@@ -87,7 +105,7 @@ def Reposicao_Estoque(quantidade):
  # Função foi importante no momento dos testes pois tinha problemas com a quantidade de produtos  
 def Fazer_Reposicao_Estoque(quantidade):
     lista = []
-    login = {"email": "fulano123@qa.com", "password": "teste123"}
+    login = {"email": "fulano@qa.com", "password": "teste"}
     i = requests.post("http://localhost:3000/login", data=login)
     response = i.json()
     token_auth = response["authorization"]

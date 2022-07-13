@@ -9,7 +9,7 @@ Suite Setup     Criar Sessao        # Fazer algo antes de começar cada teste
 
 * Test Cases *
 Cenário: POST Realizar Login 200
-    [Tags]      POST_login   
+    [Tags]      POST_login      
     POST Endpoint /login "user_valido"
     Validar Status Code "200"
     Validar Se "message" Contem "Login realizado com sucesso"

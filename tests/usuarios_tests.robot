@@ -31,9 +31,11 @@ Cenário: POST Cadastrar Usuario Dinâmico 201
     [tags]      POST_cadastrar_dinamico     POST
     Criar Dados para Usuario Válido
     POST Endpoint /usuarios
+    Coletar ID Usuario
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
+    GET Endpoint /usuarios por ID
 
 Cenário: POST Cadastrar Usuario Com Email Usado 400
     [tags]      POST_usuario_email_usado    POST
@@ -41,7 +43,7 @@ Cenário: POST Cadastrar Usuario Com Email Usado 400
     POST Endpoint /usuarios
     Validar Status Code "400"
     Validar Se "message" Contem "Este email já está sendo usado"
-
+ 
 Cenário: POST Cadastrar Usuario Com Dados Inválidos 400
     [tags]      POST_usuario_invalido   POST
     Pegar Dados Usuarios Estatico "user_invalido"
