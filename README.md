@@ -2,7 +2,7 @@
 
 ## Como obter os arquivos deste repositório
 ```
-git clone https://github.com/LeoGRibeiro/Sprint6_Leonardo_Gouvea/tree/DEVELOP
+git clone --branch DEVELOP https://github.com/LeoGRibeiro/Sprint6_Leonardo_Gouvea
 ```
 ## Librarys necessárias:
 - OperatingSystem
