@@ -8,9 +8,9 @@ Resource        ../support/common/common.robot
 Suite Setup     Criar Sessao        
 
 * Test Cases *
-# LOGIN CENÁRIOS #################################################################################################################
+# LOGIN CENÁRIOS #######################################################################################################################################
 Cenário: POST Realizar Login 200
-    [Tags]      POST_login   
+    [Tags]      POST_login      
     POST Endpoint /login "user_valido"
     Validar Status Code "200"
     Validar Se "message" Contem "Login realizado com sucesso"
@@ -33,7 +33,7 @@ Cenário: POST Realizar Login Sem Senha 400
     Validar Status Code "400"
     Validar Se "password" Contem "password não pode ficar em branco"
 
-# UUSUÁRIOS CENÁRIOS #####################################################################################################################################
+# USUÁRIOS  CENÁRIOS #######################################################################################################################################
 Cenário: GET Retornar Todos os Usuarios 200
     [tags]      GET_usuarios    GET
     GET Endpoint /usuarios
@@ -61,14 +61,14 @@ Cenário: POST Cadastrar Usuario Dinâmico 201
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
     GET Endpoint /usuarios por ID
-    
+
 Cenário: POST Cadastrar Usuario Com Email Usado 400
     [tags]      POST_usuario_email_usado    POST
     Pegar Dados Usuarios Estatico "user_email_usado"
     POST Endpoint /usuarios
     Validar Status Code "400"
     Validar Se "message" Contem "Este email já está sendo usado"
-
+ 
 Cenário: POST Cadastrar Usuario Com Dados Inválidos 400
     [tags]      POST_usuario_invalido   POST
     Pegar Dados Usuarios Estatico "user_invalido"
@@ -112,7 +112,7 @@ Cenário: PUT Editar Todos Dados Usuario 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Cadastar Novo Usuario 201
+Cenário: PUT Cadastrar Novo Usuario 201
     [tags]      PUT_cadastrar_usuario   PUT
     Criar Dados para Usuario Válido
     Definir ID Usuario "c74wn5c972y23r"
@@ -121,7 +121,15 @@ Cenário: PUT Cadastar Novo Usuario 201
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
 
-Cenário: PUT Editar Nome 200
+Cenário: PUT Editar para Email Usado 400
+    [tags]      PUT_email_usado     PUT
+    Criar Usuario
+    Pegar Dados Usuarios Estatico "user_email_usado"
+    PUT Endpoint /usuarios 
+    Validar Status Code "400"
+    Validar Se "message" Contem "Este email já está sendo usado"
+
+Cenário: PUT Editar Nome Usuario 200
     [tags]     PUT_atualizar_nome   PUT
     Criar Usuario
     GET Endpoint /usuarios por ID
@@ -165,14 +173,6 @@ Cenário: PUT Editar Administrador False 200
     PUT Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
-
-Cenário: PUT Editar para Email Usado 400
-    [tags]      PUT_email_usado     PUT
-    Criar Usuario
-    Pegar Dados Usuarios Estatico "user_email_usado"
-    PUT Endpoint /usuarios 
-    Validar Status Code "400"
-    Validar Se "message" Contem "Este email já está sendo usado"
 
 Cenário: PUT Editar para Dados Invalidos 400
     [tags]      PUT_dados_invalidos     PUT
@@ -222,14 +222,14 @@ Cenário: DELETE Deletar Usuario 200
     Validar Se "message" Contem "Registro excluído com sucesso"
     GET Endpoint /usuarios por ID
 
-Cenário: DELETE Não Encontrar Usuario 200
+Cenário: DELETE Não Encontrar Usuario para Deletar 200
     [tags]      DELETE_id_invalido  DELETE
     Definir ID Usuario "n2c7rgt354ygi"
     DELETE Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Nenhum registro excluído"
 
-Cenário: DELETE Usuario Com Carrinho 400
+Cenário: DELETE Deletar Usuario Com Carrinho 400
     [tags]      DELETE_usuario_com_carrinho     DELETE
     Fazer Login e Armazenar Token Adm "true"
     Criar Carrinho Dinamico Valido
@@ -237,8 +237,7 @@ Cenário: DELETE Usuario Com Carrinho 400
     DELETE Endpoint /usuarios
     Validar Status Code "400"
     Validar Se "message" Contem "Não é permitido excluir usuário com carrinho cadastrado"
-
-# PRODUTOS CENÁRIOS ######################################################################################################################################
+# PRODUTOS CENÁRIOS #####################################################################################################################################
 Cenário: GET Retornar Todos os Produtos 200
     [tags]       GET_produtos   GET
     GET Endpoint /produtos
@@ -406,7 +405,7 @@ Cenário: PUT Editar Produto com Nome Usado 400
     Validar Status Code "400"
     Validar Se "message" Contem "Já existe produto com esse nome"
 
-Cenário: PUT Editar Nome Produto 200
+Cenário: PUT Editar Nome 200
     [tags]     PUT_editar_nome   PUT
     Criar Produto
     Alterar "nome" Payload Produto
@@ -414,7 +413,7 @@ Cenário: PUT Editar Nome Produto 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Editar Preco Produto 200
+Cenário: PUT Editar Preco 200
     [tags]     PUT_editar_preco   PUT
     Criar Produto
     Alterar "preco" Payload Produto
@@ -422,7 +421,7 @@ Cenário: PUT Editar Preco Produto 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Editar Descricao Produto 200
+Cenário: PUT Editar Descricao 200
     [tags]     PUT_editar_descricao   PUT
     Criar Produto
     Alterar "descricao" Payload Produto
@@ -430,7 +429,7 @@ Cenário: PUT Editar Descricao Produto 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Editar Quantidade Produto 200
+Cenário: PUT Editar Quantidade 200
     [tags]     PUT_editar_quantidade   PUT
     Criar Produto
     Alterar "quantidade" Payload Produto
@@ -517,7 +516,7 @@ Cenário: DELETE Excluir Sem Adm 403
     Validar Status Code "403"
     Validar Se "message" Contem "Rota exclusiva para administradores"
 
-# CARRINHOS CENÁRIOS ######################################################################################################################################
+# CARRINHOS CENÁRIOS #########################################################################################################################
 Cenário: GET Retornar Todos Carrinhos 200
     [tags]      GET_carrinhos   GET
     GET Endpoint /carrinhos
@@ -541,9 +540,11 @@ Cenário: POST Cadastrar Carrinho Dinamico 200
     Fazer Login e Armazenar Token Adm "true"
     Criar Carrinho Dinamico Valido
     POST Endpoint /carrinhos
+    Coletar Id Carrinho
     Validar Status Code "201"
     Validar Se "message" Contem "Cadastro realizado com sucesso"
-
+    GET Endpoint /carrinhos por ID 
+    
 Cenário: POST Cadastrar Carrinho Com Produtos Repetidos 400
     [tags]      POST_produto_repetido  POST
     Fazer Login e Armazenar Token Adm "true"

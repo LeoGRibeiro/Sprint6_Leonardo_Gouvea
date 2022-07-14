@@ -88,7 +88,7 @@ Cenário: PUT Editar Todos Dados Usuario 200
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
 
-Cenário: PUT Cadastar Novo Usuario 201
+Cenário: PUT Cadastrar Novo Usuario 201
     [tags]      PUT_cadastrar_usuario   PUT
     Criar Dados para Usuario Válido
     Definir ID Usuario "c74wn5c972y23r"
@@ -97,7 +97,15 @@ Cenário: PUT Cadastar Novo Usuario 201
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
 
-Cenário: PUT Editar Nome 200
+Cenário: PUT Editar para Email Usado 400
+    [tags]      PUT_email_usado     PUT
+    Criar Usuario
+    Pegar Dados Usuarios Estatico "user_email_usado"
+    PUT Endpoint /usuarios 
+    Validar Status Code "400"
+    Validar Se "message" Contem "Este email já está sendo usado"
+
+Cenário: PUT Editar Nome Usuario 200
     [tags]     PUT_atualizar_nome   PUT
     Criar Usuario
     GET Endpoint /usuarios por ID
@@ -141,14 +149,6 @@ Cenário: PUT Editar Administrador False 200
     PUT Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Registro alterado com sucesso"
-
-Cenário: PUT Editar para Email Usado 400
-    [tags]      PUT_email_usado     PUT
-    Criar Usuario
-    Pegar Dados Usuarios Estatico "user_email_usado"
-    PUT Endpoint /usuarios 
-    Validar Status Code "400"
-    Validar Se "message" Contem "Este email já está sendo usado"
 
 Cenário: PUT Editar para Dados Invalidos 400
     [tags]      PUT_dados_invalidos     PUT
@@ -199,14 +199,14 @@ Cenário: DELETE Deletar Usuario 200
     Validar Se "message" Contem "Registro excluído com sucesso"
     GET Endpoint /usuarios por ID
 
-Cenário: DELETE Não Encontrar Usuario 200
+Cenário: DELETE Não Encontrar Usuario para Deletar 200
     [tags]      DELETE_id_invalido  DELETE
     Definir ID Usuario "n2c7rgt354ygi"
     DELETE Endpoint /usuarios
     Validar Status Code "200"
     Validar Se "message" Contem "Nenhum registro excluído"
 
-Cenário: DELETE Usuario Com Carrinho 400
+Cenário: DELETE Deletar Usuario Com Carrinho 400
     [tags]      DELETE_usuario_com_carrinho     DELETE
     Fazer Login e Armazenar Token Adm "true"
     Criar Carrinho Dinamico Valido

@@ -5,7 +5,7 @@ Library                 library_teste.py
 * Test Cases *
 Retornar Usuários com Carrinho
     [tags]              usuarios_com_carrinho      
-    ${users}            Usuarios Com Carrinho      ${637}  # Inserir a quantidade de usuários deseja retornar
+    ${users}            Usuarios Com Carrinho      ${5}  # Inserir a quantidade de usuários deseja retornar
     Log To Console      Lista de usuários com carrinho: ${users}
 
 Receita Esperada Do Estoque
@@ -25,10 +25,10 @@ Fazer Reposicao Estoque
 
 Cadastrar Produtos
     [tags]              cadastrar_produtos 
-    ${prods}            Cadastrar Produtos          ${1000}    # Inserir a quantidade de produtos que deseja criar
+    ${prods}            Cadastrar Produtos          ${5}    # Inserir a quantidade de produtos que deseja criar
     Log To Console      ${prods}
 
 Cadastrar Usuarios
     [tags]              cadastrar_usuarios
-    ${users}            Cadastrar Usuarios          ${1000}    # Inserir a quantidade de produtos que deseja criar
+    ${users}            Cadastrar Usuarios          ${5}    # Inserir a quantidade de produtos que deseja criar
     Log To Console      ${users}
