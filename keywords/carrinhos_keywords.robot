@@ -62,7 +62,7 @@ Coletar Id Carrinho
 Definir Id Carrinho "${id_carrinho}"
     Set Global Variable     ${id_carrinho}
 
-Criar Carrinho Dinamico Quantidade Insuficente
+Criar Carrinho Dinamico Quantidade Insuficente       # Aprendido com o Cléo
     ${quant_produtos}=             Evaluate            random.sample(range(1, 5),1)    random
     @{lista}                Create List
     FOR         ${C}        IN RANGE            ${quant_produtos[0]}

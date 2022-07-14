@@ -24,7 +24,7 @@ Criar Dados para Produto Dinamico Válido
     ${payload}              Create Dictionary         nome=${nome}      preco=${preco}     descricao=${descricao}    quantidade=${quantidade}
     Set Global Variable     ${payload}
 
-Criar Carrinho Dinamico Valido
+Criar Carrinho Dinamico Valido    # Aprendido com o Cléo
     ${quant_produtos}=             Evaluate            random.sample(range(1, 5),1)    random
     @{lista}                Create List
     FOR         ${C}        IN RANGE            ${quant_produtos[0]}

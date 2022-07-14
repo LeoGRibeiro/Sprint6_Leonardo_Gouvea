@@ -80,7 +80,7 @@ Alterar "${obj}" Payload Produto
     ${descricao}            FakerLibrary.Text            max_nb_chars=60
     ${quantidade}           FakerLibrary.Random Int      min=2       max=500
     ${payload}              Create Dictionary       nome=${response.json()["nome"]}      preco=${response.json()["preco"]}     descricao=${response.json()["descricao"]}   quantidade=${response.json()["quantidade"]}
-    Set to Dictionary       ${payload}               ${obj}=${${obj}}      # Aprendido com o Cléo
+    Set to Dictionary       ${payload}               ${obj}=${${obj}}     
     Set Global Variable     ${payload}
 
 Definir "${obj}" = "${valor}" Payload Produto
