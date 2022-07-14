@@ -45,39 +45,6 @@ def Cadastrar_fulano():
     u = requests.post(f"http://localhost:3000/usuarios", data=usuario)
     response = u.json()
 
-def Fazer_Reposicao_Estoque(quantidade):
-    lista = []
-    login = {"email": "fulano@qa.com", "password": "teste"}
-    i = requests.post("http://localhost:3000/login", data=login)
-    response = i.json()
-    token_auth = response["authorization"]
-
-    headers = {"monitor": 'false', "Authorization": token_auth}
-    
-    t = requests.get("http://localhost:3000/produtos")
-    produtos = t.json()
-
-    for c in range(produtos["quantidade"]):
-        nome = produtos["produtos"][c]["nome"]
-        preco = produtos["produtos"][c]["preco"]
-        descricao = produtos["produtos"][c]["descricao"]
-        quant_prod = produtos["produtos"][c]["quantidade"]
-        idProduto = produtos["produtos"][c]["_id"]
-
-        if quant_prod < quantidade:
-            
-            produto = {"nome": nome, "preco": preco, "descricao": descricao, "quantidade": quantidade}
-
-            i = requests.put(f"http://localhost:3000/produtos/{idProduto}", headers=headers, data=produto)
-
-            u = requests.get(f"http://localhost:3000/produtos/{idProduto}", headers=headers)
-            response = u.json()
-            lista.append(response)
-
 Cadastrar_fulano()
-Cadastrar_Produtos(1000)
-Cadastrar_Usuarios(1000)
-Fazer_Reposicao_Estoque(2000)
-
-
-       
+Cadastrar_Produtos(500)
+Cadastrar_Usuarios(500)
