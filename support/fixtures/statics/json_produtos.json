@@ -12,13 +12,13 @@
         "quantidade": 381
     },
     "produto_preco_zero":{
-        "nome": "Logitech MX Vertical",
+        "nome": "Fone bluetooth",
         "preco": 0,
         "descricao": "Mouse gamer",
         "quantidade": 204
     },
     "produto_sem_descricao":{
-        "nome": "Logiteh MX Vertical",
+        "nome": "Monitor 24 polegadas",
         "preco": 750,
         "descricao": "",
         "quantidade": 204
@@ -30,13 +30,13 @@
         "quantidade": 0
     },
     "produto_preco_invalido":{
-        "nome": "Logitech MX Vertical",
+        "nome": "Teclado Gamer",
         "preco": 500.4,
         "descricao": "Mouse gamer",
         "quantidade": 204
     },
     "produto_preco_negativo":{
-        "nome": "Logitech MX Vertical",
+        "nome": "Mouse Pad",
         "preco": -500,
         "descricao": "Mouse gamer",
         "quantidade": 204

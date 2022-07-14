@@ -37,7 +37,8 @@ Cenário: POST Cadastrar Produtos 201
     Validar Se "message" Contem "Cadastro realizado com sucesso"
     Validar Alguma Resposta Vazia "_id"
     GET Endpoint /produtos por ID 
-
+    Validar Status Code "200"
+    
 Cenário: POST Cadastrar Produto com Nome Usado 400
     [tags]      POST_produto_ja_existente   POST
     Fazer Login e Armazenar Token Adm "true"
